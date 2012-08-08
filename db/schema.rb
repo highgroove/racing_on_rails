@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,18 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110806162623) do
-
-  create_table "adjustments", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "person_id"
-    t.datetime "date"
-    t.decimal  "amount",       :precision => 10, :scale => 2
-    t.string   "description"
-    t.integer  "lock_version",                                :default => 0, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20120720235539) do
 
   create_table "aliases", :force => true do |t|
     t.string   "alias"
@@ -59,22 +49,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.datetime "updated_at"
   end
 
-  create_table "bank_statements", :force => true do |t|
-    t.decimal  "american_express_fees",        :precision => 10, :scale => 2
-    t.decimal  "american_express_gross",       :precision => 10, :scale => 2
-    t.decimal  "credit_card_transaction_fees", :precision => 10, :scale => 2
-    t.decimal  "credit_card_percentage_fees",  :precision => 10, :scale => 2
-    t.decimal  "credit_card_gross",            :precision => 10, :scale => 2
-    t.integer  "items"
-    t.integer  "refunds"
-    t.decimal  "gross",                        :precision => 10, :scale => 2
-    t.decimal  "refunds_gross",                :precision => 10, :scale => 2
-    t.decimal  "other_fees",                   :precision => 10, :scale => 2
-    t.date     "date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "bids", :force => true do |t|
     t.string   "name",                        :null => false
     t.string   "email",                       :null => false
@@ -88,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
 
   create_table "categories", :force => true do |t|
     t.integer  "position",                     :default => 0,   :null => false
-    t.string   "name",           :limit => 64,                  :null => false
+    t.string   "name",           :limit => 64, :default => "",  :null => false
     t.integer  "lock_version",                 :default => 0,   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -128,6 +102,8 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   end
 
   add_index "discipline_bar_categories", ["category_id", "discipline_id"], :name => "discipline_bar_categories_category_id_index", :unique => true
+  add_index "discipline_bar_categories", ["category_id"], :name => "idx_category_id"
+  add_index "discipline_bar_categories", ["discipline_id"], :name => "idx_discipline_id"
 
   create_table "disciplines", :force => true do |t|
     t.string   "name",         :limit => 64, :default => "",    :null => false
@@ -139,19 +115,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   end
 
   add_index "disciplines", ["name"], :name => "index_disciplines_on_name", :unique => true
-
-  create_table "discount_codes", :force => true do |t|
-    t.integer  "event_id",                           :null => false
-    t.string   "person_name"
-    t.string   "code",                               :null => false
-    t.string   "status",          :default => "new", :null => false
-    t.integer  "created_by_id"
-    t.string   "created_by_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "discount_codes", ["event_id"], :name => "event_id"
 
   create_table "duplicates", :force => true do |t|
     t.text "new_attributes"
@@ -165,6 +128,15 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "duplicates_people", ["duplicate_id"], :name => "index_duplicates_racers_on_duplicate_id"
   add_index "duplicates_people", ["person_id", "duplicate_id"], :name => "index_duplicates_racers_on_racer_id_and_duplicate_id", :unique => true
   add_index "duplicates_people", ["person_id"], :name => "index_duplicates_racers_on_racer_id"
+
+  create_table "duplicates_racers", :id => false, :force => true do |t|
+    t.integer "racer_id"
+    t.integer "duplicate_id"
+  end
+
+  add_index "duplicates_racers", ["duplicate_id"], :name => "index_duplicates_racers_on_duplicate_id"
+  add_index "duplicates_racers", ["racer_id", "duplicate_id"], :name => "index_duplicates_racers_on_racer_id_and_duplicate_id", :unique => true
+  add_index "duplicates_racers", ["racer_id"], :name => "index_duplicates_racers_on_racer_id"
 
   create_table "editor_requests", :force => true do |t|
     t.integer  "lock_version", :default => 0, :null => false
@@ -182,6 +154,14 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "editor_requests", ["expires_at"], :name => "index_editor_requests_on_expires_at"
   add_index "editor_requests", ["person_id"], :name => "index_editor_requests_on_person_id"
   add_index "editor_requests", ["token"], :name => "index_editor_requests_on_token"
+
+  create_table "editors_events", :id => false, :force => true do |t|
+    t.integer "event_id",  :null => false
+    t.integer "editor_id", :null => false
+  end
+
+  add_index "editors_events", ["editor_id"], :name => "index_editors_events_on_editor_id"
+  add_index "editors_events", ["event_id"], :name => "index_editors_events_on_event_id"
 
   create_table "engine_schema_info", :id => false, :force => true do |t|
     t.string  "engine_name"
@@ -235,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "events", ["date"], :name => "idx_date"
   add_index "events", ["discipline"], :name => "idx_disciplined"
   add_index "events", ["number_issuer_id"], :name => "events_number_issuer_id_index"
+  add_index "events", ["parent_id"], :name => "parent_id"
   add_index "events", ["promoter_id"], :name => "index_events_on_promoter_id"
   add_index "events", ["sanctioned_by"], :name => "index_events_on_sanctioned_by"
   add_index "events", ["type"], :name => "idx_type"
@@ -252,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
 
   add_index "historical_names", ["name"], :name => "index_names_on_name"
   add_index "historical_names", ["team_id"], :name => "team_id"
+  add_index "historical_names", ["year"], :name => "index_names_on_year"
 
   create_table "images", :force => true do |t|
     t.string   "caption"
@@ -273,32 +255,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.datetime "updated_at"
   end
 
-  create_table "line_items", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "lock_version",                                                  :default => 0,     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "event_id"
-    t.integer  "race_id"
-    t.decimal  "amount",                         :precision => 10, :scale => 2
-    t.string   "string_value"
-    t.boolean  "boolean_value"
-    t.string   "type",                                                                             :null => false
-    t.boolean  "promoter_pays_registration_fee",                                :default => false, :null => false
-    t.decimal  "purchase_price",                 :precision => 10, :scale => 2
-    t.integer  "person_id"
-    t.integer  "year"
-    t.integer  "discount_code_id"
-    t.integer  "line_item_id"
-  end
-
-  add_index "line_items", ["discount_code_id"], :name => "index_line_items_on_discount_code_id"
-  add_index "line_items", ["event_id"], :name => "index_line_items_on_event_id"
-  add_index "line_items", ["line_item_id"], :name => "index_line_items_on_line_item_id"
-  add_index "line_items", ["order_id"], :name => "index_line_items_on_order_id"
-  add_index "line_items", ["person_id"], :name => "index_line_items_on_person_id"
-  add_index "line_items", ["race_id"], :name => "index_line_items_on_race_id"
-
   create_table "mailing_lists", :force => true do |t|
     t.string   "name",                :default => "", :null => false
     t.string   "friendly_name",       :default => "", :null => false
@@ -309,7 +265,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.text     "description"
   end
 
-  add_index "mailing_lists", ["name"], :name => "idx_mailing_lists_name"
+  add_index "mailing_lists", ["name"], :name => "idx_name"
 
   create_table "names", :force => true do |t|
     t.integer  "nameable_id",                  :null => false
@@ -323,6 +279,8 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "last_name"
   end
 
+  add_index "names", ["name"], :name => "index_names_on_name"
+  add_index "names", ["nameable_id"], :name => "team_id"
   add_index "names", ["nameable_type"], :name => "index_names_on_nameable_type"
   add_index "names", ["year"], :name => "index_names_on_year"
 
@@ -337,20 +295,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "news_items", ["date"], :name => "news_items_date_index"
   add_index "news_items", ["text"], :name => "news_items_text_index"
 
-  create_table "non_member_results", :force => true do |t|
-    t.boolean  "visible",          :default => true
-    t.integer  "person_id"
-    t.integer  "size",             :default => 0
-    t.date     "recent_result_on"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "non_member_results_people", :id => false, :force => true do |t|
-    t.integer "non_member_result_id"
-    t.integer "person_id"
-  end
-
   create_table "number_issuers", :force => true do |t|
     t.string   "name",         :default => "", :null => false
     t.integer  "lock_version", :default => 0,  :null => false
@@ -360,113 +304,18 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
 
   add_index "number_issuers", ["name"], :name => "number_issuers_name_index", :unique => true
 
-  create_table "offline_single_event_licenses", :force => true do |t|
-    t.integer  "event_id"
-    t.integer  "person_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "order_people", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "order_id"
-    t.boolean  "owner",                                              :default => false, :null => false
-    t.boolean  "membership_card",                                    :default => false, :null => false
-    t.date     "date_of_birth"
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "country_code",                          :limit => 2, :default => "US"
-    t.boolean  "membership_address_is_billing_address",              :default => true,  :null => false
-    t.string   "billing_first_name"
-    t.string   "billing_last_name"
-    t.string   "billing_street"
-    t.string   "billing_city"
-    t.string   "billing_state"
-    t.string   "billing_zip"
-    t.string   "billing_country_code",                  :limit => 2, :default => "US"
-    t.date     "card_expires_on"
-    t.string   "card_type"
-    t.string   "ccx_category"
-    t.string   "dh_category"
-    t.string   "email"
-    t.string   "home_phone"
-    t.string   "first_name"
-    t.string   "gender"
-    t.string   "last_name"
-    t.string   "mtb_category"
-    t.string   "occupation"
-    t.boolean  "official_interest",                                  :default => false, :null => false
-    t.boolean  "race_promotion_interest",                            :default => false, :null => false
-    t.boolean  "team_interest",                                      :default => false, :null => false
-    t.boolean  "volunteer_interest",                                 :default => false, :null => false
-    t.boolean  "wants_mail",                                         :default => false, :null => false
-    t.boolean  "wants_email",                                        :default => false, :null => false
-    t.string   "road_category"
-    t.string   "team_name"
-    t.string   "track_category"
-    t.string   "emergency_contact"
-    t.string   "emergency_contact_phone"
-    t.integer  "lock_version",                                       :default => 0,     :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "work_phone"
-    t.string   "cell_fax"
-  end
-
-  add_index "order_people", ["order_id"], :name => "index_order_people_on_order_id"
-  add_index "order_people", ["person_id"], :name => "index_order_people_on_person_id"
-
-  create_table "order_transactions", :force => true do |t|
-    t.integer  "order_id"
-    t.string   "action"
-    t.integer  "amount"
-    t.boolean  "success"
-    t.string   "authorization"
-    t.string   "message"
-    t.text     "params"
-    t.integer  "lock_version",  :default => 0, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "order_transactions", ["created_at"], :name => "index_order_transactions_on_created_at"
-  add_index "order_transactions", ["order_id"], :name => "index_order_transactions_on_order_id"
-
-  create_table "orders", :force => true do |t|
-    t.integer  "lock_version",                                                   :default => 0,     :null => false
-    t.decimal  "purchase_price",                  :precision => 10, :scale => 2
-    t.string   "notes",           :limit => 2000
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status",                                                         :default => "new", :null => false
-    t.datetime "purchase_time"
-    t.string   "ip_address"
-    t.boolean  "waiver_accepted"
-    t.string   "error_message"
-    t.string   "previous_status"
-    t.boolean  "suggest",                                                        :default => true
-    t.decimal  "purchase_fees",                   :precision => 10, :scale => 2
-  end
-
-  add_index "orders", ["purchase_time"], :name => "index_orders_on_purchase_time"
-  add_index "orders", ["status"], :name => "index_orders_on_status"
-  add_index "orders", ["updated_at"], :name => "index_orders_on_updated_at"
-
   create_table "pages", :force => true do |t|
     t.integer  "parent_id"
-    t.text     "body",                          :null => false
-    t.string   "path",          :default => "", :null => false
-    t.string   "slug",          :default => "", :null => false
-    t.string   "title",         :default => "", :null => false
+    t.text     "body",                         :null => false
+    t.string   "path",         :default => "", :null => false
+    t.string   "slug",         :default => "", :null => false
+    t.string   "title",        :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",  :default => 0,  :null => false
-    t.integer  "created_by_id"
+    t.integer  "lock_version", :default => 0,  :null => false
   end
 
-  add_index "pages", ["created_by_id"], :name => "index_pages_on_created_by_id"
+  add_index "pages", ["parent_id"], :name => "parent_id"
   add_index "pages", ["path"], :name => "index_pages_on_path", :unique => true
   add_index "pages", ["slug"], :name => "index_pages_on_slug"
 
@@ -498,7 +347,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.date     "member_to"
     t.boolean  "print_card",                             :default => false
     t.boolean  "ccx_only",                               :default => false, :null => false
-    t.string   "last_updated_by"
     t.string   "bmx_category"
     t.boolean  "wants_email",                            :default => false, :null => false
     t.boolean  "wants_mail",                             :default => false, :null => false
@@ -506,7 +354,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.boolean  "official_interest",                      :default => false, :null => false
     t.boolean  "race_promotion_interest",                :default => false, :null => false
     t.boolean  "team_interest",                          :default => false, :null => false
-    t.string   "created_by_type"
     t.date     "member_usac_to"
     t.string   "status"
     t.string   "crypted_password"
@@ -521,7 +368,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.string   "login",                   :limit => 100
-    t.integer  "created_by_id"
     t.date     "license_expiration_date"
     t.string   "club_name"
     t.string   "ncca_club_name"
@@ -532,20 +378,23 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "country_code",            :limit => 2,   :default => "US"
     t.boolean  "membership_card",                        :default => false, :null => false
     t.boolean  "official",                               :default => false, :null => false
+    t.string   "name",                                   :default => "",    :null => false
   end
 
-  add_index "people", ["created_by_id"], :name => "index_people_on_created_by_id"
   add_index "people", ["crypted_password"], :name => "index_people_on_crypted_password"
   add_index "people", ["email"], :name => "index_people_on_email"
+  add_index "people", ["first_name"], :name => "idx_first_name"
   add_index "people", ["last_name"], :name => "idx_last_name"
   add_index "people", ["license"], :name => "index_people_on_license"
   add_index "people", ["login"], :name => "index_people_on_login"
   add_index "people", ["member_from"], :name => "index_racers_on_member_from"
   add_index "people", ["member_to"], :name => "index_racers_on_member_to"
+  add_index "people", ["name"], :name => "index_people_on_name"
   add_index "people", ["perishable_token"], :name => "index_people_on_perishable_token"
   add_index "people", ["persistence_token"], :name => "index_people_on_persistence_token"
   add_index "people", ["print_card"], :name => "index_people_on_print_card"
   add_index "people", ["single_access_token"], :name => "index_people_on_single_access_token"
+  add_index "people", ["team_id"], :name => "idx_team_id"
 
   create_table "people_people", :id => false, :force => true do |t|
     t.integer "person_id", :null => false
@@ -564,6 +413,16 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "people_roles", ["person_id"], :name => "index_people_roles_on_person_id"
   add_index "people_roles", ["role_id"], :name => "role_id"
 
+  create_table "post_texts", :force => true do |t|
+    t.integer  "post_id",    :null => false
+    t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "post_texts", ["post_id"], :name => "index_post_texts_on_post_id"
+  add_index "post_texts", ["text"], :name => "post_text"
+
   create_table "posts", :force => true do |t|
     t.text     "body",                              :null => false
     t.datetime "date",                              :null => false
@@ -574,23 +433,16 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "mailing_list_id",   :default => 0,  :null => false
+    t.integer  "position",          :default => 0,  :null => false
   end
 
   add_index "posts", ["date", "mailing_list_id"], :name => "idx_date_list"
+  add_index "posts", ["date"], :name => "idx_date"
   add_index "posts", ["mailing_list_id"], :name => "idx_mailing_list_id"
+  add_index "posts", ["position"], :name => "index_posts_on_position"
   add_index "posts", ["sender"], :name => "idx_sender"
   add_index "posts", ["subject"], :name => "idx_subject"
   add_index "posts", ["topica_message_id"], :name => "idx_topica_message_id", :unique => true
-
-  create_table "products", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.decimal  "price",        :precision => 10, :scale => 0
-    t.string   "option_type"
-    t.integer  "lock_version",                                :default => 0, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "promoters", :force => true do |t|
     t.string   "email"
@@ -602,6 +454,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   end
 
   add_index "promoters", ["name", "email", "phone"], :name => "promoter_info", :unique => true
+  add_index "promoters", ["name"], :name => "idx_name"
 
   create_table "race_numbers", :force => true do |t|
     t.integer  "person_id",        :default => 0,  :null => false
@@ -612,7 +465,6 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.integer  "lock_version",     :default => 0,  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "updated_by"
   end
 
   add_index "race_numbers", ["discipline_id"], :name => "discipline_id"
@@ -621,10 +473,50 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "race_numbers", ["value"], :name => "race_numbers_value_index"
   add_index "race_numbers", ["year"], :name => "index_race_numbers_on_year"
 
+  create_table "racers", :force => true do |t|
+    t.string   "first_name",          :limit => 64
+    t.string   "last_name"
+    t.string   "city",                :limit => 128
+    t.date     "date_of_birth"
+    t.string   "license",             :limit => 64
+    t.text     "notes"
+    t.string   "state",               :limit => 64
+    t.integer  "team_id"
+    t.integer  "lock_version",                       :default => 0,     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "cell_fax"
+    t.string   "ccx_category"
+    t.string   "dh_category"
+    t.string   "email"
+    t.string   "gender",              :limit => 2
+    t.string   "home_phone"
+    t.string   "mtb_category"
+    t.date     "member_from"
+    t.string   "occupation"
+    t.string   "road_category"
+    t.string   "street"
+    t.string   "track_category"
+    t.string   "work_phone"
+    t.string   "zip"
+    t.date     "member_to"
+    t.boolean  "print_card",                         :default => false
+    t.boolean  "print_mailing_label",                :default => false
+    t.boolean  "ccx_only",                           :default => false, :null => false
+    t.string   "updated_by"
+    t.string   "bmx_category"
+    t.boolean  "wants_email",                        :default => true,  :null => false
+    t.boolean  "wants_mail",                         :default => true,  :null => false
+  end
+
+  add_index "racers", ["first_name"], :name => "idx_first_name"
+  add_index "racers", ["last_name"], :name => "idx_last_name"
+  add_index "racers", ["team_id"], :name => "idx_team_id"
+
   create_table "races", :force => true do |t|
     t.integer  "category_id",                                   :null => false
     t.string   "city",           :limit => 128
-    t.integer  "distance"
+    t.string   "distance"
     t.string   "state",          :limit => 64
     t.integer  "field_size"
     t.integer  "laps"
@@ -642,6 +534,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   end
 
   add_index "races", ["bar_points"], :name => "index_races_on_bar_points"
+  add_index "races", ["category_id"], :name => "idx_category_id"
   add_index "races", ["event_id"], :name => "index_races_on_event_id"
 
   create_table "racing_associations", :force => true do |t|
@@ -680,7 +573,7 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "exempt_team_categories",                             :default => "0",                                   :null => false
     t.string   "membership_email",                                   :default => "scott.willson@gmail.com",             :null => false
     t.string   "name",                                               :default => "Cascadia Bicycle Racing Association", :null => false
-    t.string   "rails_host",                                         :default => "localhost:8080"
+    t.string   "rails_host",                                         :default => "localhost:3000"
     t.string   "sanctioning_organizations"
     t.string   "short_name",                                         :default => "CBRA",                                :null => false
     t.string   "show_events_sanctioning_org_event_id",               :default => "0",                                   :null => false
@@ -691,19 +584,10 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.datetime "updated_at"
     t.date     "cat4_womens_race_series_end_date"
     t.boolean  "unregistered_teams_in_results",                      :default => true,                                  :null => false
-    t.string   "domain"
+    t.date     "next_year_start_at"
+    t.boolean  "mobile_site",                                        :default => false,                                 :null => false
+    t.date     "cat4_womens_race_series_start_date"
   end
-
-  create_table "refunds", :force => true do |t|
-    t.integer  "order_id"
-    t.decimal  "amount",          :precision => 10, :scale => 2
-    t.string   "created_by_type"
-    t.integer  "created_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "refunds", ["order_id"], :name => "index_refunds_on_order_id"
 
   create_table "results", :force => true do |t|
     t.integer  "category_id"
@@ -744,8 +628,8 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "category_class",          :limit => 16
     t.string   "age_group",               :limit => 16
     t.text     "custom_attributes"
-    t.boolean  "competition_result",                                       :default => true, :null => false
-    t.boolean  "team_competition_result",                                  :default => true, :null => false
+    t.boolean  "competition_result",                                       :null => false
+    t.boolean  "team_competition_result",                                  :null => false
     t.string   "category_name"
     t.string   "event_date_range_s",                                       :null => false
     t.date     "date",                                                     :null => false
@@ -764,8 +648,10 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "results", ["category_id"], :name => "idx_category_id"
   add_index "results", ["event_id"], :name => "index_results_on_event_id"
   add_index "results", ["members_only_place"], :name => "index_results_on_members_only_place"
+  add_index "results", ["person_id"], :name => "idx_racer_id"
   add_index "results", ["place"], :name => "index_results_on_place"
   add_index "results", ["race_id"], :name => "idx_race_id"
+  add_index "results", ["team_id"], :name => "idx_team_id"
   add_index "results", ["year"], :name => "index_results_on_year"
 
   create_table "roles", :force => true do |t|
@@ -788,6 +674,25 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
   add_index "scores", ["competition_result_id"], :name => "scores_competition_result_id_index"
   add_index "scores", ["source_result_id"], :name => "scores_source_result_id_index"
 
+  create_table "standings", :force => true do |t|
+    t.integer  "event_id",                              :default => 0,    :null => false
+    t.integer  "bar_points",                            :default => 1
+    t.string   "name"
+    t.integer  "lock_version",                          :default => 0,    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "ironman",                               :default => true
+    t.integer  "position",                              :default => 0
+    t.string   "discipline",              :limit => 32
+    t.string   "notes",                                 :default => ""
+    t.integer  "source_id"
+    t.string   "type",                    :limit => 32
+    t.boolean  "auto_combined_standings",               :default => true
+  end
+
+  add_index "standings", ["event_id"], :name => "event_id"
+  add_index "standings", ["source_id"], :name => "source_id"
+
   create_table "teams", :force => true do |t|
     t.string   "name",                                :default => "",    :null => false
     t.string   "city",                :limit => 128
@@ -803,24 +708,9 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.string   "contact_email"
     t.string   "contact_phone"
     t.boolean  "show_on_public_page",                 :default => false
-    t.string   "created_by_type"
-    t.integer  "created_by_id"
   end
 
-  add_index "teams", ["created_by_id"], :name => "index_teams_on_created_by_id"
-
-  create_table "update_requests", :force => true do |t|
-    t.integer  "lock_version",    :default => 0, :null => false
-    t.integer  "order_person_id",                :null => false
-    t.datetime "expires_at",                     :null => false
-    t.string   "token",                          :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "update_requests", ["expires_at"], :name => "index_update_requests_on_expires_at"
-  add_index "update_requests", ["order_person_id"], :name => "index_update_requests_on_order_person_id", :unique => true
-  add_index "update_requests", ["token"], :name => "index_update_requests_on_token"
+  add_index "teams", ["name"], :name => "idx_name", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "name",         :default => "", :null => false
@@ -830,6 +720,8 @@ ActiveRecord::Schema.define(:version => 20110806162623) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["username"], :name => "idx_alias", :unique => true
 
   create_table "velodromes", :force => true do |t|
     t.string   "name"
