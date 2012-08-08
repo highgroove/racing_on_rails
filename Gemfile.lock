@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/james2m/authlogic.git
+  revision: d1fdc90351697fc892b16baaf0ea381a9ca17e62
+  branch: fix-migrations
+  specs:
+    authlogic (3.1.3)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/sandal/prawn.git
   revision: 857f13e919d1bd7120de1ea9ba0429620329865b
   specs:
@@ -27,15 +36,6 @@ GIT
     vestal_versions (1.3.0)
       activerecord (~> 3.0.0)
       activesupport (~> 3.0.0)
-
-GIT
-  remote: git@github.com:james2m/authlogic.git
-  revision: d1fdc90351697fc892b16baaf0ea381a9ca17e62
-  branch: fix-migrations
-  specs:
-    authlogic (3.1.3)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
 
 GEM
   remote: https://rubygems.org/

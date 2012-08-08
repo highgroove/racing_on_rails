@@ -5,7 +5,7 @@ gem "rails", "~>3.0.0"
 gem "fastercsv", :platforms => :ruby_18
 gem "rack", "~>1.2.3"
 gem "rake"
-gem 'authlogic', :git => 'git@github.com:james2m/authlogic.git', :branch => 'fix-migrations'
+gem 'authlogic', :git => 'git://github.com/james2m/authlogic.git', :branch => 'fix-migrations'
 gem "tabular", ">0.0.5"
 gem "mysql2", "<0.3.0"
 gem "pdf-reader", :require => "pdf/reader"
