@@ -15,6 +15,7 @@ module Schedule
       :club            => :team_id,
       :website         => :flyer,
       :flier           => :flyer,
+      :registration    => :registration_link,
       :where           => :city,
       :flyer_approved  => { :column_type => :boolean }
     }
