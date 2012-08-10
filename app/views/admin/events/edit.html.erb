@@ -142,6 +142,7 @@
         <% unless RacingAssociation.current.short_name == "OBRA" -%>
         <%= f.labelled_text_field :website, nil, :editable => administrator? %>
         <%= f.labelled_text_field :registration_link, nil, :editable => administrator? %>
+        <%= f.labelled_text_field :twitter_tag, nil, :editable => administrator? %>
         <% end -%>
 
         <%= f.labelled_text_field :pre_event_fees %>

@@ -17,7 +17,8 @@ module Schedule
       :flier           => :flyer,
       :registration    => :registration_link,
       :where           => :city,
-      :flyer_approved  => { :column_type => :boolean }
+      :flyer_approved  => { :column_type => :boolean },
+      :'twitter_#'     => :twitter_tag
     }
 
     # FIXME Remove dependency. Is it here because we need a helper?

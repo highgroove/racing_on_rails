@@ -217,6 +217,7 @@ CREATE TABLE `events` (
   `beginner_friendly` tinyint(1) NOT NULL DEFAULT '0',
   `website` varchar(255) DEFAULT NULL,
   `registration_link` varchar(255) DEFAULT NULL,
+  `twitter_tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_disciplined` (`discipline`),
   KEY `parent_id` (`parent_id`),
@@ -1044,6 +1045,8 @@ INSERT INTO schema_migrations (version) VALUES ('20120301051824');
 INSERT INTO schema_migrations (version) VALUES ('20120528182244');
 
 INSERT INTO schema_migrations (version) VALUES ('20120720235539');
+
+INSERT INTO schema_migrations (version) VALUES ('20120810162048');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

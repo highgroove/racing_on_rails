@@ -21,7 +21,7 @@ module Admin
              "event"=>{"city"=>"Smith Rock", "name"=>"Skull Hollow Roubaix","date"=>"2010-01-02",
                        "flyer"=>"http://timplummer.org/roubaix.html", "sanctioned_by"=>"USA Cycling", "flyer_approved"=>"1", 
                        "discipline"=>"Downhill", "cancelled"=>"1", "state"=>"KY",
-                      'promoter_id' => person.to_param, 'type' => 'SingleDayEvent'}
+                      'promoter_id' => person.to_param, 'type' => 'SingleDayEvent', 'twitter_tag' => '@twitterer'}
         )
   
         skull_hollow = Event.find_by_name('Skull Hollow Roubaix')
@@ -41,6 +41,7 @@ module Admin
         assert_equal(true, skull_hollow.cancelled, 'cancelled')
         assert_equal('KY', skull_hollow.state, 'state')
         assert_equal(person, skull_hollow.promoter, 'promoter')
+        assert_equal('@twitterer', skull_hollow.twitter_tag)
       end
 
       def test_create_child_event
