@@ -14,6 +14,7 @@ module Schedule
       :team            => :team_id,
       :club            => :team_id,
       :website         => :flyer,
+      :flier           => :flyer,
       :where           => :city,
       :flyer_approved  => { :column_type => :boolean }
     }
