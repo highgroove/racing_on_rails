@@ -26,7 +26,7 @@ module Schedule
     # 0-based array of Months
     attr_reader :months, :year
 
-    # Import Schedule from Excel +filename+.
+    # Import Schedule from Excel +file_path+.
     #
     # *Warning:* Deletes all events after the schedule's first event date.
     # See http://trac.butlerpress.com/racing_on_rails/wiki/SampleImportFiles for format details and examples.
