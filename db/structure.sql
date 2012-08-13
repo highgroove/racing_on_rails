@@ -732,6 +732,17 @@ CREATE TABLE `scores` (
   CONSTRAINT `scores_source_result_id_fk` FOREIGN KEY (`source_result_id`) REFERENCES `results` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(255) NOT NULL,
+  `data` text,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_sessions_on_session_id` (`session_id`),
+  KEY `index_sessions_on_updated_at` (`updated_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE `standings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL DEFAULT '0',
@@ -1047,6 +1058,8 @@ INSERT INTO schema_migrations (version) VALUES ('20120528182244');
 INSERT INTO schema_migrations (version) VALUES ('20120720235539');
 
 INSERT INTO schema_migrations (version) VALUES ('20120810162048');
+
+INSERT INTO schema_migrations (version) VALUES ('20120813183838');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
