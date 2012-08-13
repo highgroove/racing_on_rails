@@ -20,9 +20,6 @@ module RacingOnRails
     )
 
     config.encoding = "utf-8"
-
-    config.session_store :key, "_gbra_session"
-    config.session_store :secret, "cIIrj9TWoeH2YVjLdGyqg6UHYCjcYc"
     
     config.assets.enabled = true
     config.assets.version = "1.0"
@@ -44,6 +41,11 @@ module RacingOnRails
   
     # HP's proxy, among others, gets this wrong
     config.action_dispatch.ip_spoofing_check = false
+
+    config.action_dispatch.session = {
+      :key => "_gbra_session",
+      :secret => "cIIrj9TWoeH2YVjLdGyqg6UHYCjcYc"
+    }
 
     require "#{config.root}/app/helpers/racing_on_rails/form_builder"
     config.action_view.default_form_builder = ::RacingOnRails::FormBuilder
