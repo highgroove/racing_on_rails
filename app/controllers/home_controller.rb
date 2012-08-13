@@ -1,6 +1,5 @@
 # Homepage
 class HomeController < ApplicationController
-  caches_page :index, :if => Proc.new { |c| !is_mobile? }
 
   # Show homepage
   # === Assigns

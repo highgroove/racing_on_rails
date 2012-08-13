@@ -1,8 +1,6 @@
 # BAR = Best All-around Rider
 # FIXME Add test for overall and make logic cleaner
 class BarController < ApplicationController
-  caches_page :index, :show, :if => Proc.new { |c| !is_mobile? }
-  
   def index
     @overall_bar = OverallBar.find_for_year
     expires_in 1.hour, :public => true

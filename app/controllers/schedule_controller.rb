@@ -4,8 +4,6 @@
 class ScheduleController < ApplicationController
   before_filter :assign_schedule_data, :except => :show
   
-  caches_page :index, :calendar, :list, :if => Proc.new { |c| !is_mobile? }
-  
   # Default calendar format
   # === Params
   # * year: default to current year
