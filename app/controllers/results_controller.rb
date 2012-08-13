@@ -22,7 +22,6 @@ class ResultsController < ApplicationController
   # See source code of Api::Results and Api::Base
   def index
     unless is_mobile?
-      expires_in 1.hour, :public => true
     end
     respond_to do |format|
       format.html {
@@ -63,7 +62,6 @@ class ResultsController < ApplicationController
       )
     end
     
-    expires_in 1.hour, :public => true
   end
   
   # Single Person's Results for a single Event
@@ -74,7 +72,6 @@ class ResultsController < ApplicationController
       :include => { :scores => [ :source_result, :competition_result ] },
       :conditions => ['results.event_id = ? and person_id = ?', params[:event_id], params[:person_id]]
     )
-    expires_in 1.hour, :public => true
   end
 
   # Single Team's Results for a single Event
@@ -86,7 +83,6 @@ class ResultsController < ApplicationController
       :conditions => ['results.event_id = ? and team_id = ? and race_id = ?', params[:event_id], params[:team_id], params[:race_id]]
     )
     raise ActiveRecord::RecordNotFound unless @result
-    expires_in 1.hour, :public => true
   end
   
   # Person's Results for an entire year
@@ -100,7 +96,6 @@ class ResultsController < ApplicationController
      :include => { :scores => [ :source_result, :competition_result ] },
      :conditions => [ "person_id = ? and year = ? and (competition_result = true or team_competition_result = true)", @person.id, @date.year ]
     )
-    expires_in 1.hour, :public => true
     render :layout => !request.xhr?
   end
   
@@ -111,7 +106,6 @@ class ResultsController < ApplicationController
     @results = Result.all(
       :conditions => [ "team_id = ? and year = ? and competition_result = false and team_competition_result = false", @team.id, @date.year ]
     )
-    expires_in 1.hour, :public => true
   end
   
   

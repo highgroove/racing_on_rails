@@ -41,7 +41,6 @@ class PostsController < ApplicationController
   end
   
   def show
-    expires_in 1.hour, :public => true
     @post = Post.find(params["id"])
   end
   

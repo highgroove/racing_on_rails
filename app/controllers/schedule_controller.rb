@@ -15,7 +15,6 @@ class ScheduleController < ApplicationController
     if is_mobile?
       render :show
     else
-      expires_in 1.hour, :public => true
       respond_to do |format|
         format.html { render_page }
         format.rss do
@@ -63,12 +62,10 @@ class ScheduleController < ApplicationController
   # * year
   # * schedule: instance of year's Schedule::Schedule
   def list
-    expires_in 1.hour, :public => true
     render_page
   end
 
   def calendar
-    expires_in 1.hour, :public => true
     respond_to do |format|
       format.html { render_page }
       format.json {
