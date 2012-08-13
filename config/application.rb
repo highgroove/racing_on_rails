@@ -21,8 +21,8 @@ module RacingOnRails
 
     config.encoding = "utf-8"
 
-    config.session_store :key, "_racing_on_rails_session"
-    config.session_store :secret, "9998d23d32c59a8161aba78b03630a93"
+    config.session_store :key, "_gbra_session"
+    config.session_store :secret, "cIIrj9TWoeH2YVjLdGyqg6UHYCjcYc"
     
     config.assets.enabled = true
     config.assets.version = "1.0"
