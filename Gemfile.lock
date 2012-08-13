@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/nevinera/mobilicious.git
+  revision: f23d63e888a73ed2ecb7bdca4d37a637c4476fbc
+  specs:
+    mobilicious (0.0.3)
+
+GIT
   remote: git://github.com/parasew/acts_as_tree.git
   revision: ed52495d1671c99e1add582628403bf8104e9077
   specs:
@@ -278,6 +284,7 @@ DEPENDENCIES
   in_place_editing
   jquery-rails
   launchy
+  mobilicious!
   mocha
   mysql2
   newrelic_rpm

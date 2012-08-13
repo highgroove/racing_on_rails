@@ -28,7 +28,8 @@
       
       <div data-role="footer">
         <div data-role="controlgroup" data-type="horizontal">
-        <%= link_to "Full", url_for(:full_site => 1), "data-role" => "button", "rel" => "external" %><%= link_to "Mobile", url_for(:mobile_site => 1), "data-role" => "button" %>
+          <%= link_to "Full", url_for(:mobile => 0), "data-role" => "button", "rel" => "external" %>
+          <%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %>
         </div>
       </div>
     </div>

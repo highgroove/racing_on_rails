@@ -4,7 +4,7 @@
 class ScheduleController < ApplicationController
   before_filter :assign_schedule_data, :except => :show
   
-  caches_page :index, :calendar, :list, :if => Proc.new { |c| !mobile_request? }
+  caches_page :index, :calendar, :list, :if => Proc.new { |c| !is_mobile? }
   
   # Default calendar format
   # === Params
@@ -14,7 +14,7 @@ class ScheduleController < ApplicationController
   # * year
   # * schedule: instance of year's Schedule::Schedule
   def index
-    if mobile_request?
+    if is_mobile?
       render :show
     else
       expires_in 1.hour, :public => true

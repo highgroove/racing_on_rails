@@ -9,20 +9,21 @@ class RacesController < ApplicationController
   def index
     if params[:event_id]
       @event = Event.includes(:races).find(params[:event_id])
-      unless mobile_request?
+      unless is_mobile?
         redirect_to event_results_path(@event)
       end
     else
-      if mobile_request?
-        return redirect_to_full_site
+      if is_mobile?
+        redirect_to :mobile => 0
+      else
+        @category = Category.find(params[:category_id])
       end
-      @category = Category.find(params[:category_id])
     end
   end
   
   def show
     @race = Race.find(params[:id])
-    unless mobile_request?
+    unless is_mobile?
       redirect_to event_results_path(@race.event)
     end
   end
