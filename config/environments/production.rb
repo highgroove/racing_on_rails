@@ -8,7 +8,5 @@ RacingOnRails::Application.configure do
   config.cache_classes                     = true
   config.consider_all_requests_local       = false
   config.i18n.fallbacks                    = true
-  config.logger                            = Logger::Syslog.new("racing_on_rails", Syslog::LOG_LOCAL4)
-  config.logger.level                      = ::Logger::INFO
   config.serve_static_assets               = false
 end
