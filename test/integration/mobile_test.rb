@@ -2,40 +2,55 @@ require File.expand_path("../../test_helper", __FILE__)
 
 # :stopdoc:
 class MobileTest < ActionController::IntegrationTest
-  def test_popular_pages
-    result = FactoryGirl.create(:result)
+  def setup
+    @category = FactoryGirl.create(:category)
+    @result = FactoryGirl.create(:result)
+    @mailing_list = FactoryGirl.create(:mailing_list)
+    @mailing_list_post = FactoryGirl.create(:post)
+  end
 
-    get "http://m.cbra.org/"
-    assert_response :success
-    
-    get "http://m.cbra.org/events/#{result.event_id}/races"
-    assert_response :success
-
-    get "http://m.cbra.org/schedule"
-    assert_response :success
-
-    get "http://m.cbra.org/results"
-    assert_response :success
-
-    mailing_list = FactoryGirl.create(:mailing_list)
-    get "http://m.cbra.org/mailing_lists"
-    assert_response :success
-    
-    get "http://m.cbra.org/mailing_lists/#{mailing_list.id}/posts"
-    assert_response :success
-
-    mailing_list_post = FactoryGirl.create(:post)
-    get "http://m.cbra.org/posts/#{mailing_list_post.id}"
+  def test_homepage
+    get('/', :mobile => '1')
     assert_response :success
   end
 
-  def test_categories_page_redirect
-    category = FactoryGirl.create(:category)
+  def test_races
+    get "/events/#{@result.event_id}/races", :mobile => '1'
+    assert_response :success
+  end
 
-    get "http://m.cbra.org/categories/#{category.id}/races", { :mobile_site => 1 }, { "HTTP_USER_AGENT" => "Android" }
-    assert_redirected_to "http://cbra.org/categories/#{category.id}/races?"
+  def test_schedule
+    get "/schedule", :mobile => '1'
+    assert_response :success
+  end
 
-    get "http://cbra.org/categories/#{category.id}/races?", {}, { "HTTP_USER_AGENT" => "Android" }
+  def test_results
+    get "/results", :mobile => '1'
+    assert_response :success
+  end
+
+  def test_mailing_lists
+    get "/mailing_lists", :mobile => '1'
+    assert_response :success
+  end
+
+  def test_mailing_list_posts
+    get "/mailing_lists/#{@mailing_list.id}/posts", :mobile => '1'
+    assert_response :success
+  end
+
+  def test_post
+    get "/posts/#{@mailing_list_post.id}", :mobile => '1'
+    assert_response :success
+  end
+
+  def test_races_redirects_mobile_client_to_full_site
+    get "/categories/#{@category.id}/races", {:mobile => '1'}, { "HTTP_USER_AGENT" => "Safari Mobile" }
+    assert_redirected_to "/categories/#{@category.id}/races?mobile=0"
+  end
+
+  def test_mobile_clients_viewing_non_mobile_races_does_not_redirect
+    get "/categories/#{@category.id}/races?", {:mobile => '0'}, { "HTTP_USER_AGENT" => "Safari mobile" }
     assert_response :success
   end
 end
