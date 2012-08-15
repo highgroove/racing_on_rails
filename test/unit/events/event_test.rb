@@ -577,6 +577,12 @@ class EventTest < ActiveSupport::TestCase
     FactoryGirl.create(:event).propagate_races
   end
 
+  def test_xlsx
+    event = FactoryGirl.build(:result).event
+    xlsx = event.to_xlsx
+    assert xlsx.is_a?(StringIO), "to_xlsx should return a StringIO"
+  end
+
   private
   
   def assert_orphans(count, event)

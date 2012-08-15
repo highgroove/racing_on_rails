@@ -24,4 +24,13 @@ class ResultsTest < ActionController::IntegrationTest
     assert @response.body["Run 1"]
     assert @response.body["Run 2"]
   end
+
+  def test_xlsx_download
+    event = FactoryGirl.create(:result).event
+    goto_login_page_and_login_as FactoryGirl.create(:administrator)
+
+    get event_path(event, :format => 'xlsx')
+    assert_equal('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', @response.content_type, "Content type should be Excel")
+    assert_match(Regexp.new(event.name), @response.header['Content-Disposition'], "File download should have name of event")
+  end
 end

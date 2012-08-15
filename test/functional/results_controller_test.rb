@@ -81,6 +81,15 @@ class ResultsControllerTest < ActionController::TestCase
     assert_template("results/event")
     assert_not_nil(assigns["event"], "Should assign event")
   end
+
+  def test_xlsx_download
+    event = FactoryGirl.create(:result).event
+    get(:event, :event_id => event.id, :format => 'xlsx')
+    assert_response(:success)
+    assert_equal(response.content_type, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    assert_match(Regexp.new(event.name), response.header['Content-Disposition'])
+    assert_match(Regexp.new('attachment'), response.header['Content-Disposition'])
+  end
   
   def test_index
     future_national_federation_event = FactoryGirl.create(:event, :date => Date.new(2004, 3), :sanctioned_by => "USA Cycling")

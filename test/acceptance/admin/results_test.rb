@@ -93,4 +93,14 @@ class ResultsTest < AcceptanceTest
     click_button "Save"
     assert_equal "12", find_field("race_laps").value
   end
+
+  def test_results_xlsx_download
+    login_as FactoryGirl.create(:administrator)
+    event = FactoryGirl.create(:result).event
+
+    visit "/admin/events/#{event.id}/edit"
+    click_link 'Download results as Excel spreadsheet'
+
+    wait_for_download("*#{event.name}*")
+  end
 end
