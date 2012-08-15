@@ -534,4 +534,20 @@ class Event < ActiveRecord::Base
   def to_s
     "<#{self.class} #{id} #{discipline} #{name} #{date}>"
   end
+
+  # Produces an IO stream of an xlsx which can be +read+
+  def to_xlsx
+    Axlsx::Package.new do |p|
+      p.workbook.add_worksheet(:name => "Event Results") do |sheet|
+        sheet.add_row self.races.first.result_columns_or_default.map {|c| ::ResultColumn[c].description }
+        self.races_with_results.sort.each do |race|
+          sheet.add_row([race.name])
+          race.results.sort.each do |result|
+            sheet.add_row(race.result_columns_or_default.map {|col| result.send(col) })
+          end
+        end
+      end
+      return p.to_stream
+    end
+  end
 end
