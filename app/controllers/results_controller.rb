@@ -38,7 +38,8 @@ class ResultsController < ApplicationController
   
   # All Results for Event
   def event
-    @event = Event.find(params[:event_id])
+    @event = Event.find params[:event_id],
+      :include => [:races => [:category, {:results => :team}]]
     
     case @event
     when AgeGradedBar, Bar, TeamBar
@@ -55,13 +56,15 @@ class ResultsController < ApplicationController
       return redirect_to(rider_rankings_path(:year => @event.year))
     end
 
-    benchmark "Load results", :level => :debug do
-      @event = Event.find(
-        params[:event_id],
-        :include => [ :races => [ :category, { :results => :team } ] ]
-      )
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        send_data @event.to_xlsx.read,
+          :type => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          :disposition => 'attachment',
+          :filename => @event.name << '.xlsx'
+      end
     end
-    
   end
   
   # Single Person's Results for a single Event

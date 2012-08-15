@@ -1,6 +1,9 @@
 <% nav_caption = %Q{
   <div>Races</div>
   <div class="right">
+  #{link_to(image_tag('icons/table.png', :title => 'Download results as Excel spreadsheet', :alt => 'Download results as Excel spreadsheet'),
+    event_results_path(@event, :format => 'xlsx'),
+    {:class => 'image', :title => 'Download results as Excel spreadsheet'}) if @event.has_results_including_children? }
   #{link_to(image_tag('icons/page_go.png', :title => 'View public results web page', :alt => 'View public results web page'), 
      event_results_path(@event), 
      { :class => "image" }) if @event.has_results_including_children? }
