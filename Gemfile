@@ -30,6 +30,7 @@ gem "yui-compressor"
 gem "paperclip"
 gem 'pry-rails'
 gem 'mobilicious', :git => 'git://github.com/nevinera/mobilicious.git'
+gem 'axlsx'
 
 
 group :assets do
