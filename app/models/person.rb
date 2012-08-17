@@ -37,7 +37,8 @@ class Person < ActiveRecord::Base
   has_and_belongs_to_many :editable_events, :class_name => "Event", :foreign_key => "editor_id", :join_table => "editors_events"
   has_many :race_numbers, :include => [ :discipline, :number_issuer ]
   has_many :results
-  has_and_belongs_to_many :roles
+  has_many :role_assignments
+  has_many :roles, :through => :role_assignments
   has_many :sent_editor_requests, :foreign_key => "editor_id", :class_name => "EditorRequest", :dependent => :destroy
   belongs_to :team
   

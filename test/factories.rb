@@ -152,6 +152,11 @@ FactoryGirl.define do
   factory :role do
     name "Administrator"
   end
+
+  factory :role_assignment do
+    association :role, :factory => :role
+    association :person, :factory => :person
+  end
   
   factory :result do
     sequence :place
