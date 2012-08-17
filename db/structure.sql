@@ -432,15 +432,6 @@ CREATE TABLE `people_people` (
   CONSTRAINT `people_people_ibfk_2` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `people_roles` (
-  `role_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL,
-  KEY `role_id` (`role_id`),
-  KEY `index_people_roles_on_person_id` (`person_id`),
-  CONSTRAINT `people_roles_person_id` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `roles_users_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `post_texts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `post_id` int(11) NOT NULL,
@@ -700,6 +691,19 @@ CREATE TABLE `results` (
   CONSTRAINT `results_person_id` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`),
   CONSTRAINT `results_race_id_fk` FOREIGN KEY (`race_id`) REFERENCES `races` (`id`) ON DELETE CASCADE,
   CONSTRAINT `results_team_id_fk` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `role_assignments` (
+  `role_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`),
+  KEY `index_people_roles_on_person_id` (`person_id`),
+  CONSTRAINT `people_roles_person_id` FOREIGN KEY (`person_id`) REFERENCES `people` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `roles_users_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `roles` (
@@ -1060,6 +1064,8 @@ INSERT INTO schema_migrations (version) VALUES ('20120720235539');
 INSERT INTO schema_migrations (version) VALUES ('20120810162048');
 
 INSERT INTO schema_migrations (version) VALUES ('20120813183838');
+
+INSERT INTO schema_migrations (version) VALUES ('20120816165547');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
