@@ -55,6 +55,7 @@ RacingOnRails::Application.routes.draw do
     end
     resources :people do
       resources :aliases
+      resources :role_assignments
       collection do
         get  :cards
         get  :duplicates

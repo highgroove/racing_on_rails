@@ -1,0 +1,25 @@
+<%= table :caption => "Account Roles", :class => "box-3 last", :id => "roles", :collection => person.role_assignments do %>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% person.role_assignments.each do |ra| %>
+      <tr>
+        <td><%= ra.role.name %></td>
+        <td><%= link_to image_tag('icons/delete.png'), admin_person_role_assignment_path(person, ra), :method => :delete, :title => "Revoke #{ra.role.name} role" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <% roles = Role.all - person.roles %>
+    <% if roles.any? %>
+        <tr>
+          <td><%= select_tag 'role_id', options_for_select(roles.map {|r| [r.name, r.id] }), :id => 'roles_select' %></td>
+          <td><%= button_tag 'Add role', :id => 'add_roll_button', :'data-person-id' => person.id %></td>
+        </tr>
+    <% end %>
+  </tfoot>
+<% end %>

@@ -131,6 +131,7 @@
     <%= render(:partial => "people/events", :locals => { :person => @person, :events => @person.events.all( :conditions => [ 
        "parent_id is null and date between ? and ?", Time.zone.now.beginning_of_year, Time.zone.now.end_of_year 
      ]).sort_by(&:date).reverse }) unless @person.events.empty? %>
+    <%= render :partial => "admin/people/role_assignments", :locals => {:person => @person} %>
   </div>
 
   <div class="page_buttons span-6 last">

@@ -6,6 +6,7 @@
  *= require_self
  *= require tabs
  *= require first_aid_providers
+ *= require admin/role_assignments
 */
 
 function restripeTable(id) {

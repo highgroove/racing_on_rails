@@ -1,0 +1,2 @@
+module Admin::RoleAssignmentsHelper
+end

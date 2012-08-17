@@ -229,4 +229,23 @@ class PeopleTest < AcceptanceTest
     visit '/admin/people'
     attach_file 'people_file', "#{Rails.root}/test/files/membership/database.xls"
   end
+
+  def test_person_role_assignment
+    eric = FactoryGirl.create(:person, :name => "Erik Tonkin")
+    login_as FactoryGirl.create(:administrator)
+    visit "/admin/people/#{eric.id}/edit"
+
+    select('Administrator', :from => 'roles_select')
+    click_button 'add_roll_button'
+    assert_page_has_content 'Administrator'
+  end
+
+  def test_person_role_revocation
+    eric = FactoryGirl.create(:administrator, :login => 'eric', :name => "Erik Tonkin")
+    login_as FactoryGirl.create(:administrator)
+    visit "/admin/people/#{eric.id}/edit"
+
+    click_link 'Revoke Administrator role'
+    assert_page_has_content('Removed role.')
+  end
 end
