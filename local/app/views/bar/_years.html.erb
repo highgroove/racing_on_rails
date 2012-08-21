@@ -1,0 +1,16 @@
+<%= tabs do |tabs|
+  years = Event.find_all_years
+  current_year = RacingAssociation.current.effective_year
+  
+  unless years.include?(current_year)
+    years << current_year
+    years.sort!.reverse!
+  end
+
+  years.each do |year|
+    tabs.add(
+      year, 
+      bar_path({:year => year, :category => race.try(:category_friendly_param), :discipline => Discipline[race.try(:discipline)]})
+    )
+  end
+end -%>

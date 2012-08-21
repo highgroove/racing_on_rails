@@ -1,0 +1,42 @@
+<% if @race
+     @page_title = "GCS: #{@race.year}: #{@race.discipline}: #{@race.category.name}"
+   else
+     @page_title = "GCS"
+   end  -%>
+
+<%= render :partial => "years", :locals => { :overall_bar => @overall_bar, :race => @race } %>
+<%= render :partial => "disciplines", :locals => { :overall_bar => @overall_bar, :race => @race } %>
+
+<% if @race && @race.results.any? -%>
+<h2><%= @race.year %> <%= @race.discipline %> GCS</h2>
+<div class="updatedon centered">Updated <%= @race.updated_at.to_formatted_s(:long) %></div>
+<% end -%>
+
+<%= render :partial => "races", :locals => { :race => @race } %>
+
+<% if @race.nil? || @race.results.empty? %>
+No results for <%= params[:year] %>
+<% else %>
+
+<%= table :caption => @race.name, :class => "event_results" do %>
+  <% 
+    if @race.discipline == "Team"
+      result_columns = %w{ place team_name points }
+    else
+      result_columns = %w{ place name team_name points }
+    end
+  %>
+  <tr>
+    <%- result_columns.map.each do |column| -%>
+    <th class="<%= column %>"><%= result_header column %></th>
+    <%- end -%>
+  </tr>
+  <%- @race.results.sort.each do |result| -%>
+  <tr class="<%= cycle "even", "odd" %>">
+    <%- result_columns.each do |column| -%>
+    <td<%= result_cell_class column %>><%= result_cell result, column %></td>
+    <%- end -%>
+  </tr>
+  <%- end -%>
+<%- end -%>
+<%- end -%>
