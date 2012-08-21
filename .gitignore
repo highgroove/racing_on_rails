@@ -12,7 +12,6 @@
 *.sublime-*
 .tm_properties
 ._*
-/local
 chromedriver.log
 db/*.sqlite3
 db/production.sql
