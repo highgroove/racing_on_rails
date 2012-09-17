@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
 module Admin::EventsHelper
   LONG_DAYS_OF_WEEK = %w{ Sunday Monday Tuesday Wednesday Thursday Friday Saturday } unless defined?(LONG_DAYS_OF_WEEK)
   
   # Build a caption and footer links and render events/upcoming partial
   def upcoming_events_table(upcoming_events, caption = nil, footer = nil)
-    caption ||= link_to("Schedule", :only_path  => false, :host => RacingAssociation.current.rails_host, :controller => 'schedule')
-    footer ||= link_to("More &hellip;".html_safe, :only_path => false, :host => RacingAssociation.current.rails_host, :controller => 'schedule')
+#    caption ||= link_to("Schedule", :only_path  => false, :host => RacingAssociation.current.rails_host, :controller => 'schedule')
+#    footer ||= link_to("More &hellip;".html_safe, :only_path => false, :host => RacingAssociation.current.rails_host, :controller => 'schedule')
+    caption ||= link_to("Schedule".html_safe, {:action => 'list', :controller => 'schedule'})
+    footer ||= link_to("More &hellip;".html_safe, {:action => 'list', :controller => 'schedule'})
     render_page 'events/upcoming', :locals => { :upcoming_events => upcoming_events, :caption => caption.html_safe, :footer => footer.html_safe }
   end
   
