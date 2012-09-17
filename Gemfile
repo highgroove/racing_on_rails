@@ -32,7 +32,6 @@ gem 'pry-rails'
 gem 'mobilicious', :git => 'git://github.com/nevinera/mobilicious.git'
 gem 'axlsx'
 gem 'execjs'
-
 gem 'therubyracer'
 
 group :assets do
