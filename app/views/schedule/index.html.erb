@@ -6,7 +6,10 @@
     tabs.add(month.name, :anchor => month.name)
   end
 end -%>
-<%= render_page "schedule/disciplines", :locals => { :year => @year } %>
+<%= render_page "schedule/disciplines", :locals => { :year => @year} %>
+
+
+
 
 <% if Time.zone.today < Date.new(@year, 2) %>
 <div>Tentative. Dates are subject to change.</div>

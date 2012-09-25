@@ -3,6 +3,7 @@
 *.swp
 *.tmproj
 *~
+*#
 .bundle
 .DS_Store
 .gitmodules
