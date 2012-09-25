@@ -65,6 +65,12 @@ group :acceptance do
   gem "timecop"
 end
 
+group :staging do
+  gem "execjs"
+  gem "rvm-capistrano"
+  gem "capistrano-unicorn"
+end
+
 group :production do
   gem "syslog-logger"
   gem "unicorn"
