@@ -27,17 +27,6 @@ set :use_sudo, false
 set :scm_auth_cache, true
 
 namespace :deploy do
-  desc "Deploy association-specific customizations"
-  task :local_code do
-    if site_local_repository_branch
-      run "git clone #{site_local_repository} -b #{site_local_repository_branch} #{release_path}/local"
-    else
-      run "git clone #{site_local_repository} #{release_path}/local"
-    end
-    run "chmod -R g+w #{release_path}/local"
-    run "ln -s #{release_path}/local/public #{release_path}/public/local"
-  end
-  
   task :symlinks do
     run <<-CMD
       rm -rf #{latest_release}/tmp/pids &&
@@ -101,10 +90,6 @@ namespace :deploy do
   task :stop, :roles => :app do
     top.unicorn.graceful_stop
   end
-end
-
-if Dir.exists?("local")
-  before "deploy:assets:precompile", "deploy:local_code"
 end
 
 after "deploy:update_code", "deploy:symlinks", "deploy:copy_cache"
