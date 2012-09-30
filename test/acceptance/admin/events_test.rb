@@ -2,19 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + "/../acceptance_test")
 
 # :stopdoc:
 class EventsTest < AcceptanceTest
-  def administrator
-    @_administrator ||= FactoryGirl.create(:administrator)
-  end
-
-  def setup
-    login_as administrator
-  end
-
-  def teardown
-    logout
-  end
-
   def test_create_event
+    login_as FactoryGirl.create(:administrator)
+
     click_link 'New Event'
 
     fill_in 'event_name', :with => 'Tour de Atlanta'
@@ -24,6 +14,8 @@ class EventsTest < AcceptanceTest
   end
 
   def test_event_twitter_tag
+    login_as FactoryGirl.create(:administrator)
+
     event = FactoryGirl.create(:event, :name => "Tour de Atlanta")
     visit "/admin/events/#{event.id}/edit"
 
@@ -174,6 +166,7 @@ class EventsTest < AcceptanceTest
   end
   
   def test_lost_children
+    login_as FactoryGirl.create(:administrator)
     FactoryGirl.create(:series, :name => "PIR")
     event = FactoryGirl.create(:event, :name => "PIR")
     
