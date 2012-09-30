@@ -10,8 +10,7 @@ require 'bundler/capistrano'
 require "capistrano-unicorn"
 
 set :scm, "git"
-set :repository, "git://github.com/scottwillson/racing_on_rails.git"
-set :site_local_repository, "git@github.com:scottwillson/#{application}-local.git"
+set :repository, "git@github.com:highgroove/racing_on_rails.git"
 set :branch, "master"
 set :deploy_via, :remote_cache
 set :keep_releases, 5
@@ -22,17 +21,6 @@ set :use_sudo, false
 set :scm_auth_cache, true
 
 namespace :deploy do
-  desc "Deploy association-specific customizations"
-  task :local_code do
-    if site_local_repository_branch
-      run "git clone #{site_local_repository} -b #{site_local_repository_branch} #{release_path}/local"
-    else
-      run "git clone #{site_local_repository} #{release_path}/local"
-    end
-    run "chmod -R g+w #{release_path}/local"
-    run "ln -s #{release_path}/local/public #{release_path}/public/local"
-  end
-  
   task :symlinks do
     run <<-CMD
       rm -rf #{latest_release}/tmp/pids &&
