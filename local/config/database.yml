@@ -37,7 +37,8 @@ staging:
 production:
   adapter: mysql2
   database: gbra
-  username: root
+  username: gbra
+  password: MNKPR6TCOLysqJ3
   encoding: utf8
   host: localhost
   reconnect: false
