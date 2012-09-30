@@ -17,7 +17,7 @@ gem "will_paginate", "~> 3.0.beta"
 gem "airbrake"
 gem "ruby-ole", :git => "git://github.com/scottwillson/ruby-ole.git"
 gem "spreadsheet", :git => "git://github.com/scottwillson/spreadsheet.git"
-gem "ckeditor", "3.7.0.rc3"
+gem "ckeditor_rails", :require => "ckeditor-rails"
 gem "default_value_for", :git => "https://github.com/FooBarWidget/default_value_for.git"
 gem "acts_as_list", :git => "git://github.com/swanandp/acts_as_list.git"
 gem "acts_as_tree", :git => "git://github.com/parasew/acts_as_tree.git"
@@ -33,10 +33,10 @@ gem 'mobilicious', :git => 'git://github.com/nevinera/mobilicious.git'
 gem 'axlsx'
 gem 'execjs'
 gem 'therubyracer'
+gem 'coffee-rails', "~> 3.2.0"
 
 group :assets do
   gem 'sass-rails', "~> 3.2.0"
-  gem 'coffee-rails', "~> 3.2.0"
   gem 'uglifier'
 end
 
