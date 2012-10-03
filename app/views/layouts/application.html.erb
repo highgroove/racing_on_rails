@@ -27,7 +27,8 @@
           <div class="breadcrumb">
             <%= link_to RacingAssociation.current.short_name, "/" %> |
             <%= link_to "Results", results_path, :id => "results_link" %> |
-            <%= link_to "Schedule", schedule_path, :id => "schedule_link" %> | 
+            <%= link_to "Schedule", schedule_path, :id => "schedule_link" %> |
+	    <%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %> |
       <% if current_person %>
       <%= link_to "Logout", person_session_path, :method => :delete, :id => "account_link" %>
       <% else %>
