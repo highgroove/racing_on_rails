@@ -1,7 +1,7 @@
 <% @page_title = "Schedule" %>
 <h2><%= @year %></h2>
 <ul data-role="listview" class="ui-listview">
-  <%- @events.each do |event| -%>
+  <%- @events.sort_by(&:start_date).each do |event| -%>
   <li>
     <%- if event.flyer.present? && event.flyer_approved? -%>
     <%= link_to(event.flyer) do %>
