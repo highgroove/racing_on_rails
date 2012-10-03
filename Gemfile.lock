@@ -60,7 +60,6 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    RedCloth (4.2.9)
     actionmailer (3.2.7)
       actionpack (= 3.2.7)
       mail (~> 2.4.4)
@@ -274,7 +273,6 @@ PLATFORMS
 
 DEPENDENCIES
   Ascii85
-  RedCloth
   acts_as_list!
   acts_as_tree!
   airbrake
