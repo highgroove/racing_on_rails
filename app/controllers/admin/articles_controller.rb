@@ -24,11 +24,13 @@ class Admin::ArticlesController < Admin::AdminController
   def new
     @article = Article.new
     @article_category = ArticleCategory.first
+    5.times { @article.assets.build }
   end
 
   def edit
     @article = Article.find(params[:id])
     @article_category = ArticleCategory.find(@article.article_category_id)
+    5.times { @article.assets.build }
   end
 
   def create

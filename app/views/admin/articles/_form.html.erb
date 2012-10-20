@@ -7,8 +7,36 @@
   <hr/>
 
   <%= f.text_area :body, :class => 'ckeditor' %>
-  <%= f.label :article %>
+  
+  <%= f.label :files %></br>
 
+  <%= f.fields_for :assets do |asset_fields| %>
+    <% if asset_fields.object.new_record? %>
+      <p>
+	<%= asset_fields.file_field :asset %></br>
+      </p>
+    <% end %>
+  <% end %>
+
+
+
+
+  <%= f.label :uploaded %></br>
+
+  <%= f.fields_for :assets do |asset_fields| %>
+
+  <% unless asset_fields.object.new_record? %>
+<p>
+
+  Delete:
+     <%= asset_fields.check_box :_destroy %>
+
+    <%= link_to(asset_fields.object.asset_file_name,
+	asset_fields.object.asset.url(:original)) %>
+  <% end %>
+  <% end %>
+</p>
+</br>
   <%= f.labelled_text_field :position %>
   <%= f.labelled_check_box :display %>
 </div>
