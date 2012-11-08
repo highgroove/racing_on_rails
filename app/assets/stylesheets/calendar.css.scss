@@ -1,0 +1,67 @@
+/* Calendar of events */
+div.calendar table {
+  border-collapse: separate;
+  padding: 0px;
+  width: 100%;
+  background: white;
+  
+}
+
+div.calendar {
+  margin-bottom: 36px;
+}
+
+.calendar table th, .calendar .caption
+{
+  text-align: center;
+}
+
+tr.month
+{
+  vertical-align: top;
+}
+
+td.day
+{
+  height: 70px;
+  width: 14%;
+  border: 1px solid #EEE;
+  background: #FFF;
+  padding: 4px 4px;
+  text-align: left;
+}
+
+td.day div.event {
+  margin-bottom: 8px;
+  line-height: 16px;
+}
+
+td.day div.beginner_friendly {
+  background-image: url("icons/star_green.png");
+  background-repeat: no-repeat;
+  padding-left: 20px;
+}
+
+td.day div.number
+{
+  font-weight: bold;
+}
+
+td.day_from_other_month
+{
+  height: 70px;
+  width: 14%;
+  border: 1px solid #EEE;
+  background: #EEB;
+  padding: 4px 4px;
+}
+
+td.day_from_other_month div.number
+{
+  font-style: italic;
+  text-align: left;
+}
+
+div.calendar table.base td.beginner_friendly {
+  text-align: right;
+}

@@ -1,0 +1,5 @@
+<%= tabs do |tabs|
+    @schedule.months.each do |month|
+    tabs.add(month.name, :anchor => month.name)
+end
+end -%>

@@ -1,0 +1,100 @@
+$border-rad: 4px;
+$light-text: white;
+$dark-text: black;
+$main-bg: silver;
+$overall-width: 1050px;
+$main-width: 650px;
+
+#header {
+    background: url("backgrounds/gbratitle.jpg") top center no-repeat;
+    width: $overall-width;
+    height: 100px;
+    margin: auto;
+    @include border-radius($border-rad);
+    @include box-shadow(0px 0px 2px 2px);
+
+}
+
+
+#top-menu {
+
+    @include background-image(linear-gradient(#303030, #888));
+    width: $overall-width;
+    height: 31px;
+    margin: auto;
+    position: relative;
+    top: 2px;
+    @include border-radius($border-rad);
+    @include box-shadow(0px 0px 2px 2px);
+
+    ul, li {
+	font-family: $verdana;
+	display: inline;
+	padding: 10px;
+	font-size: 13px;
+	text-transform: uppercase;
+	position: relative;
+	top: 3px;
+    }
+
+    
+    a {
+	@include box-sizing(content-box);
+	text-decoration: none;
+	color: $light-text;
+	&:hover {
+	    border: 5px solid #333;
+	    color: #fcff00;
+	    background-color: #333;
+	    @include border-radius($border-rad);
+	}
+    }
+
+}
+
+#main-wrapper {
+    width: $overall-width;
+    margin: auto;
+    @include border-radius($border-rad);
+    background: $main-bg;
+    position: relative;
+    top: 10px;
+    overflow: hidden;
+}
+
+.main-content {
+    width: $main-width px;
+    float: left;
+    max-width: $main-width;
+    min-width: $main-width;
+}
+
+.left-menu {
+    width: 200px;
+    float: left;
+}
+
+.right-info {
+    width: 200px;
+    float: left;
+
+    ul, li {
+	display: block;
+    }
+
+}
+
+.content-item {
+    background: #EEE;
+    border: 3px solid $main-bg;
+    padding: 10px;
+    @include box-sizing(border-box);
+    @include border-radius($border-rad * 3);
+
+    
+    ul, li {
+	font-family: $verdana;
+	font-size: 12px;
+	text-decoration: none;
+    }
+}

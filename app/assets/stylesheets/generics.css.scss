@@ -1,0 +1,43 @@
+$even-odd-bg: #BBB;
+
+a {
+    color: #b00;
+    text-decoration: none;
+    &:hover {
+	color: #f00;
+    }
+}
+
+body {
+    background: url("backgrounds/wolf-bw.jpg")
+}
+
+img {
+    max-width: 100%;
+}
+
+ul, li {
+    display: inline;
+    padding: 5px;
+}
+
+.odd {
+    background: $even-odd-bg + #111;
+
+    @include transition(all 300ms ease-in-out);
+
+    &:hover {
+	background: $even-odd-bg + #333;
+    }
+}
+
+.even {
+    background: $even-odd-bg - #111;
+
+    @include transition(all 300ms ease-in-out);
+
+
+    &:hover {
+	background: $even-odd-bg + #333;
+    }
+}
