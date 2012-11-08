@@ -1,0 +1,77 @@
+<% @page_title = "Schedule: #{@year}" %>
+
+<div class="content-item">
+  <%= render_page "schedule/years" %>
+</div>
+<div class="content-item">
+  <%= render_page "schedule/months" %>
+</div>
+<div class="content-item">
+  <%= render_page "schedule/disciplines", :locals => { :year => @year} %>
+</div>
+
+
+
+<% if Time.zone.today < Date.new(@year, 2) %>
+   <div>Tentative. Dates are subject to change.</div>
+   <% end %>
+
+   <%= render_page "schedule/others" %>
+   <p class="centered"><%= link_to "Schedule in list format", {:action => 'list'}, {:class => 'obvious'} %> with race organizer contact information</p>
+
+<% if RacingAssociation.current.competitions.include?(:atra_points_series) -%>
+<p class="centered"><%= image_tag "icons/red_star.gif", :style => "margin: 0px; padding-top: 2px;" %>&nbsp;ATRA National Championship Series (NCS)</p>
+<%- end %>
+
+<div class="container">
+  <%- for month in @schedule.months -%>
+  <%= table :class => "calendar", :caption => "<a name='#{month.name}'>#{month.name} #{@year}</a>".html_safe do %>
+  <tr>
+    <th>Sunday</th>
+    <th>Monday</th>
+    <th>Tuesday</th>
+    <th>Wednesday</th>
+    <th>Thursday</th>
+    <th>Friday</th>
+    <th>Saturday</th>
+  </tr>
+  <%- month.weeks.each do |week| -%>
+  <tr class="month">
+    <%- week.days.each do |day| -%>
+    <%- if day.other_month? -%>
+    <td class="day_from_other_month"><div class="number"><%= day.day_of_month -%></div>
+      <%- else -%>
+    <td class="day">
+      <div class="number"><%= day.day_of_month -%></div>
+      <%- day.events.each do |event| -%>
+      <div class="event<%= ' atra_points_series' if event.atra_points_series? %><%= " beginner_friendly" if event.beginner_friendly? %>">
+        <%- if event.cancelled %>
+        <span class="cancelled"><%= event.full_name -%></span> <i>cancelled</i>
+        <%- elsif event.postponed? %>
+        <span class="postponed"><%= event.full_name -%></span> <i>postponed</i>
+        <%- else -%>
+        <%- if !event.flyer.blank? && event.flyer_approved? -%>
+        <a href="<%= event.flyer -%>" class="obvious" <%= "target='_blank'" if RacingAssociation.current.flyers_in_new_window? %>><%= event.full_name -%><%= " MTB" if !event.name.include?("MTB") && event.discipline == "Mountain Bike" -%></a>
+        <%- else -%>
+        <%= event.full_name -%><%= " MTB" if !event.name.include?("MTB") && event.discipline == "Mountain Bike" -%>
+        <%- end -%>
+        <%- end -%>
+      </div>
+      <%- end -%>
+      <%- end -%>
+    </td>
+    <%- end -%>
+  </tr>
+  <%- end -%>
+  <% end -%>
+  <% end %>
+</div>
+
+<h3>Download as:</h3>
+<%= link_to "Excel", :format => :xls %> |
+<%= link_to "iCal", schedule_url(:format => :ics, :protocol => "webcal") %>
+
+<% content_for :head do -%>
+<%= auto_discovery_link_tag :atom, :format => :atom %>
+<%= auto_discovery_link_tag :ics, :format => :ics, :protocol => "webcal" %>
+<% end %>
