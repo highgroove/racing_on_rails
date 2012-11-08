@@ -1,14 +1,17 @@
 <% @page_title = "Results: #{@year}" %>
 
+<div class="content-item">
 <%= render_page "schedule/years" %>
-
-<%= render :partial => 'disciplines' %>
+</div>
+<div class="content-item">
+<%= render_page "results/disciplines" %>
+</div>
 
 <%= table :caption => "#{@year}&nbsp;Results".html_safe do %>
-  <%- for event in @events.sort {|x, y| y.date <=> x.date} -%>
+<%- for event in @events.sort {|x, y| y.date <=> x.date} -%>
   <tr class="<%= cycle('even', 'odd') %>">
     <td class="right"><%= event.short_date %></td>
     <td><%= link_to event.name, event_results_path(event) %></td>
   </tr>
-  <% end -%>
+<% end -%>
 <% end -%>

@@ -1,3 +1,4 @@
+
 # All SingleDayEvents that will occur in the next +weeks+. Used to display a list of upcoming events
 # on the homepage. Organized by parent class (WeeklySeries and everything else) and Discipline:
 # @events: Hash keyed by Discipline#name

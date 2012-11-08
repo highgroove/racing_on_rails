@@ -5,22 +5,8 @@
   @disciplines = Discipline.find(:all, :order => 'name')
 
   @disciplines.each do |disc|
-   tabs.add(disc.name , :discipline => disc.name.downcase, :year => @year)
+   tabs.add(disc.name , :discipline => disc.name.capitalize, :year => @year)
   end
 
-
-
-=begin    
-
-  tabs.add('Criterium', :discipline => 'criterium', :year => @year)
-  tabs.add('Cyclocross', :discipline => 'cyclocross', :year => @year)
-  tabs.add('Downhill', :discipline => 'downhill', :year => @year)
-  tabs.add('Mountain Bike (XC)', :discipline => 'mountain_bike', :year => @year)
-  tabs.add('Super D', :discipline => 'super_d', :year => @year)
-  tabs.add('Road', :discipline => 'road', :year => @year)
-  tabs.add('Time Trial', :discipline => 'time_trial', :year => @year)
-  tabs.add('Track', :discipline => 'track', :year => @year)
-
-=end
 end  %>
 

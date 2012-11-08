@@ -40,6 +40,7 @@ gem 'coffee-rails', "~> 3.2.0"
 group :assets do
   gem 'sass-rails', "~> 3.2.0"
   gem 'uglifier'
+  gem 'bourbon'
 end
 
 group :development do
