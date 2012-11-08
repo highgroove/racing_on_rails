@@ -1,48 +1,47 @@
-<div class="span-6 last">
-  <%= f.error_messages %>
-  <%= f.labelled_text_field :title %>
 
-  <%= f.label :category %>
-  <%= tree_select(ArticleCategory.all( :conditions => "parent_id = 0"), 'article', 'article_category_id', @article, false) %>
-  <hr/>
+<%= f.error_messages %>
+<div class="content-item">
 
-  <%= f.text_area :body, :class => 'ckeditor' %>
+<%= f.labelled_text_field :title %>
+<%= f.label :category %>
+<%= tree_select(ArticleCategory.all( :conditions => "parent_id = 0"), 'article', 'article_category_id', @article, false) %>
+
+
+</div>
+<div class="content-item">
+<%= f.text_area :body, :class => 'ckeditor' %>
+</div>
+
+<div class="content-item">
+  <%= f.label :new_files %>
+
+  <%= f.fields_for :assets do |asset_fields| %>
+  <% if asset_fields.object.new_record? %>
   
-  <%= f.label :files %></br>
+    </br><%= asset_fields.file_field :asset %>
 
-  <%= f.fields_for :assets do |asset_fields| %>
-    <% if asset_fields.object.new_record? %>
-      <p>
-	<%= asset_fields.file_field :asset %></br>
-      </p>
     <% end %>
-  <% end %>
-
-
-
-
-  <%= f.label :uploaded %></br>
-
-  <%= f.fields_for :assets do |asset_fields| %>
-
-  <% unless asset_fields.object.new_record? %>
-<p>
-
-  Delete:
-     <%= asset_fields.check_box :_destroy %>
-
-    <%= link_to(asset_fields.object.asset_file_name,
-	asset_fields.object.asset.url(:original)) %>
-  <% end %>
-  <% end %>
-</p>
+    <% end %>
 </br>
-  <%= f.labelled_text_field :position %>
-  <%= f.labelled_check_box :display %>
-</div>
+</br>
+<%= f.label :uploaded_files %></br>
 
-<div class="span-6 last">
-  <%= f.submit action_button %>
-</div>
+<%= f.fields_for :assets do |asset_fields| %>
 
-<hr/>
+<% unless asset_fields.object.new_record? %>
+  Delete:
+  <%= asset_fields.check_box :_destroy %>
+
+  <%= link_to(asset_fields.object.asset_file_name,
+      asset_fields.object.asset.url(:original)) %></br>
+  <% end %>
+  <% end %>
+</br>
+<%= f.labelled_text_field :position %></br>
+</br><%= f.labelled_check_box :display %></br>
+
+
+
+</br><%= f.submit action_button %>
+
+</div>

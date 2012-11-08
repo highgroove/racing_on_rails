@@ -12,7 +12,11 @@
 
   <% for article in @articles %>
     <tr class="<%= cycle("even", "odd") %>" id="article_<%= article.id %>_row">
+      <% if article.title? %>
       <td><%= link_to "#{article.title}", edit_admin_article_path(article) %></td>
+      <% else %>
+      <td><%= link_to "<NULL>", edit_admin_article_path(article) %></td>
+      <% end %>
       <td><%= link_to "#{article.article_category.name}", { :action => 'index', :article_category_id => article.article_category } %></td> 
       <td><%=h article.id %></td>
       <td><%=h article.position %></td>

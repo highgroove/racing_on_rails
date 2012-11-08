@@ -1,15 +1,14 @@
 <h1>Editing article</h1>
 
-<div class="column_grid_container">
-  <%= form_for([:admin, @article], :html => { :multipart => true }) do |f| %>
-    <%= render :partial => "form", :locals => { :f => f, :action_button => "Update" } %>
-  <% end %>
 
-  <%= form_tag({:action => 'update', :id => @article}) %>
+<%= form_for([:admin, @article], :html => { :multipart => true }) do |f| %>
+<%= render :partial => "form", :locals => { :f => f, :action_button => "Update" } %>
+<% end %>
+<%= form_tag({:action => 'update', :id => @article}) %>
 
-  <div class="page_buttons span-6 last">
-    <%= link_to 'Delete', [:admin, @article], :confirm => 'Are you sure?', :method => :delete %>
-     | 
-    <%= link_to 'Back', admin_articles_path %>
-  </div>
+
+<div class="content-item">
+<%= link_to 'Delete', [:admin, @article], :confirm => 'Are you sure you want to delete this article?', :method => :delete %>
+| 
+<%= link_to 'Back', admin_articles_path %>
 </div>
