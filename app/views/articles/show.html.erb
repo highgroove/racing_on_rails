@@ -5,12 +5,13 @@
 <h3><%= @article.title.html_safe %></h3>
 <p><%= @article.body.html_safe %></p>
 
-
+<% unless @article.assets.empty? %>
 <h3>Attached Files</h3>
 <% @article.assets.each do |asset| %>
 <p>
   <%= link_to(asset.asset_file_name, asset.asset.url(:original))%>
 </p>   
+<% end %>
 <% end %>
 
 
