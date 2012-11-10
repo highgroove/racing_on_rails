@@ -1,6 +1,6 @@
 <h2><%= link_to "Results", results_url %></h2>
 <ul data-role="listview" data-inset="true">
-  <%- @recent_results.each do |event| -%>
+  <%- @recent_results.first(4).each do |event| -%>
   <li><%= link_to event.full_name, event_races_url(event) %></li>
   <% end %>
   
@@ -11,7 +11,7 @@
 
 <h2><%= link_to "Schedule", schedule_url %></h2>
 <ul data-role="listview" data-inset="true">
-  <%- @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).reverse.each do |event| -%>
+  <%- @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).reverse.first(4).each do |event| -%>
     <li><%= public_link_to_flyer event %></li>
   <% end -%>
 
@@ -20,4 +20,10 @@
   <% end %>
 </ul>
 
+<h2><%= link_to "Articles", articles_url %></h2>
+<ul data-role="listview" data-inset="true">
+  <% @recent_articles.first(4).each do |article| %>
+  <li><%= link_to article.title, article %></li>
+  <% end %>
+</ul>
 <h2><%= link_to "Mailing Lists", mailing_lists_url %></h2>
