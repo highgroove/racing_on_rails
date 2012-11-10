@@ -1,0 +1,8 @@
+<% @page_title = "Articles" %>
+<ul data-role="listview" class="ui-listview">
+  <% @articles.each do |article| %>
+  <li>
+    <%= link_to article.title, article %>
+  </li>
+  <% end %>
+</ul>
