@@ -151,8 +151,6 @@ GEM
     hashery (2.0.1)
     highline (1.6.15)
     hike (1.2.1)
-    html_truncator (0.3.0)
-      nokogiri (~> 1.4)
     htmlentities (4.3.1)
     i18n (0.6.1)
     in_place_editing (1.2.0)
@@ -303,7 +301,6 @@ DEPENDENCIES
   factory_girl
   factory_girl_rails
   fastercsv
-  html_truncator (~> 0.2)
   in_place_editing
   jquery-rails
   launchy

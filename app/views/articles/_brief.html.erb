@@ -1,6 +1,6 @@
 <div class="content-item">
   <%= link_to(article.title, article, :class=>"title") %>
-  <div class="story"><%= HTML_Truncator.truncate(article.body, 30).html_safe %></div>
+  <div class="story"><%= truncate_html article.body, :length => 240 %></div>
   <div class="timestamp">
     <ul>
       <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>

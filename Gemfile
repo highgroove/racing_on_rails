@@ -36,7 +36,7 @@ gem 'axlsx'
 gem 'execjs'
 gem 'therubyracer'
 gem 'coffee-rails', "~> 3.2.0"
-gem "html_truncator", "~>0.2"
+
 
 
 group :assets do

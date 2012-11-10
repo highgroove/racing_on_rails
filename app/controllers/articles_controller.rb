@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 #    layout "mobile/layouts/application"
 #  end
 
-  require "html_truncator"
+#  require "html_truncator"
   
   def show
     @article = Article.find(params[:id])
