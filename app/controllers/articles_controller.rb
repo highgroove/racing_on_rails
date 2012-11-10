@@ -5,6 +5,10 @@ class ArticlesController < ApplicationController
   end
 
   def recent_news
-    @recent_articles = Article.where(:created_at => Time.now.prev_month()..Time.now, :display => true).order("created_at desc")
+    @recent_articles = Article.where(:display => true).order("created_at desc").first(10)
+  end
+
+  def index
+    @articles = Article.where(:display => true).order("created_at desc")
   end
 end
