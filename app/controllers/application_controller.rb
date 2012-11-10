@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   might_be_mobile
 
+
   include SentientController
 
   helper_method :current_person_session, :current_person, :secure_redirect_options

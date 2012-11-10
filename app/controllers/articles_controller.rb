@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
 #    layout "mobile/layouts/application"
 #  end
 
+  require "html_truncator"
+  
   def show
     @article = Article.find(params[:id])
  #   render :layout => !request.xhr?
