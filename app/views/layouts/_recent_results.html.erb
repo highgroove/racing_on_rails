@@ -1,6 +1,6 @@
 <% cutoff = Time.zone.today - RacingAssociation.current.weeks_of_recent_results * 7 %>
 
-<% @recent_results = Event.all(:select => "DISTINCT(events.id), events.name, events.parent_id, events.date, events.sanctioned_by",:joins => [:races => :results], :conditions => ['events.date > ? and events.sanctioned_by = ?', cutoff, RacingAssociation.current.default_sanctioned_by],:order => 'events.date desc') %>
+<% @recent_results = Event.all(:select => "DISTINCT(events.id), events.name, events.parent_id, events.date, events.sanctioned_by",:joins => [:races => :results], :conditions => ['events.date > ? and events.sanctioned_by = ?', cutoff, RacingAssociation.current.default_sanctioned_by],:order => 'events.date desc').first(4) %>
 
 
 
