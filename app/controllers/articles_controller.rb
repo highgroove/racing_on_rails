@@ -3,20 +3,17 @@ class ArticlesController < ApplicationController
 #    layout "mobile/layouts/application"
 #  end
 
-#  require "html_truncator"
-  
   def show
     @article = Article.find(params[:id])
  #   render :layout => !request.xhr?
   end
 
   def recent_news
-    @recent_articles = Article.where(:display => true).order("created_at desc").first(10)
+    @recent_articles = Article.where(:display => true).order("created_at desc").first(15)
   end
 
   def index
-
     @articles = Article.where(:display => true).order("created_at desc")
-
   end
+
 end

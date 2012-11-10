@@ -1,9 +1,10 @@
 <div id="articles_controller">
 <% @page_title = "Article #{@article.title}" %>
 <%= link_to "Back to Articles", articles_url %>
-<br/>
-<h3><%= @article.title.html_safe %></h3>
-<p><%= @article.body.html_safe %></p>
+</br></br>
+<div class="title"><%= @article.title.html_safe %></div>
+
+<div class="story"><%= @article.body.html_safe %></div>
 
 <% unless @article.assets.empty? %>
 <h3>Attached Files</h3>
