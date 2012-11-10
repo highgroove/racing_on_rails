@@ -1,8 +1,10 @@
 <% @page_title = "Articles" %>
+
 <ul data-role="listview" class="ui-listview">
-  <% @articles.each do |article| %>
+  <% @articles.first(4).each do |article| %>
   <li>
-    <%= link_to article.title, article %>
+    <%= link_to article.title, article_path(article), :locals => {:articles => @articles} %>
+
   </li>
   <% end %>
 </ul>

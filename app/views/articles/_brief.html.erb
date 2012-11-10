@@ -3,8 +3,8 @@
   <div class="story"><%= truncate(article.body.html_safe, :length=>140) %></div>
   <div class="timestamp">
     <ul>
-      <li>Created: <%= article.created_at %></li>
-      <li>Last modified: <%= article.updated_at %></li>
+      <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>
+      <li>Modified: <%= article.updated_at.to_formatted_s(:short) %></li>
   </div>
 
 </div>

@@ -1,23 +1,19 @@
-<div id="articles_controller">
 <% @page_title = "Article #{@article.title}" %>
-<%= link_to "Back to Articles", articles_url %>
-<br/>
 <h3><%= @article.title.html_safe %></h3>
 <p><%= @article.body.html_safe %></p>
 
 
 <h3>Attached Files</h3>
 <% @article.assets.each do |asset| %>
-<p>
-  <%= link_to(asset.asset_file_name, asset.asset.url(:original))%>
-</p>   
+<ul data-role="listview">
+  <li><%= link_to(asset.asset_file_name, asset.asset.url(:original))%></li></br>
+</ul>
 <% end %>
 
 
 
-<div class="timestamp">
+
   <ul>
-    <li>Created: <%= @article.created_at.to_formatted_s(:short) %></li>
+    <li>Created:  <%= @article.created_at.to_formatted_s(:short) %></li>
     <li>Modified: <%= @article.updated_at.to_formatted_s(:short) %></li>
-</div>
-</div>
+

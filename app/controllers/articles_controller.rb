@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
-
+#  if is_mobile?
+#    layout "mobile/layouts/application"
+#  end
 
   def show
     @article = Article.find(params[:id])
-    render :layout => !request.xhr?
+ #   render :layout => !request.xhr?
   end
 
   def recent_news
@@ -11,13 +13,8 @@ class ArticlesController < ApplicationController
   end
 
   def index
+
     @articles = Article.where(:display => true).order("created_at desc")
 
-#    if is_mobile?
- #     render :index, :locals=>{:articles => @articles}
-#    end
-
-    
-    
   end
 end
