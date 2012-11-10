@@ -1,0 +1,7 @@
+<div class="content-item">
+  <%= link_to(article.title, article, :class=>"title") %>
+  <div class="story"><%= truncate(article.body.html_safe, :length=>140) %></div>
+  <div class="timestamp"><%= article.created_at %></div>
+  
+
+</div>

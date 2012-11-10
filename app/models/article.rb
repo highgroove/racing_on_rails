@@ -1,6 +1,6 @@
 # Homepage content
 class Article < ActiveRecord::Base
-#  attr_accessible :assets_attributes, :title, :heading, :description
+#  attr_accessible :assets_attributes, :title, :heading, :description, :display
   has_many :assets
   accepts_nested_attributes_for :assets, :allow_destroy => true
   belongs_to :article_category

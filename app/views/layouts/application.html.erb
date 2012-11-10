@@ -17,7 +17,7 @@
   <body>
 
     <div id="header">
-      <%= link_to("", "/") %>
+      <%= link_to("", "/", :id=>"header") %>
     </div>
     <div id="top-menu">
       <%= render :partial => "layouts/top_menu" %>
@@ -35,8 +35,6 @@
 	</div>
       </div>
 
-
-
       <div class="right-info">
 	<div class="content-item">
 	  <%= render :partial => "layouts/recent_results" %>
@@ -45,12 +43,7 @@
 	  <%= render :partial => "layouts/upcoming_events" %>
 	</div>
       </div>
-
-
-      
-
     </div>
-
 
     <%= render :partial => "shared/tabs" %>        
     <%= render :partial => "shared/flash_messages", :locals => { :flash => flash } %>

@@ -224,7 +224,7 @@ RacingOnRails::Application.routes.draw do
   resources :teams do
     resources :results
   end
-  match '/' => 'home#index', :as => :root
+  match '/' => 'articles#recent_news', :as => :root
   match '/track' => 'track#index', :as => :track
   match '/track/schedule' => 'track#schedule', :as => :track_schedule
   resource :person_session
