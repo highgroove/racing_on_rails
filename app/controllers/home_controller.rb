@@ -21,10 +21,15 @@ class HomeController < ApplicationController
     )
 
     @news_category = ArticleCategory.find( :all, :conditions => ["name = 'news'"] )
-    @recent_news = Article.all(
-      :conditions => ['(created_at > ? OR updated_at > ?) and article_category_id = ?', cutoff, cutoff, @news_category],
-      :order => 'created_at desc'
-    )
+
+
+    @recent_articles = Article.where(:display => true).order("created_at desc").first(10)
+
+
+#    @recent_articles = Article.all(
+#      :conditions => ['(created_at > ? OR updated_at > ?) and article_category_id = ?', cutoff, cutoff, @news_category],
+#      :order => 'created_at desc'
+#    )
 
     render_page
   end
