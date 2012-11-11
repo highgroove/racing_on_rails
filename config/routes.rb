@@ -207,6 +207,7 @@ RacingOnRails::Application.routes.draw do
   match '/results/:year/:discipline' => 'results#index', :constraints => { :year => /(19|20)\d\d/ }, :as => :results_year_discipline
   match '/results/:year' => 'results#index', :constraints => { :year => /(19|20)\d\d/ }, :as => :results_year
   match '/results/:discipline' => 'results#index'
+
   resources :results
   match '/schedule/:year/calendar' => 'schedule#calendar', :constraints => { :year => /\d\d\d\d/ }
   match '/schedule/calendar' => 'schedule#calendar'
@@ -218,6 +219,9 @@ RacingOnRails::Application.routes.draw do
   match '/schedule/list' => 'schedule#list'
   match '/schedule/:discipline' => 'schedule#index'
   match '/schedule' => 'schedule#index', :as => :schedule
+
+
+
   resources :single_day_events
   match '/teams/:team_id/results' => 'results#team'
   match '/teams/:team_id/:year' => 'results#team', :constraints => { :person_id => /\d+/, :year => /\d\d\d\d/ }, :as => :team_results_year

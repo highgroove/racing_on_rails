@@ -1,23 +1,28 @@
 <% @page_title = "Schedule: #{@year}" %>
 
 <div class="content-item">
-  <%= render_page "schedule/years" %>
+  <%= render "years" %>
 </div>
 <div class="content-item">
-  <%= render_page "schedule/months" %>
+  <%= render "months" %>
 </div>
 <div class="content-item">
-  <%= render_page "schedule/disciplines", :locals => { :year => @year} %>
+  <%= render "disciplines", :locals => { :year => @year} %>
 </div>
 
 
 
 <% if Time.zone.today < Date.new(@year, 2) %>
-   <div>Tentative. Dates are subject to change.</div>
+   <div>
+     Tentative. Dates are subject to change.
+   </div>
    <% end %>
+   
 
-   <%= render_page "schedule/others" %>
-   <p class="centered"><%= link_to "Schedule in list format", {:action => 'list'}, {:class => 'obvious'} %> with race organizer contact information</p>
+   <p class="centered">
+     <%= link_to "Schedule in list format", {:action => 'list'} %>
+with race organizer contact information
+</p>
 
 <% if RacingAssociation.current.competitions.include?(:atra_points_series) -%>
 <p class="centered"><%= image_tag "icons/red_star.gif", :style => "margin: 0px; padding-top: 2px;" %>&nbsp;ATRA National Championship Series (NCS)</p>

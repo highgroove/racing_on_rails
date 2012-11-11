@@ -86,13 +86,17 @@ class ScheduleController < ApplicationController
     end_date = params["end"]
     @discipline = Discipline[params["discipline"]]
     @discipline_names = Discipline.names
-    
+    @gcs = params["gcs"]
+
     if !start_date.blank? and !end_date.blank?
-      @events = SingleDayEvent.find_all_by_unix_dates(start_date, end_date, @discipline)
+      @events = SingleDayEvent.find_all_by_unix_dates(start_date, end_date, @discipline, @gcs)
+
+      logger.info("!!!!!!!!!\n\n\n\n #{@gcs}\n\n\n\n!!!!!!!!!!!")
     else
-      @events = SingleDayEvent.find_all_by_year(@year, @discipline)
+      @events = SingleDayEvent.find_all_by_year(@year, @discipline, @gcs)
     end
-    
+
+        
     if RacingAssociation.current.include_multiday_events_on_schedule?
       #we will remove the single day events that are children of multi-day events
       if !start_date.blank? and !end_date.blank?

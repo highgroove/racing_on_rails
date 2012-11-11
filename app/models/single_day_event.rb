@@ -6,9 +6,9 @@ class SingleDayEvent < Event
   
   before_create :set_bar_points
 
-  def SingleDayEvent.find_all_by_year(year, discipline = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
+  def SingleDayEvent.find_all_by_year(year, discipline = nil, gcs = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
     conditions = ["date between ? and ?", "#{year}-01-01", "#{year}-12-31"]
-    SingleDayEvent.find_all_by_conditions(conditions, discipline, sanctioned_by)
+    SingleDayEvent.find_all_by_conditions(conditions, discipline, gcs, sanctioned_by)
   end
 
   def SingleDayEvent.find_all_by_unix_dates(start_date, end_date, discipline = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
@@ -16,7 +16,7 @@ class SingleDayEvent < Event
     SingleDayEvent.find_all_by_conditions(conditions, discipline, sanctioned_by)
   end
 
-  def SingleDayEvent.find_all_by_conditions(conditions, discipline = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
+  def SingleDayEvent.find_all_by_conditions(conditions, discipline = nil, gcs = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
     conditions.first << " and practice in (?)"
     conditions << [RacingAssociation.current.show_practices_on_calendar?, false]
 
@@ -30,6 +30,11 @@ class SingleDayEvent < Event
       conditions << discipline.name
     end
 
+    if gcs
+      conditions.first << " and gcs = ?"
+      conditions << gcs
+    end
+    
     SingleDayEvent.all :conditions => conditions
   end
 
