@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <%= auto_discovery_link_tag(:rss, "http://gbra.obra.org/") %>
     <title><%= page_title %></title>
     <%= csrf_meta_tag %>
     <%= airbrake_javascript_notifier unless Rails.env.acceptance? %>
@@ -51,6 +52,3 @@
     <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
   </body>
 </html>
-
-
-

@@ -16,4 +16,13 @@ class ArticlesController < ApplicationController
     @articles = Article.where(:display => true).order("created_at desc")
   end
 
+  def feed
+    @articles = Article.all(:select => "title, body, created_at", :display => true, :order => "posted_at DESC", :limit => 20)
+
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false }
+    end
+  end
+
 end
