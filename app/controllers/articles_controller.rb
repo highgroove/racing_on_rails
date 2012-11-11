@@ -24,5 +24,4 @@ class ArticlesController < ApplicationController
       format.rss { render :layout => false }
     end
   end
-
 end
