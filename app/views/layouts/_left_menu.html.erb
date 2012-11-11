@@ -1,7 +1,7 @@
 <div class="content-item">
   Road Racing
   <ul>
-    <li><span><%= link_to "Schedule", schedule_path, :id => "schedule_link"%></span></li>
+    <li><span><%= link_to "Schedule", :action => "list", :controller => "schedule" %></span></li>
     <li><span><%= link_to "Results", results_path, :id => "results_link" %></span></li>
     <li><span><%= link_to "GCS Info", "/gcsinfo" %></span></li>
     <li><span><%= link_to "GCS Standings", "/" %></span></li>
@@ -12,7 +12,7 @@
 <div class="content-item">
   Cyclocross Racing
   <ul>
-    <li><span><%= link_to "Schedule", schedule_path, :action => "list", :controller => "schedule" %></span></li>
+    <li><span><%= link_to "Schedule", :action => "list", :controller => "schedule" %></span></li>
     <li><span><%= link_to "GA Cross Series", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year %></span></li>
     <li><span><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year%></span></li>
     <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
@@ -23,7 +23,7 @@
 <div class="content-item">
   Track Racing
   <ul>
-    <li><span><%= link_to "Schedule", schedule_path, :action => "list", :controller => "schedule" %></span></li>
+    <li><span><%= link_to "Schedule", :action => "list", :controller => "schedule" %></span></li>
     <li><span><%= link_to "Dick Lane Velodrome", "http://www.dicklanevelodrome.com/" %></span></li>
     <li><span><%= link_to "Track ROY - TOY", "http://www.dicklanevelodrome.com/pages/results.html" %></span></li>
     <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
