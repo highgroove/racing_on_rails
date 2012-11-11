@@ -37,8 +37,7 @@ td.day div.event {
 }
 
 td.day div.beginner_friendly {
-  background-image: url("icons/star_green.png");
-  background-repeat: no-repeat;
+  @include background-image(url("icons/star_green.png") no-repeat);
   padding-left: 20px;
 }
 
