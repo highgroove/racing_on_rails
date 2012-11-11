@@ -71,6 +71,7 @@
         <% end -%>
         
         <% if administrator? %>
+	<%= f.labelled_check_box :gcs %>
         <%= f.labelled_check_box :cancelled %>
         <%= f.labelled_check_box :postponed %>
         <%= f.labelled_check_box :instructional %>

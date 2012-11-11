@@ -12,8 +12,8 @@
 <div class="content-item">
 Cyclocross Racing
 <ul>
-  <li><%= link_to "GA Cross Series",  "/" %></li>
-  <li><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year, :gcs => false %></li>
+  <li><%= link_to "GA Cross Series", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year %></li>
+  <li><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year%></li>
   <li><%= link_to "State Championships", "/statechamps" %></li>
 </ul>
 </div>

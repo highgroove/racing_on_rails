@@ -11,9 +11,9 @@ class SingleDayEvent < Event
     SingleDayEvent.find_all_by_conditions(conditions, discipline, gcs, sanctioned_by)
   end
 
-  def SingleDayEvent.find_all_by_unix_dates(start_date, end_date, discipline = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
+  def SingleDayEvent.find_all_by_unix_dates(start_date, end_date, discipline = nil, gcs = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
     conditions = ["date between ? and ?", "#{Time.at(start_date.to_i).strftime('%Y-%m-%d')}", "#{Time.at(end_date.to_i).strftime('%Y-%m-%d')}"]
-    SingleDayEvent.find_all_by_conditions(conditions, discipline, sanctioned_by)
+    SingleDayEvent.find_all_by_conditions(conditions, discipline, gcs, sanctioned_by)
   end
 
   def SingleDayEvent.find_all_by_conditions(conditions, discipline = nil, gcs = nil, sanctioned_by = RacingAssociation.current.show_only_association_sanctioned_races_on_calendar)
