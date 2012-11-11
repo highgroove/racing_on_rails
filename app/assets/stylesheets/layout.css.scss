@@ -75,17 +75,17 @@ $main-width: 650px;
     min-width: $main-width;
 }
 
-.left-menu {
-    width: 200px;
-    float: left;
-}
 
-.right-info {
+.side-info {
     width: 200px;
     float: left;
 
     ul, li {
 	display: block;
+    }
+
+    h1 {
+	font-size: 16px;
     }
 
 }

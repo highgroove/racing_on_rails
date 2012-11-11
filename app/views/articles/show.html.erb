@@ -1,10 +1,10 @@
-<div id="articles_controller">
+
 <% @page_title = "Article #{@article.title}" %>
 <%= link_to "Back to Articles", articles_url %>
 </br></br>
 <div class="title"><%= @article.title.html_safe %></div>
 
-<div class="story"><%= @article.body.html_safe %></div>
+<div class="content"><%= @article.body.html_safe %></div>
 
 <% unless @article.assets.empty? %>
 <h3>Attached Files</h3>
@@ -21,5 +21,4 @@
   <ul>
     <li>Created: <%= @article.created_at.to_formatted_s(:short) %></li>
     <li>Modified: <%= @article.updated_at.to_formatted_s(:short) %></li>
-</div>
 </div>

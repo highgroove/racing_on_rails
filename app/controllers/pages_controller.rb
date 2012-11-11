@@ -5,7 +5,21 @@
 # but could use a template handler with a comple method that queries DB?
 # Template-finding seems to assume a file, though
 class PagesController < ApplicationController
+
+
+  def show_old
+    @page = Page.find(params[:id])
+  end
+
+  def index
+    @pages = Page.all
+  end
+
+
   def show
+    if params[:id]
+      @page = Page.find(params[:id])
+    end
     if params[:path]
       path = params[:path].dup
       if path
@@ -18,6 +32,6 @@ class PagesController < ApplicationController
     
     @page = Page.find_by_path!(path)
 
-    render :inline => @page.body, :layout => "application"
-  end  
+#    render :inline => @page.body, :layout => "application"
+  end
 end

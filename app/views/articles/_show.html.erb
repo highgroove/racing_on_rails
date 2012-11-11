@@ -1,7 +1,7 @@
 <div class="content-item">
   <br/>
   <%= link_to article.title, article, :class=>"title" %>
-  <div class="story"><%= article.body.html_safe %></div>
+  <div class="content"><%= article.body.html_safe %></div>
 
   <% unless article.assets.empty? %>
   <h3>Attached Files</h3>

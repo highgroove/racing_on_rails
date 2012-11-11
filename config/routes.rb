@@ -115,6 +115,7 @@ RacingOnRails::Application.routes.draw do
     resources :weekly_series
   end
 
+  resources :pages
   resources :articles
   resources :article_categories
   resources :categories do
@@ -241,7 +242,8 @@ RacingOnRails::Application.routes.draw do
   match '/wsba_masters_barr/:year' => 'competitions#show', :as => :wsba_masters_barr, :type => 'wsba_masters_barr', :constraints => { :year => /\d{4}/ }
 
   match '*path', :to => 'pages#show'
-  
+#  match "/pages/:id" => "pages#show"
+
   if Rails.env.test?
     resources :fake do
       collection do

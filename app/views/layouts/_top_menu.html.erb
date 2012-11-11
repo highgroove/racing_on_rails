@@ -1,19 +1,19 @@
 <ul>
   <li><%= link_to(RacingAssociation.current.short_name, "/")%></li>
-  <li><%= link_to "Results", results_path, :id => "results_link" %></li>
-  <li><%= link_to "Schedule", schedule_path, :id => "schedule_link"%></li>
+  <li><%= link_to "Results", results_path %></li>
+  <li><%= link_to "Schedule", schedule_path %></li>
   <li><%= link_to "Articles", articles_path %></li>
   <li><%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %></li>
 
   <% if current_person %>
   <li><%= link_to "Logout", person_session_path, :method => :delete, :id => "account_link"%></li>
 
+  <% if current_person.administrator? %>
+  <li><%= link_to("Administration", {:controller => "/admin/events"}, {:id => "admin_link"}) %></li>
+  <% end %>
+  
   <% else %>
   <li><%= link_to "Login", new_person_session_path, { :id => "account_link" } %></li>
-    <% end %>
-
-    <% if current_person && current_person.administrator? %>
-  <li><%= link_to("Administration", {:controller => "/admin/events"}, {:id => "admin_link"}) %></li>
   <% end %>
 
 </ul>

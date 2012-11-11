@@ -1,5 +1,43 @@
+<div class="content-item">
+  Road Racing
+  <ul>
+    <li><%= link_to "Schedule", schedule_path, :id => "schedule_link"%></li>
+    <li><%= link_to "Results", results_path, :id => "results_link" %></li>
+    <li><%= link_to "Articles", articles_path %></li>
+    <li><%= link_to "Categories", categories_path %></li>
+    <li><%= link_to "GCS Info", "/" %></li>
+    <li><%= link_to "GCS Standings", "/" %></li>
+    <li><%= link_to "State Championships", "/" %></li>
+  </ul>
+</div>
+
+<div class="content-item">
+Cyclocross Racing
+<ul>
+  <li><%= link_to "GA Cross Series", "/" %></li>
+  <li><%= link_to "Non-Series Races", "/" %></li>
+  <li><%= link_to "State Championships", "/" %></li>
+</ul>
+</div>
 
 
-<div class = "content-item">
+<div class="content-item">
+Track Racing
+<ul>
+  <li><%= link_to "Dick Lane Velodrome", "http://www.dicklanevelodrome.com/" %></li>
+  <li><%= link_to "Track ROY - TOY", "http://www.dicklanevelodrome.com/pages/results.html" %></li>
+  <li><%= link_to "State Championships", "http://www.dicklanevelodrome.com/pages/statechampionships.html" %></li>
+</ul>
+</div>
+
+<div class="content-item">
+  <%= render "pages/pages" %>
+</div>
+
+<div class="content-item">
   <%= render :partial => "layouts/sponsors" %>
+</div>
+
+<div class="content-item">
+  <%= render "layouts/usac_disclaimer" %>
 </div>

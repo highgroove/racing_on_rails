@@ -2,7 +2,9 @@
 
 
 <%= link_to "Schedule", schedule_path, :id => "schedule_link" %>
+<ul>
 <% @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).reverse.first(4).each do |event| %>
   <li><%= public_link_to_flyer event %></li>
 <% end %>
 
+</ul>

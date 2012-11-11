@@ -1,5 +1,3 @@
-<div id="articles_controller">
   <% @articles.each do |article| %>
   <%= render :partial => "articles/brief", :locals => {:article => article} %>
   <% end %>
-</div>

@@ -1,6 +1,5 @@
-<div id="articles_controller">
-  <% @recent_articles.each do |article| %>
-  <%= render :partial => "articles/show", :locals =>{:article => article} %>
-  <% end %>
-</div>
+<% @recent_articles.each do |article| %>
+<%= render :partial => "articles/show", :locals =>{:article => article} %>
+<% end %>
+
 <h3><%= link_to "More  Articles", articles_path %></h3>

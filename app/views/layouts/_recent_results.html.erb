@@ -5,9 +5,12 @@
 
 
 <%= link_to "Recent Results", results_path, :id => "results_link" %>
-<%- @recent_results.each do |event| -%>
+<ul>
+  <%- @recent_results.each do |event| -%>
   <li><%= link_to event.full_name, event_results_path(event, :host => RacingAssociation.current.rails_host) %></li>
-<%- end -%>
+  <%- end -%>
+</ul>
+
 <%- if @recent_results.empty? -%>
   No results in the last two weeks</br>
 <%- end -%>
