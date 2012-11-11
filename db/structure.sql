@@ -217,6 +217,7 @@ CREATE TABLE `events` (
   `website` varchar(255) DEFAULT NULL,
   `registration_link` varchar(255) DEFAULT NULL,
   `twitter_tag` varchar(255) DEFAULT NULL,
+  `gcs` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `events_number_issuer_id_index` (`number_issuer_id`),
   KEY `idx_date` (`date`),
@@ -1045,6 +1046,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121016192731');
 INSERT INTO schema_migrations (version) VALUES ('20121016205454');
 
 INSERT INTO schema_migrations (version) VALUES ('20121017183409');
+
+INSERT INTO schema_migrations (version) VALUES ('20121111192914');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

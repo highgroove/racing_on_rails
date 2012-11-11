@@ -41,7 +41,7 @@ class Event < ActiveRecord::Base
   before_save :set_promoter, :set_team
   after_initialize :set_defaults
 
-  validates_presence_of :date, :name
+  validates_presence_of :date, :name, :gcs
   
   validate :parent_is_not_self
   
