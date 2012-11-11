@@ -5,6 +5,9 @@ $main-bg: silver;
 $overall-width: 1050px;
 $main-width: 650px;
 
+
+
+
 #header {
     background: url("backgrounds/gbratitle.jpg") top center no-repeat;
     width: $overall-width;
@@ -16,7 +19,7 @@ $main-width: 650px;
     text-indent:100%;
     white-space:nowrap;
     display: block;
-    
+
 }
 
 
@@ -34,7 +37,6 @@ $main-width: 650px;
     @include box-shadow(0px 0px 2px 2px);
 
     ul, li {
-	font-family: $verdana;
 	display: inline;
 	padding: 10px;
 	font-size: 13px;
@@ -58,7 +60,7 @@ $main-width: 650px;
 
 }
 
-#main-wrapper {
+.main-wrapper {
     width: $overall-width;
     margin: auto;
     border-radius: $border-rad;
@@ -80,14 +82,24 @@ $main-width: 650px;
     width: 200px;
     float: left;
 
-    ul, li {
-	display: block;
+    ul {
+
+    }
+
+    li {
+	margin-left: 15px;
+	font-size: 16px;
+	display: list-item;
+	line-height: 90%;
+
+	span {
+	    margin-left: -10px;
+	}
     }
 
     h1 {
 	font-size: 16px;
     }
-
 }
 
 .content-item {
@@ -98,9 +110,12 @@ $main-width: 650px;
     border-radius: $border-rad * 3;
 
     
-    ul, li {
-	font-family: $verdana;
+    ul {
+
+    }
+
+    li {
 	font-size: 12px;
-	text-decoration: none;
+//	text-decoration: none;
     }
 }

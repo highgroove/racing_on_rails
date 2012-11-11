@@ -7,13 +7,16 @@
 
   <% if current_person %>
   <li><%= link_to "Logout", person_session_path, :method => :delete, :id => "account_link"%></li>
-
-  <% if current_person.administrator? %>
-  <li><%= link_to("Administration", {:controller => "/admin/events"}, {:id => "admin_link"}) %></li>
-  <% end %>
   
+
   <% else %>
   <li><%= link_to "Login", new_person_session_path, { :id => "account_link" } %></li>
   <% end %>
+
+
+  <% if current_person and current_person.administrator? %>
+  <li><%= link_to("Administration", {:controller => "/admin/events"}, {:id => "admin_link"}) %></li>
+  <% end %>
+  
 
 </ul>

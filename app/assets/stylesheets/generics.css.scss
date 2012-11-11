@@ -9,6 +9,7 @@ a {
 }
 
 body {
+    font-family: $helvetica;
     background: url("backgrounds/wolf-bw.jpg")
 }
 
@@ -17,6 +18,7 @@ img {
 }
 
 ul, li {
+
     display: inline;
     padding: 5px;
 }

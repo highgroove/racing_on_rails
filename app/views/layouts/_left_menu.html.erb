@@ -1,36 +1,63 @@
 <div class="content-item">
   Road Racing
   <ul>
-    <li><%= link_to "Schedule", schedule_path, :id => "schedule_link"%></li>
-    <li><%= link_to "Results", results_path, :id => "results_link" %></li>
-    <li><%= link_to "GCS Info", "/gcsinfo" %></li>
-    <li><%= link_to "GCS Standings", "/" %></li>
-    <li><%= link_to "State Championships", "/statechamps" %></li>
+    <li><span><%= link_to "Schedule", schedule_path, :id => "schedule_link"%></span></li>
+    <li><span><%= link_to "Results", results_path, :id => "results_link" %></span></li>
+    <li><span><%= link_to "GCS Info", "/gcsinfo" %></span></li>
+    <li><span><%= link_to "GCS Standings", "/" %></span></li>
+    <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
   </ul>
 </div>
 
 <div class="content-item">
-Cyclocross Racing
-<ul>
-  <li><%= link_to "GA Cross Series", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year %></li>
-  <li><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year%></li>
-  <li><%= link_to "State Championships", "/statechamps" %></li>
-</ul>
+  Cyclocross Racing
+  <ul>
+    <li><span><%= link_to "Schedule", schedule_path, :action => "list", :controller => "schedule" %></span></li>
+    <li><span><%= link_to "GA Cross Series", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year %></span></li>
+    <li><span><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year%></span></li>
+    <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
+  </ul>
 </div>
 
 
 <div class="content-item">
-Track Racing
-<ul>
-  <li><%= link_to "Dick Lane Velodrome", "http://www.dicklanevelodrome.com/" %></li>
-  <li><%= link_to "Track ROY - TOY", "http://www.dicklanevelodrome.com/pages/results.html" %></li>
-  <li><%= link_to "State Championships", "/statechamps" %></li>
-</ul>
+  Track Racing
+  <ul>
+    <li><span><%= link_to "Schedule", schedule_path, :action => "list", :controller => "schedule" %></span></li>
+    <li><span><%= link_to "Dick Lane Velodrome", "http://www.dicklanevelodrome.com/" %></span></li>
+    <li><span><%= link_to "Track ROY - TOY", "http://www.dicklanevelodrome.com/pages/results.html" %></span></li>
+    <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
+  </ul>
 </div>
 
 <div class="content-item">
   <%= render "pages/pages" %>
 </div>
+
+<div class="content-item">
+  About GBRA
+  <ul>
+    <li><span><%= link_to "Mailing List", "/mailinglist" %></span></li>
+    <li><span><%= link_to "Voting", "/voting" %></span></li>
+    <li><span><%= link_to "Teams News Feed", "/" %></span></li>
+    <li><span><%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %></span></li>
+
+  <% if current_person %>
+  <li><span><%= link_to "Logout", person_session_path, :method => :delete, :id => "account_link"%></span></li>
+  
+
+  <% else %>
+  <li><span><%= link_to "Login", new_person_session_path, { :id => "account_link" } %></span></li>
+  <% end %>
+
+
+  <% if current_person and current_person.administrator? %>
+  <li><span><%= link_to("Administration", {:controller => "/admin/events"}, {:id => "admin_link"}) %></span></li>
+  <% end %>
+
+  </ul>
+</div>
+
 
 <div class="content-item">
   <%= render :partial => "layouts/sponsors" %>

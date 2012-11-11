@@ -7,7 +7,7 @@
 <%= link_to "Recent Results", results_path, :id => "results_link" %>
 <ul>
   <%- @recent_results.each do |event| -%>
-  <li><%= link_to event.full_name, event_results_path(event, :host => RacingAssociation.current.rails_host) %></li>
+  <li><span><%= link_to event.full_name, event_results_path(event, :host => RacingAssociation.current.rails_host) %></span></li>
   <%- end -%>
 </ul>
 

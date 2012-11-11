@@ -1,9 +1,9 @@
 <% @pages = Page.all(:order => :title) %>
 
-About GBRA
+Resources
 
 <ul>
   <% @pages.each do |page| %>
-  <li><%= link_to page.title, page.path %></li>
+  <li><span><%= link_to page.title, page.path %></span></li>
   <% end %>
 </ul>
