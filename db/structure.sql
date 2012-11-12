@@ -48,6 +48,7 @@ CREATE TABLE `assets` (
   `article_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `page_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1051,6 +1052,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121017183409');
 INSERT INTO schema_migrations (version) VALUES ('20121111192914');
 
 INSERT INTO schema_migrations (version) VALUES ('20121112002950');
+
+INSERT INTO schema_migrations (version) VALUES ('20121112005948');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

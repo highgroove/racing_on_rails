@@ -6,12 +6,15 @@ class Admin::PagesController < Admin::AdminController
   def index
     @pages = Page.roots
   end
-  
+
+
+
+
   def new
-    @page = Page.new(params[:page])
+    @page = Page.new
     render :edit
   end
-  
+
   def create
     @page = Page.new(params["page"])
     @page.save
@@ -26,6 +29,7 @@ class Admin::PagesController < Admin::AdminController
   
   def edit
     @page = Page.find(params[:id])
+    5.times { @page.assets.build }
   end
   
   def update

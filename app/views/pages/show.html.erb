@@ -2,3 +2,21 @@
 
 <div class="title"><%= @page.title %></div>
 <div class="content"><%= @page.body.html_safe %></div>
+
+<% unless @page.assets.empty? %>
+<h2>Attached Files</h2>
+<% @page.assets.each do |asset| %>
+<p>
+  <h5><%= link_to(asset.asset_file_name, asset.asset.url(:original))%></h5>
+</p>   
+<% end %>
+<% end %>
+
+
+
+<div class="timestamp">
+  <ul>
+    <li>Created: <%= @page.created_at.to_formatted_s(:short) %></li>
+    <li>Modified: <%= @page.updated_at.to_formatted_s(:short) %></li>
+  </ul>
+</div>

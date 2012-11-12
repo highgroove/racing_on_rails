@@ -14,7 +14,8 @@ class Page < ActiveRecord::Base
   
   after_create :update_parent
   after_destroy :update_parent
-
+  has_many :assets
+  accepts_nested_attributes_for :assets, :allow_destroy => true
   # Friendly param. Last segment in +path+
   def set_slug
     self.slug = title.downcase.gsub(" ", "_") if slug.blank?

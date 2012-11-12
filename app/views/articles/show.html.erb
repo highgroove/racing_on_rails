@@ -10,7 +10,7 @@
 <h3>Attached Files</h3>
 <% @article.assets.each do |asset| %>
 <p>
-  <%= link_to(asset.asset_file_name, asset.asset.url(:original))%>
+  <h5><%= link_to(asset.asset_file_name, asset.asset.url(:original))%></h5>
 </p>   
 <% end %>
 <% end %>
