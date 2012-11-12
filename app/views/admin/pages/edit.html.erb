@@ -27,6 +27,7 @@
                       :method => :delete, 
                       :class => "obvious", 
                       :id => "delete") unless @page.new_record? %>
+	  </br>Display in resources box in left menu?<%= f.check_box :list_page %></br>
           <%= submit_tag "Save", :id => "save" %>
         </div>
       </div>

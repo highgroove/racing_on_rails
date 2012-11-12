@@ -1,4 +1,4 @@
-<% @pages = Page.all(:order => :title) %>
+<% @pages = Page.where(:list_page => true).order(:title) %>
 
 Resources
 
