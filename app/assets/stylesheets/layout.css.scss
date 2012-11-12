@@ -3,61 +3,15 @@ $light-text: white;
 $dark-text: black;
 $main-bg: silver;
 $overall-width: 1050px;
-$main-width: 650px;
+$main-width: 640px;
 
-
-
-
-#header {
-    background: url("backgrounds/gbratitle.jpg") top center no-repeat;
+.page-wrapper {
     width: $overall-width;
-    height: 100px;
-    margin: auto;
-    border-radius: $border-rad;
-    @include box-shadow(0px 0px 2px 2px);
-    overflow:hidden;
-    text-indent:100%;
-    white-space:nowrap;
-    display: block;
-
+    margin:auto;
 }
 
-
-#top-menu {
-
-
-    @include background(linear-gradient(#303030, #888));
-    background-color: #777;
-    width: $overall-width;
-    height: 31px;
-    margin: auto;
-    position: relative;
-    top: 2px;
-    border-radius: $border-rad;
-    @include box-shadow(0px 0px 2px 2px);
-
-    ul, li {
-	display: inline;
-	padding: 10px;
-	font-size: 13px;
-	text-transform: uppercase;
-	position: relative;
-	top: 3px;
-    }
-
-    
-    a {
-	@include box-sizing(content-box);
-	text-decoration: none;
-	color: $light-text;
-	&:hover {
-	    border: 5px solid #333;
-	    color: #fcff00;
-	    background-color: #333;
-	    border-radius: $border-rad;
-	}
-    }
-
+.base-row {
+    display: table-row;
 }
 
 .main-wrapper {
@@ -68,20 +22,44 @@ $main-width: 650px;
     position: relative;
     top: 10px;
     overflow: hidden;
+    display: table;
 }
 
+
+.main-wrapper > div {
+    background: #EEE;
+    border: 5px solid $main-bg;
+    padding: 3px;
+    @include box-sizing(border-box);
+    border-radius: $border-rad * 3;
+    display: table-cell;
+    overflow: visible;
+}
+
+
+.content-item {
+    font-size: 14px;
+    background: #EEE;
+    border-top: 2px solid $main-bg + #111;
+    border-bottom: 3px solid $main-bg;
+    padding: 10px 3px 10px 3px;
+    border-radius: $border-rad * 3;
+}
+
+
 .main-content {
-    width: $main-width px;
-    float: left;
+    width: $main-width;
     max-width: $main-width;
     min-width: $main-width;
+
 }
 
 
 .side-info {
+
     width: 200px;
-    float: left;
     padding: 0px 0px 0px 0px;
+    font-size: 16px;
 
     ul {
 	margin-top: -3px;
@@ -94,8 +72,8 @@ $main-width: 650px;
 	margin-top: -3px;
 	margin-bottom: 0px;
 	padding: 2px;
-	margin-left: -1.5em;
-	font-size: 16px;
+	margin-left: -1em;
+	font-size: 12px;
 
 
 	span {
@@ -105,22 +83,5 @@ $main-width: 650px;
 
     h1 {
 	font-size: 16px;
-    }
-}
-
-.content-item {
-    background: #EEE;
-    border: 3px solid $main-bg;
-    padding: 10px;
-    @include box-sizing(border-box);
-    border-radius: $border-rad * 3;
-
-    
-    ul {
-
-    }
-
-    li {
-	font-size: 12px;
     }
 }

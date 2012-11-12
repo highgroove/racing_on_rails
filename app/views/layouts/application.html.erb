@@ -14,41 +14,43 @@
   
 
 
+  <div class="page-wrapper">
+    <body>
 
-  <body>
-
-    <div id="header">
-      <%= link_to("", "/", :id=>"header") %>
-    </div>
-    <div id="top-menu">
-      <%= render "layouts/top_menu" %>
-    </div>
-
-    <div class="main-wrapper">
-      
-      <div class="side-info">
-	<%= render "layouts/left_menu" %>
+      <div id="header">
+	<%= link_to("", "/", :id=>"header") %>
+      </div>
+      <div id="top-menu">
+	<%= render "layouts/top_menu" %>
       </div>
 
-      <div class="main-content">
-	<div class="content-item">
+      <div class="main-wrapper">
+
+	
+
+	<div class="side-info">
+	  <%= render "layouts/left_menu" %>
+	</div>
+
+
+	<div class="main-content">
 	  <%= yield %>
 	</div>
+
+	<div class="side-info" >
+	  <div class="content-item">
+	    <%= render "layouts/recent_results" %>
+	  </div>
+	  <div class="content-item">
+	    <%= render "layouts/upcoming_events" %>
+	  </div>
+	</div>
       </div>
 
-      <div class="side-info" >
-	<div class="content-item">
-	  <%= render "layouts/recent_results" %>
-	</div>
-	<div class="content-item">
-	  <%= render "layouts/upcoming_events" %>
-	</div>
-      </div>
-    </div>
-
-    <%= render "shared/tabs" %>        
-    <%= render "shared/flash_messages", :locals => { :flash => flash } %>
-    <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
-    <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
-  </body>
+      <%= render "shared/tabs" %>        
+      <%= render "shared/flash_messages", :locals => { :flash => flash } %>
+      <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
+      <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
+    </body>
+  </div>
 </html>
