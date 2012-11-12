@@ -7,8 +7,8 @@
     <title><%= page_title %></title>
     <%= csrf_meta_tag %>
     <%= airbrake_javascript_notifier unless Rails.env.acceptance? %>
-    <%= render :partial => "layouts/stylesheets" %>
-    <%= render :partial => "layouts/javascripts" %>
+    <%= render  "layouts/stylesheets" %>
+    <%= render  "layouts/javascripts" %>
     <%= yield :head %>
   </head>
   
@@ -21,13 +21,13 @@
       <%= link_to("", "/", :id=>"header") %>
     </div>
     <div id="top-menu">
-      <%= render :partial => "layouts/top_menu" %>
+      <%= render "layouts/top_menu" %>
     </div>
 
     <div class="main-wrapper">
       
       <div class="side-info">
-	<%= render :partial => "layouts/left_menu" %>
+	<%= render "layouts/left_menu" %>
       </div>
 
       <div class="main-content">
@@ -38,16 +38,16 @@
 
       <div class="side-info" >
 	<div class="content-item">
-	  <%= render :partial => "layouts/recent_results" %>
+	  <%= render "layouts/recent_results" %>
 	</div>
 	<div class="content-item">
-	  <%= render :partial => "layouts/upcoming_events" %>
+	  <%= render "layouts/upcoming_events" %>
 	</div>
       </div>
     </div>
 
-    <%= render :partial => "shared/tabs" %>        
-    <%= render :partial => "shared/flash_messages", :locals => { :flash => flash } %>
+    <%= render "shared/tabs" %>        
+    <%= render "shared/flash_messages", :locals => { :flash => flash } %>
     <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
     <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
   </body>

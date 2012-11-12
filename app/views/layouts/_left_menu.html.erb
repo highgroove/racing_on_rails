@@ -13,8 +13,8 @@
   Cyclocross Racing
   <ul>
     <li><span><%= link_to "Schedule", :action => "list", :controller => "schedule" %></span></li>
-    <li><span><%= link_to "GA Cross Series", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year %></span></li>
-    <li><span><%= link_to "Non-Series Races", :action => "list", :controller => "schedule", :discipline => "cyclocross", :year => Time.now.year%></span></li>
+    <li><span><%= link_to "GA Cross Series", "/gacx"  %></span></li>
+    <li><span><%= link_to "Non-Series Races", "/nonseriescx" %></span></li>
     <li><span><%= link_to "State Championships", "/statechamps" %></span></li>
   </ul>
 </div>
@@ -39,7 +39,7 @@
   <ul>
     <li><span><%= link_to "Mailing List", "/mailinglist" %></span></li>
     <li><span><%= link_to "Voting", "/voting" %></span></li>
-    <li><span><%= link_to "Teams News Feed", "/" %></span></li>
+    <li><span><%= link_to "Teams News Feed", "/teamnews" %></span></li>
     <li><span><%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %></span></li>
 
   <% if current_person %>
