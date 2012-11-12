@@ -50,7 +50,7 @@ CREATE TABLE `assets` (
   `updated_at` datetime NOT NULL,
   `page_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -399,7 +399,7 @@ CREATE TABLE `people` (
   `country_code` varchar(2) DEFAULT 'US',
   `membership_card` tinyint(1) NOT NULL DEFAULT '0',
   `official` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `idx_first_name` (`first_name`),
   KEY `idx_last_name` (`last_name`),
@@ -1043,10 +1043,6 @@ INSERT INTO schema_migrations (version) VALUES ('20120813183838');
 
 INSERT INTO schema_migrations (version) VALUES ('20120816165547');
 
-INSERT INTO schema_migrations (version) VALUES ('20121016192731');
-
-INSERT INTO schema_migrations (version) VALUES ('20121016205454');
-
 INSERT INTO schema_migrations (version) VALUES ('20121017183409');
 
 INSERT INTO schema_migrations (version) VALUES ('20121111192914');
@@ -1054,6 +1050,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121111192914');
 INSERT INTO schema_migrations (version) VALUES ('20121112002950');
 
 INSERT INTO schema_migrations (version) VALUES ('20121112005948');
+
+INSERT INTO schema_migrations (version) VALUES ('20121112211557');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
