@@ -331,6 +331,7 @@ CREATE TABLE `pages` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `lock_version` int(11) NOT NULL DEFAULT '0',
+  `list_page` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_pages_on_path` (`path`),
   KEY `index_pages_on_slug` (`slug`),
@@ -1048,6 +1049,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121016205454');
 INSERT INTO schema_migrations (version) VALUES ('20121017183409');
 
 INSERT INTO schema_migrations (version) VALUES ('20121111192914');
+
+INSERT INTO schema_migrations (version) VALUES ('20121112002950');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
