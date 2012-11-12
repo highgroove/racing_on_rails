@@ -1,0 +1,37 @@
+
+#top-menu {
+
+
+    @include background(linear-gradient(#303030, #888));
+    background-color: #777;
+    width: $overall-width;
+    height: 31px;
+    margin: auto;
+    position: relative;
+    top: 2px;
+    border-radius: $border-rad;
+    @include box-shadow(0px 0px 2px 2px);
+
+    ul, li {
+	display: inline;
+	padding: 10px;
+	font-size: 13px;
+	text-transform: uppercase;
+	position: relative;
+	top: 3px;
+    }
+
+    
+    a {
+	@include box-sizing(content-box);
+	text-decoration: none;
+	color: $light-text;
+	&:hover {
+	    border: 5px solid #333;
+	    color: #fcff00;
+	    background-color: #333;
+	    border-radius: $border-rad;
+	}
+    }
+
+}

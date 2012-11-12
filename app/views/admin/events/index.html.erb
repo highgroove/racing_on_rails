@@ -23,10 +23,11 @@
 
 <%= render :partial => "shared/race_calendar", :locals => { :edit_schedule => true } %>
 
-
+<% unless @competitions.blank? %>
+<div class="content-item">
 <h2 class="left">Competitions</h2>
 <% @competitions.sort_by(&:name).each do |competition| -%>
 <%= link_to competition.name, edit_admin_event_path(competition) %><br />
 <% end -%>
-
-
+</div>
+<% end %>

@@ -14,9 +14,9 @@
   
 
 
-  <div class="page-wrapper">
-    <body>
 
+  <body>
+    <div class="page-wrapper">
       <div id="header">
 	<%= link_to("", "/", :id=>"header") %>
       </div>
@@ -51,6 +51,6 @@
       <%= render "shared/flash_messages", :locals => { :flash => flash } %>
       <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
       <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
-    </body>
-  </div>
+    </div>
+  </body>
 </html>

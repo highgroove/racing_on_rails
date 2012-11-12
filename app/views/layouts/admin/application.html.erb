@@ -18,7 +18,10 @@
     <%= yield :head %>
   </head>
 
+
+
   <body>    
+    <div class="page-wrapper">
     <div id="header">
       <%= link_to("HOME", "/", :id=>"header") %>
     </div>
@@ -31,11 +34,12 @@
 	<h1>Admin Tasks</h1>
 	<%= render :partial => "shared/tabs" %>
 	<%= render :partial => "shared/flash_messages" %>      
-      </div>
+      <!/div-->
       <div class="content-item">
 	<%= yield %>
       </div>
     </div>
     <%= render :partial => "shared/auto_complete" %>
+    </div>
   </body>
 </html>
