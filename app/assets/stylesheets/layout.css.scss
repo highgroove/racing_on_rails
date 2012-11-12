@@ -81,18 +81,22 @@ $main-width: 650px;
 .side-info {
     width: 200px;
     float: left;
+    padding: 1px;
 
     ul {
-
+	margin-top: -3px;
+	text-align: left;
     }
 
     li {
+	margin-top: -3px;
+	padding: 2px;
 	margin-left: 15px;
 	font-size: 16px;
 	display: list-item;
 
 	span {
-	    margin-left: -10px;
+	    margin-left: 0px;
 	}
     }
 

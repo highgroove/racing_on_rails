@@ -54,6 +54,6 @@ namespace :deploy do
   end
 end
 
-after "deploy:update_code", "deploy:symlinks", "deploy:copy_cache"
+after "deploy:update_code", "deploy:symlinks", "deploy:copy_cache", "deploy:migrate"
 
 require 'airbrake/capistrano'
