@@ -12,6 +12,7 @@ class Admin::PagesController < Admin::AdminController
 
   def new
     @page = Page.new
+    5.times { @page.assets.build}
     render :edit
   end
 
