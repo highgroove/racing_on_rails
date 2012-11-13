@@ -16,11 +16,16 @@
 <% end %>
 
 
-  <div class="content-item">
-    Tags: <%= @article.tags.map(&:name).map {
-	      |t|
-	      link_to t, tag_path(t)}.join(", ").html_safe %>
-  </div>
+<div class="content-item">
+  Tags:
+  <% @article.tags.each do |t| %>
+  
+  <span class="tag">
+    <%= link_to t.name, tag_path(t.name) %>    
+  </span>
+
+  <% end %>
+</div>
 
 
 <div class="timestamp">

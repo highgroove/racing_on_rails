@@ -1,11 +1,25 @@
 <div class="content-item">
   <%= link_to(article.title, article, :class=>"title") %>
   <div class="content"><%= truncate_html article.body, :length => 240 %></div>
-  <div class="timestamp">
-    <ul>
-      <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>
-      <li>Modified: <%= article.updated_at.to_formatted_s(:short) %></li>
-    </ul>
-  </div>
+</br>
+
+<% unless article.tags.empty? %>
+Tags:
+<% article.tags.each do |t| %>
+
+<span class="tag">
+  <%= link_to t.name, tag_path(t.name) %>    
+</span>
+
+<% end %>
+<% end %>
+
+
+<div class="timestamp">
+  <ul>
+    <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>
+    <li>Modified: <%= article.updated_at.to_formatted_s(:short) %></li>
+  </ul>
+</div>
 
 </div>

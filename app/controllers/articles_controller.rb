@@ -13,6 +13,8 @@ class ArticlesController < ApplicationController
   end
 
   def index
+    @tags = Tag.all
+
     if params[:tag]
       @articles = Article.tagged_with(params[:tag]).where(:display => true).order("created_at desc")
     else

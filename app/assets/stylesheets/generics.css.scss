@@ -1,5 +1,24 @@
 $even-odd-bg: #BBB;
 
+@mixin even-odd-common {
+/*
+    border: 4px solid #EEE;
+
+    padding: px;
+    border-radius: 10px;
+*/
+    @include transition(all 300ms ease-in-out);
+
+    &:hover {
+	background: $even-odd-bg + #333;
+    }
+/*
+    a {
+	color: blue;
+    }
+    */
+}
+
 a {
     color: #b00;
     text-decoration: none;
@@ -30,21 +49,11 @@ li {
 
 .odd {
     background: $even-odd-bg + #111;
-
-    @include transition(all 300ms ease-in-out);
-
-    &:hover {
-	background: $even-odd-bg + #333;
-    }
+    @include even-odd-common
 }
+
 
 .even {
     background: $even-odd-bg - #111;
-
-    @include transition(all 300ms ease-in-out);
-
-
-    &:hover {
-	background: $even-odd-bg + #333;
-    }
+    @include even-odd-common
 }

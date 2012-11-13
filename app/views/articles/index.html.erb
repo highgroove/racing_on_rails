@@ -1,3 +1,14 @@
+<div class="content-item">
+  Select articles by tag:
+  <% @tags.each do |tag| %>
+
+  <span class="tag">
+    <%= link_to tag.name, tag_path(tag.name) %>    
+  </span>
+
+  <% end %>
+</div>
+
 <% @articles.each do |article| %>
 <%= render :partial => "articles/brief", :locals => {:article => article} %>
 <% end %>

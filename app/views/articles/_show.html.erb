@@ -13,18 +13,26 @@
   <% end %>
 
 
-  <% unless article.tags.empty? %>
-    Tags: <%= article.tags.map(&:name).map {
-	      |t|
-	      link_to t, tag_path(t)}.join(", ").html_safe %>
-  <% end %>
+
+  <% unless article.tags.empty? %>  
+</br>
+Tags:
+<% article.tags.each do |t| %>
+
+<span class="tag">
+  <%= link_to t.name, tag_path(t.name) %>    
+</span>
+
+<% end %>
+<% end %>
 
 
 
-  <div class="timestamp">
-    <ul>
-      <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>
-      <li>Modified: <%= article.updated_at.to_formatted_s(:short) %></li>
-    </ul>
-  </div>
+
+<div class="timestamp">
+  <ul>
+    <li>Created: <%= article.created_at.to_formatted_s(:short) %></li>
+    <li>Modified: <%= article.updated_at.to_formatted_s(:short) %></li>
+  </ul>
+</div>
 </div>

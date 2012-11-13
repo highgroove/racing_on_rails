@@ -5,6 +5,28 @@ $main-bg: silver;
 $overall-width: 1050px;
 $main-width: 640px;
 
+
+.tag {
+
+
+    border: 0px solid #EEE;
+
+    padding: 3px;
+    border-radius: 10px;
+
+
+    @include transition(all 300ms ease-in-out);
+
+    &:hover {
+	background: #EEE - #333;
+    }
+
+    a {
+	color: blue;
+    }
+    
+}
+
 .page-wrapper {
     width: $overall-width;
     margin:auto;
