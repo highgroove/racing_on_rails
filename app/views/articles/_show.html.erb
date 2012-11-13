@@ -13,6 +13,13 @@
   <% end %>
 
 
+  <% unless article.tags.empty? %>
+    Tags: <%= article.tags.map(&:name).map {
+	      |t|
+	      link_to t, tag_path(t)}.join(", ").html_safe %>
+  <% end %>
+
+
 
   <div class="timestamp">
     <ul>

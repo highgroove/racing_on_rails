@@ -121,6 +121,8 @@ RacingOnRails::Application.routes.draw do
   resources :categories do
     resources :races
   end
+
+  get 'articles/tags/:tag', to: 'articles#index', as: :tag
   match ':controller/:id/aliases/:alias_id/destroy' => '#destroy_alias', :constraints => { :id => /\d+/ }
   match '/admin/results/:id/scores' => 'admin/results#scores'
   match '/admin/racers' => 'admin/racers#index'

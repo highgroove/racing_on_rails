@@ -13,7 +13,11 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.where(:display => true).order("created_at desc")
+    if params[:tag]
+      @articles = Article.tagged_with(params[:tag]).where(:display => true).order("created_at desc")
+    else
+      @articles = Article.where(:display => true).order("created_at desc")
+    end
   end
 
   def feed
@@ -24,4 +28,7 @@ class ArticlesController < ApplicationController
       format.rss { render :layout => false }
     end
   end
+
+  
+  
 end

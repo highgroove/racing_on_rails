@@ -50,7 +50,7 @@ CREATE TABLE `assets` (
   `updated_at` datetime NOT NULL,
   `page_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -399,7 +399,7 @@ CREATE TABLE `people` (
   `country_code` varchar(2) DEFAULT 'US',
   `membership_card` tinyint(1) NOT NULL DEFAULT '0',
   `official` tinyint(1) NOT NULL DEFAULT '0',
-  `name` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_first_name` (`first_name`),
   KEY `idx_last_name` (`last_name`),
@@ -746,6 +746,25 @@ CREATE TABLE `standings` (
   KEY `source_id` (`source_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `taggings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag_id` int(11) DEFAULT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_taggings_on_tag_id` (`tag_id`),
+  KEY `index_taggings_on_article_id` (`article_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `tags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -1043,6 +1062,10 @@ INSERT INTO schema_migrations (version) VALUES ('20120813183838');
 
 INSERT INTO schema_migrations (version) VALUES ('20120816165547');
 
+INSERT INTO schema_migrations (version) VALUES ('20121016192731');
+
+INSERT INTO schema_migrations (version) VALUES ('20121016205454');
+
 INSERT INTO schema_migrations (version) VALUES ('20121017183409');
 
 INSERT INTO schema_migrations (version) VALUES ('20121111192914');
@@ -1051,7 +1074,9 @@ INSERT INTO schema_migrations (version) VALUES ('20121112002950');
 
 INSERT INTO schema_migrations (version) VALUES ('20121112005948');
 
-INSERT INTO schema_migrations (version) VALUES ('20121112211557');
+INSERT INTO schema_migrations (version) VALUES ('20121113033807');
+
+INSERT INTO schema_migrations (version) VALUES ('20121113033848');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

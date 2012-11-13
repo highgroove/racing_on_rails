@@ -11,6 +11,11 @@
 <div class="content-item">
 <%= f.text_area :body, :class => 'ckeditor' %>
 </div>
+<div class="content-item">
+  <%= f.label :tag_list, "Tags (comma delimited)" %></br>
+  <%= f.text_field :tag_list %>
+</div>
+
 
 <div class="content-item">
   <%= f.label :new_files %>
