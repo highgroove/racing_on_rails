@@ -20,152 +20,151 @@
   :url => @event.new_record? ? admin_events_path : admin_event_path(@event), 
   :html => { :method => form_method_for(@event) }) do |f| -%></br>
 
-    <%= f.hidden_field :parent_id %></br>
-    <%= f.labelled_text_field :name, nil, :editable => administrator?, :class => "wants_focus" %></br>
+  <%= f.hidden_field :parent_id %></br>
+  <%= f.labelled_text_field :name, nil, :editable => administrator?, :class => "wants_focus" %></br>
 
-    <% if administrator? %></br>
-    <% unless @event.new_record? -%></br>
+  <% if administrator? %></br>
+  <% unless @event.new_record? -%></br>
 
-      <%= link_to "Duplicate", new_admin_event_path(:event => @event.attributes), :class => "obvious", :id => "duplicate_event" %></br><br/>
+  <%= link_to "Duplicate", new_admin_event_path(:event => @event.attributes), :class => "obvious", :id => "duplicate_event" %></br><br/>
 
-    <% end -%></br>
-    <% if @event.type_modifiable? %></br>
-    <%= f.label :type %></br>
-    <%= f.select(:type, [['Event', nil],
-        ['Single Day Event', 'SingleDayEvent'],
-        ['Multi Day Event', 'MultiDayEvent'], 
-        ['Series', 'Series'], 
-        ['Weekly Series', 'WeeklySeries']], {}, 
-        { :title => "Event: placeholder hidden from schedule (combined TT results). 
-    \nSingle day event: most events. 
-    \nMulti day event: event over consecutive days (stage races, AVC). 
-    \nSeries: weekend events with full BAR points (Cross Crusade). 
-    \nWeekly series: weeknight, BAR points only for overall (PIR)" }) %></br><br/>
-    <% else -%></br>
-    <%= f.labelled_text :type, @event.friendly_class_name %></br>
-    <% end -%></br>
-    <% end -%></br>
-    
-    <% case @event
-       when SingleDayEvent -%></br>
-    <% if administrator? %></br>
-    <%= f.label :date_1i, "Date" %></br>
-    <%= f.date_select :date, :order => [:month, :day, :year] %></br>
-    <% else %></br>
-    <%= f.labelled_text(:date, @event.date ? @event.date.strftime('%A, %B %d, %Y') : "") %></br>
-    <% end -%></br>
-    <% when MultiDayEvent -%></br>
-    <%- if @event.start_date == @event.end_date -%></br>
-    <%= f.labelled_text(:date, @event.start_date ? @event.start_date.strftime('%A, %B %d, %Y') : "") %></br>
-    <%- else -%></br>
-    <%= f.labelled_text(:date, (@event.start_date && @event.end_date) ? "#{@event.start_date.strftime('%a %m/%d/%Y')} to #{@event.end_date.strftime('%a %m/%d/%Y')}" : "") %></br>
-    <%- end -%></br>
-    <% else -%></br>
-    <%= f.labelled_text(:date, @event.date ? @event.date.strftime('%A, %B %d, %Y') : "") %></br>
-    <% end -%></br>
+  <% end -%></br>
+  <% if @event.type_modifiable? %></br>
+  <%= f.label :type %></br>
+  <%= f.select(:type, [['Event', nil],
+      ['Single Day Event', 'SingleDayEvent'],
+      ['Multi Day Event', 'MultiDayEvent'], 
+      ['Series', 'Series'], 
+      ['Weekly Series', 'WeeklySeries']], {}, 
+      { :title => "Event: placeholder hidden from schedule (combined TT results). 
+  \nSingle day event: most events. 
+  \nMulti day event: event over consecutive days (stage races, AVC). 
+  \nSeries: weekend events with full BAR points (Cross Crusade). 
+  \nWeekly series: weeknight, BAR points only for overall (PIR)" }) %></br><br/>
+  <% else -%></br>
+  <%= f.labelled_text :type, @event.friendly_class_name %></br>
+  <% end -%></br>
+  <% end -%></br>
+  
+  <% case @event
+     when SingleDayEvent -%></br>
+  <% if administrator? %></br>
+  <%= f.label :date_1i, "Date" %></br>
+  <%= f.date_select :date, :order => [:month, :day, :year] %></br>
+  <% else %></br>
+  <%= f.labelled_text(:date, @event.date ? @event.date.strftime('%A, %B %d, %Y') : "") %></br>
+  <% end -%></br>
+  <% when MultiDayEvent -%></br>
+  <%- if @event.start_date == @event.end_date -%></br>
+  <%= f.labelled_text(:date, @event.start_date ? @event.start_date.strftime('%A, %B %d, %Y') : "") %></br>
+  <%- else -%></br>
+  <%= f.labelled_text(:date, (@event.start_date && @event.end_date) ? "#{@event.start_date.strftime('%a %m/%d/%Y')} to #{@event.end_date.strftime('%a %m/%d/%Y')}" : "") %></br>
+  <%- end -%></br>
+  <% else -%></br>
+  <%= f.labelled_text(:date, @event.date ? @event.date.strftime('%A, %B %d, %Y') : "") %></br>
+  <% end -%></br>
 
-    <%= f.labelled_text_field(:time) if administrator? %></br>
-    <%= f.labelled_select(:discipline, @disciplines.sort) if administrator? %></br><br/>
+  <%= f.labelled_text_field(:time) if administrator? %></br>
+  <%= f.labelled_select(:discipline, @disciplines.sort) if administrator? %></br><br/>
 
-    <%= f.label :city, "City, State" %></br>
-    <%= f.text_field :city, :class => "city_no_zip" %></br> <%= f.text_field :state, :class => "state_no_zip" %></br>
+  <%= f.label :city, "City, State" %></br>
+  <%= f.text_field :city, :class => "city_no_zip" %></br> <%= f.text_field :state, :class => "state_no_zip" %></br>
 
-    <% if RacingAssociation.current.show_events_velodrome? && administrator? -%></br>
-    <%= f.labelled_select(:velodrome_id, Velodrome.all.sort_by(&:name).collect {|v| [ v.name, v.id ] }, :include_blank => true) %></br>
-    <% end -%></br>
-    
-    <% if administrator? %></br>
-    <%= f.labelled_check_box :gcs %></br>
-    <%= f.labelled_check_box :cancelled %></br>
-    <%= f.labelled_check_box :postponed %></br>
-    <%= f.labelled_check_box :instructional %></br>
-    <%= f.labelled_check_box :practice %></br>
-    <%= f.labelled_check_box :beginner_friendly %></br>
-    <% end -%></br>
+  <% if RacingAssociation.current.show_events_velodrome? && administrator? -%></br>
+  <%= f.labelled_select(:velodrome_id, Velodrome.all.sort_by(&:name).collect {|v| [ v.name, v.id ] }, :include_blank => true) %></br>
+  <% end -%></br>
+  
+  <% if administrator? %></br>
+  <%= f.labelled_check_box :gcs %></br>
+  <%= f.labelled_check_box :cancelled %></br>
+  <%= f.labelled_check_box :postponed %></br>
+  <%= f.labelled_check_box :instructional %></br>
+  <%= f.labelled_check_box :practice %></br>
+  <%= f.labelled_check_box :beginner_friendly %></br>
+  <% end -%></br>
 
 
   <% if administrator? %></br>
 
-    <%= auto_complete f, :event, :promoter, people_path(:format => :json) %></br>
+  <%= auto_complete f, :event, :promoter, people_path(:format => :json) %></br>
 
   
 
-    <%= link_to "Edit", "#", :class => "obvious", :id => "edit_promoter_link", "data-event-id" => @event.id %></br>
+  <%= link_to "Edit", "#", :class => "obvious", :id => "edit_promoter_link", "data-event-id" => @event.id %></br>
 
   <% end -%></br>
   
 
-    <fieldset>
-      <legend>Contact Information</legend>
-      <p>If different than promoter's personal contact information</p>
-      <%= f.labelled_text_field :phone %></br>
-      <%= f.labelled_text_field :email %></br>
-    </fieldset>
+  <fieldset>
+    <legend>Contact Information</legend>
+    <p>If different than promoter's personal contact information</p>
+    <%= f.labelled_text_field :phone %></br>
+    <%= f.labelled_text_field :email %></br>
+  </fieldset>
 
   
 
-    <%= auto_complete(f, :event, :team, admin_teams_path(:format => :json), "Sponsoring Team") if administrator? %></br>
-    <%= f.labelled_text_field :first_aid_provider, nil, :editable => administrator? %></br>
-    <%= f.labelled_text_field :chief_referee, nil, :editable => administrator? %></br>
+  <%= auto_complete(f, :event, :team, admin_teams_path(:format => :json), "Sponsoring Team") if administrator? %></br>
+  <%= f.labelled_text_field :first_aid_provider, nil, :editable => administrator? %></br>
+  <%= f.labelled_text_field :chief_referee, nil, :editable => administrator? %></br>
 
   
 
-    <% if RacingAssociation.current.sanctioning_organizations.many? -%></br>
-    <%= f.labelled_select :sanctioned_by, RacingAssociation.current.sanctioning_organizations %></br>
-    <%- end %></br>
+  <% if RacingAssociation.current.sanctioning_organizations.many? -%></br>
+  <%= f.labelled_select :sanctioned_by, RacingAssociation.current.sanctioning_organizations %></br>
+  <%- end %></br>
 
-    <% if administrator? -%></br>
-    <% if RacingAssociation.current.show_events_sanctioning_org_event_id? -%></br>
-    <%= f.labelled_text_field :sanctioning_org_event_id, "Sanctioning Org Event ID" %></br>
-    <% end -%></br>
+  <% if administrator? -%></br>
+  <% if RacingAssociation.current.show_events_sanctioning_org_event_id? -%></br>
+  <%= f.labelled_text_field :sanctioning_org_event_id, "Sanctioning Org Event ID" %></br>
+  <% end -%></br>
 
-    <%= f.labelled_select(:number_issuer_id, NumberIssuer.all( :order => 'name').collect {|i| [i.name, i.id]}) %></br>
-    <br/>
-    
-    <%= f.labelled_check_box :atra_points_series, "ATRA National Championship Series (NCS)" if RacingAssociation.current.competitions.include?(:atra_points_series) %></br>
-    <% end -%></br>
+  <%= f.labelled_select(:number_issuer_id, NumberIssuer.all( :order => 'name').collect {|i| [i.name, i.id]}) %></br>
+  <br/>
+  
+  <%= f.labelled_check_box :atra_points_series, "ATRA National Championship Series (NCS)" if RacingAssociation.current.competitions.include?(:atra_points_series) %></br>
+  <% end -%></br>
 
-    <% if RacingAssociation.current.competitions.include?(:bar) -%></br>
-    <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "BAR Points"}, :editable => administrator? %></br>
-    <%- end %></br>
-    
-    <% if RacingAssociation.current.competitions.include?(:rider_rankings) -%></br>
-    <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "Rankings Pts"}, :editable => administrator? %></br>
-    <%- end %></br>
+  <% if RacingAssociation.current.competitions.include?(:bar) -%></br>
+  <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "BAR Points"}, :editable => administrator? %></br>
+  <%- end %></br>
+  
+  <% if RacingAssociation.current.competitions.include?(:rider_rankings) -%></br>
+  <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "Rankings Pts"}, :editable => administrator? %></br>
+  <%- end %></br>
 
-    <% if administrator? -%></br>
-    <%- if CombinedTimeTrialResults.allows_combined_results?(@event) -%></br>
-    <%= f.labelled_check_box :auto_combined_results, "Auto-calc combined results" %></br>
-    <%- end -%></br>
+  <% if administrator? -%></br>
+  <%- if CombinedTimeTrialResults.allows_combined_results?(@event) -%></br>
+  <%= f.labelled_check_box :auto_combined_results, "Auto-calc combined results" %></br>
+  <%- end -%></br>
 
-    <%= f.labelled_check_box(:ironman) if RacingAssociation.current.competitions.include?(:ironman) %></br>
-    <% end -%></br>
-    
-    <%= f.labelled_text_field :flyer, nil, :editable => administrator? %></br>
-    <% if administrator? -%></br>
-    <%= f.labelled_check_box :flyer_approved, nil %></br>
-    <% unless RacingAssociation.current.short_name == "OBRA" -%></br>
-    <%= f.labelled_text_field :website, nil, :editable => administrator? %></br>
-    <%= f.labelled_text_field :registration_link, nil, :editable => administrator? %></br>
-    <%= f.labelled_text_field :twitter_tag, nil, :editable => administrator? %></br>
-    <% end -%></br>
+  <%= f.labelled_check_box(:ironman) if RacingAssociation.current.competitions.include?(:ironman) %></br>
+  <% end -%></br>
+  
+  <%= f.labelled_text_field :flyer, nil, :editable => administrator? %></br>
+  <% if administrator? -%></br>
+  <%= f.labelled_check_box :flyer_approved, nil %></br>
+  <% unless RacingAssociation.current.short_name == "OBRA" -%></br>
+  <%= f.labelled_text_field :website, nil, :editable => administrator? %></br>
+  <%= f.labelled_text_field :registration_link, nil, :editable => administrator? %></br>
+  <%= f.labelled_text_field :twitter_tag, nil, :editable => administrator? %></br>
+  <% end -%></br>
 
-    <%= f.labelled_text_field :pre_event_fees %></br>
-    <%= f.labelled_text_field :post_event_fees %></br>
-    <%= f.labelled_text_field :flyer_ad_fee %></br>
+  <%= f.labelled_text_field :pre_event_fees %></br>
+  <%= f.labelled_text_field :post_event_fees %></br>
+  <%= f.labelled_text_field :flyer_ad_fee %></br>
 
-    <%= f.labelled_text_area :notes %></br>
-    <% end -%></br>
+  <%= f.labelled_text_area :notes %></br>
+  <% end -%></br>
 
   
 
 
-      <% unless @event.updated_at.nil? %></br>Last Updated: <%= @event.updated_at.to_s(:long) %></br><% end %></br>
-      <%= "New" if @event.new_record? %></br>
+  <% unless @event.updated_at.nil? %></br>Last Updated: <%= @event.updated_at.to_s(:long) %></br><% end %></br>
 
 
-      <%= link_to("Delete", admin_event_path(@event), :method => :delete, :class => 'obvious', :id => 'delete') unless @event.new_record? || !administrator? %></br>
-      <%= submit_tag "Save", :id => "save" %></br>
+  <%= link_to("Delete", admin_event_path(@event), :method => :delete, :class => 'obvious', :id => 'delete') unless @event.new_record? || !administrator? %></br>
+  <%= submit_tag "Save", :id => "save" %></br>
 
 
   <% end -%></br>

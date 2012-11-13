@@ -22,24 +22,24 @@
 
   <body>    
     <div class="page-wrapper">
-    <div id="header">
-      <%= link_to("HOME", "/", :id=>"header") %>
-    </div>
-    <div id="top-menu">
-      <%= render :partial => "layouts/top_menu" %>
-    </div>
-
-    <div class="main-wrapper">
-      <div class="content-item">
-	<h1>Admin Tasks</h1>
-	<%= render :partial => "shared/tabs" %>
-	<%= render :partial => "shared/flash_messages" %>      
-      <!/div-->
-      <div class="content-item">
-	<%= yield %>
+      <div id="header">
+	<%= link_to("HOME", "/", :id=>"header") %>
       </div>
-    </div>
-    <%= render :partial => "shared/auto_complete" %>
+      <div id="top-menu">
+	<%= render :partial => "layouts/top_menu" %>
+      </div>
+
+      <div class="admin-wrapper">
+	<div class="content-item">
+	  <h1>Admin Tasks</h1>
+	  <%= render :partial => "shared/tabs" %>
+	  <%= render :partial => "shared/flash_messages" %>      
+	</div>
+	<div class="content-item">
+	  <%= yield %>
+	</div>
+      </div>
+      <%= render :partial => "shared/auto_complete" %>
     </div>
   </body>
 </html>

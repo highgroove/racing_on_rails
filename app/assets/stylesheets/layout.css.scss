@@ -10,11 +10,7 @@ $main-width: 640px;
     margin:auto;
 }
 
-.base-row {
-    display: table-row;
-}
-
-.main-wrapper {
+.main-wrapper, .admin-wrapper {
     width: $overall-width;
     margin: auto;
     border-radius: $border-rad;
@@ -25,7 +21,6 @@ $main-width: 640px;
     display: table;
 }
 
-
 .main-wrapper > div {
     background: #EEE;
     border: 5px solid $main-bg;
@@ -35,7 +30,6 @@ $main-width: 640px;
     display: table-cell;
     overflow: visible;
 }
-
 
 .content-item {
     font-size: 14px;
@@ -62,8 +56,13 @@ $main-width: 640px;
     font-size: 16px;
 
     img {
-	max-width: 100%;
-	min-width: 100%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .3em;
+	margin-bottom: .3em;
+	max-width: 150px;
+	min-width: 150px;
     }
 
     
