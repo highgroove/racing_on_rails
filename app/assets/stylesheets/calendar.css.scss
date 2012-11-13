@@ -1,66 +1,95 @@
 /* Calendar of events */
 div.calendar table {
-  border-collapse: separate;
-  padding: 0px;
-  width: 100%;
-  background: white;
-  
+    border-collapse: separate;
+    padding: 0px;
+    width: 100%;
+    background: white;
+    
 }
 
 div.calendar {
-  margin-bottom: 36px;
+    margin-bottom: 36px;
 }
 
 .calendar table th, .calendar .caption
 {
-  text-align: center;
+    text-align: center;
 }
 
 tr.month
 {
-  vertical-align: top;
+    vertical-align: top;
 }
 
-td.day
-{
-  height: 70px;
-  width: 14%;
-  border: 1px solid #EEE;
-  background: #FFF;
-  padding: 4px 4px;
-  text-align: left;
-}
+td.day {
 
-td.day div.event {
-  margin-bottom: 8px;
-  line-height: 16px;
-}
 
-td.day div.beginner_friendly {
-  @include background-image(url("icons/star_green.png") no-repeat);
-  padding-left: 20px;
+    height: 70px;
+    width: 14%;
+    border: 1px solid #EEE;
+    background: #FFF;
+    padding: 4px 4px;
+    text-align: left;
+
+    div.event {
+	margin-bottom: 8px;
+	line-height: 16px;
+	
+	border-top: 2px solid #D8D8D8;
+	border-bottom: 3px solid #DDD;
+	border-radius: 4px;
+    }
+
+/*    
+    div.beginner_friendly {
+	@include background-image(url("icons/star_green.png") no-repeat);
+	padding-left: 20px;
+    }
+
+    div.flyer {
+	background: url("icons/pdf-icon.png") no-repeat;
+	//	background-position: 0px 0px;
+    }
+    
+    div.registration {
+	background: url("icons/registration-icon.png") no-repeat;
+	//	background-position: 17px 0px;
+    }
+    
+    div.results {
+	background: url("icons/results-icon.png") no-repeat;
+	//	background-position: 0px 0px;
+    }
+
+    li.flyer{
+	background: url("icons/pdf-icon.png") no-repeat;
+    }
+    */
+    li {
+	display :inline;
+    }
 }
 
 td.day div.number
 {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 td.day_from_other_month
 {
-  height: 70px;
-  width: 14%;
-  border: 1px solid #EEE;
-  background: #EEB;
-  padding: 4px 4px;
+    height: 70px;
+    width: 14%;
+    border: 1px solid #EEE;
+    background: #EEB;
+    padding: 4px 4px;
 }
 
 td.day_from_other_month div.number
 {
-  font-style: italic;
-  text-align: left;
+    font-style: italic;
+    text-align: left;
 }
 
 div.calendar table.base td.beginner_friendly {
-  text-align: right;
+    text-align: right;
 }
