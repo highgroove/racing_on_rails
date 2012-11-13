@@ -61,6 +61,12 @@ $main-width: 640px;
     padding: 0px 0px 0px 0px;
     font-size: 16px;
 
+    img {
+	max-width: 100%;
+	min-width: 100%;
+    }
+
+    
     ul {
 	margin-top: -3px;
 	margin-bottom: 0px;
