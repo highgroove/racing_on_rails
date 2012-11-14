@@ -30,7 +30,7 @@
   <th>Discipline</th>
   <th>Location</th>
   <th>Sponsoring Team</th>
-  <th>Tweet</th>
+  <!--th>Tweet</th-->
   <th>Flyer</th>
   <th>Reg.</th> 
   <th>Results</th>
@@ -49,17 +49,17 @@
 
   <td>
     <%- if event.cancelled %>
-    <span class="cancelled"><%= link_to event.full_name, event_path(event) -%></span> <i>cancelled</i>
+    <span class="cancelled"><%= link_to event.full_name, event.website -%></span> <i>cancelled</i>
     <%- elsif event.postponed? %>
-    <span class="postponed"><%= link_to event.full_name, event_path(event) -%></span> <i>postponed</i>
+    <span class="postponed"><%= link_to event.full_name, event.website -%></span> <i>postponed</i>
     <%- else -%>
-    <%= link_to event.full_name.html_safe, event_path(event) %>
+    <%= link_to event.full_name.html_safe, event.website %>
     <%- end -%>
   </td>
 
   <td><%= event.discipline -%></td>
 
-  <td><%= event.location %></td>
+  <td><%= event.city %></td>
 
   <td>
     <% if event.team_id %>
@@ -67,13 +67,13 @@
     <% end %>
   </td>
 
-  <td>
+  <!--td>
     <% if event.twitter_tag.blank? %>
     <%= link_to image_tag("icons/tweetbutton.png"), "http://twitter.com/intent/tweet?url=http://www.gacycling.org#{event_path(event)}&hashtags=gbra&via=gacycling", :target => "blank" %>
     <% else %>
     <%= link_to image_tag("icons/tweetbutton.png"), "http://twitter.com/intent/tweet?url=http://www.gacycling.org#{event_path(event)}&hashtags=#{event.twitter_tag}&via=gacycling", :target => "blank" %>
     <% end %>
-  </td>
+  </td-->
 
 
   <td>
