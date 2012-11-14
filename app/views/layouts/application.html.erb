@@ -9,27 +9,7 @@
     <%= airbrake_javascript_notifier unless Rails.env.acceptance? %>
     <%= render  "layouts/stylesheets" %>
     <%= render  "layouts/javascripts" %>
-    <%= yield :head %>
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-36315439-1']);
-      _gaq.push(['_trackPageview']);
-      _gaq.push(['_setAccount', 'UA-36359016-1']);
-      _gaq.push(['_trackPageview']);
-
-
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-
-    </script>
-
-    
+    <%= yield :head %>  
   </head>
   
 
@@ -72,5 +52,8 @@
       <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
       <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
     </div>
+    
+    <%= render "google-analytics" if RAILS_ENV == 'production' %>
+
   </body>
 </html>
