@@ -53,7 +53,7 @@
       <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
     </div>
     
-    <%= render "google-analytics" if RAILS_ENV == 'production' %>
+    <%= render "layouts/google-analytics" if Rails.env == 'production' %>
 
   </body>
 </html>
