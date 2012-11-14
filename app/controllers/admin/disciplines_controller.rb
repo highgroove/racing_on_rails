@@ -3,8 +3,12 @@ class Admin::DisciplinesController < Admin::AdminController
   before_filter :require_administrator
   layout "admin/application"
 
+  def new
+    @discipline = Discipline.new
+  end
+
   def index
-    @disciplines = Discipline.all
+    @disciplines = Discipline.all(:order => :name)
   end
   
   def edit
@@ -20,6 +24,19 @@ class Admin::DisciplinesController < Admin::AdminController
       redirect_to admin_disciplines_url
     else
       render :edit
+    end
+  end
+
+
+  def create
+    @discipline = Discipline.new(params[:discipline])
+
+    if @discipline.save
+      expire_cache
+      flash[:notice] = "Discipline saved."
+      redirect_to admin_disciplines_url
+    else
+      render :new
     end
   end
 
