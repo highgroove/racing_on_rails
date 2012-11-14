@@ -3,7 +3,7 @@
 <h2>Disciplines</h2>
 
 
-<table class="base" id="article_categories">
+<table>
   <tr>
     <th>Name</th>
     <th>Short Name</th>
@@ -12,11 +12,11 @@
   <p><b><%= link_to 'New discipline', new_admin_discipline_path %></b></p>
 
   <% for discipline in @disciplines %>
-    <tr class="<%= cycle("even", "odd") %>" id="discipline_<%= discipline.id %>_row">
+    <tr class="<%= cycle("even", "odd") %>">
       <td><%= discipline.name %></td>
       <td><%= discipline.short_name %></td>
-          <td><%= link_to 'Edit', edit_admin_discipline_path(discipline.id)  %></td>
-      <td><%= link_to 'Destroy', admin_discipline_path(discipline.id), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Edit', edit_admin_discipline_path(discipline.id)  %></td>
+      <!--td><%= link_to 'Destroy', admin_discipline_path(discipline.id), :confirm => 'Are you sure?', :method => :delete %></td -->
     </tr>
   <% end %>
 </table>

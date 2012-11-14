@@ -40,11 +40,13 @@ class Admin::DisciplinesController < Admin::AdminController
     end
   end
 
+=begin
   def destroy
     expire_cache
     @discipline = Discipline.find(params[:id])
     @discipline.destroy
     redirect_to admin_disciplines_path
   end
-  
+=end
+
 end

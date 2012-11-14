@@ -13,19 +13,39 @@ class Admin::CategoriesController < Admin::AdminController
       @category = Category.find_or_create_by_name(RacingAssociation.current.short_name)
       @unknowns = Category.find_all_unknowns
     end
+
+    @categories = @category.children.sort
+    
   end
     
   def update
     @category = Category.find(params[:id])
-    @category.update_attributes(params[:category])
+#    @category.update_attributes(params[:category])
     # parent_id could be nil, so can't use @category.children
-    if @category.parent_id
-      @children = @category.parent.children
+    #if @category.parent_id
+    #  @children = @category.parent.children
+   # else
+   #   @children = Category.find_all_unknowns
+   # end
+
+    if @category.update_attributes(params[:category])
+      expire_cache
+      flash[:notice] = "Category updated."
+      redirect_to admin_categories_url
     else
-      @children = Category.find_all_unknowns
-    end
+      render :edit
+    end  
   end
 
+=begin
+  def destroy
+    expire_cache
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to admin_categories_path
+  end
+=end
+  
   # Calculate MbraBar only
   def recompute_bar
     MbraBar.calculate!
@@ -43,4 +63,7 @@ class Admin::CategoriesController < Admin::AdminController
     MbraTeamBar.calculate!
     redirect_to :action => :index
   end
+
+
+  
 end

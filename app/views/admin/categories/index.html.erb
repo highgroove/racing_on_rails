@@ -1,29 +1,56 @@
 <% @page_title = "Admin: Categories" %>
 
 <% #We're small enough we can recompute competitions on demand. alp -%>
+
 <% if RacingAssociation.current.competitions.include?(:mbra_bar) -%>
-  <div class="left">
-    <p><%= form_tag "/admin/categories/recompute_bar" do -%>
-      <%= submit_tag "Recompute MBRA BAR", :id => "recompute_bar" %>
+<div class="content-item">
+  <p><%= form_tag "/admin/categories/recompute_bar" do -%>
+    <%= submit_tag "Recompute MBRA BAR", :id => "recompute_bar" %>
     <% end -%></p>
-    <p><%= form_tag "/admin/categories/recompute_team_bar" do -%>
-      <%= submit_tag "Recompute MBRA BAT", :id => "recompute_bar" %>
+  <p><%= form_tag "/admin/categories/recompute_team_bar" do -%>
+    <%= submit_tag "Recompute MBRA BAT", :id => "recompute_bar" %>
     <% end -%></p>
-  </div>
+</div>
 <%- end %>
 
-<div class="column_grid_container">
-  <div class="table_container box-3">
-    <div class="caption"><%= RacingAssociation.current.short_name %></div>
-    <div class="category category_root association_category_root" id="category_<%= @category.id %>_row" data-id="<%= @category.id %>">
-      <%= render :partial => "category", :collection => @category.children.sort %>
-    </div>
-  </div>
 
-  <div class="table_container box-3 last">
-    <div class="caption">Unknown</div>
-    <div class="category category_root unknown_category_root" id="category__row" data-id="">
-      <%= render :partial => "category", :collection => @unknowns.sort %>
-    </div>
-  </div>
+
+<div class="content-item">
+
+  <%= RacingAssociation.current.short_name %> Categories</br></br>
+
+  
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Races</th>
+    </tr>
+
+    <% @categories.each do |category| %>
+    <tr class="<%= cycle("even", "odd")%>">
+      <%= render :partial => "category", :locals => {:category => category} %>
+      <!-- td><%= link_to 'Destroy', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td -->
+    </tr>
+    <% end %>
+  </table>
 </div>
+
+
+<div class="content-item">
+  Unknown</br></br>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Races</th>
+    </tr>
+
+    <% @unknowns.each do |category| %>
+    <tr class="<%= cycle("even", "odd")%>">
+      <%= render :partial => "category", :locals => {:category => category} %>
+      <!-- td><%= link_to 'Destroy', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete %></td -->
+    </tr>
+    <% end %>
+  </table>
+</div>
+
