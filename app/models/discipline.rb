@@ -11,11 +11,8 @@ class Discipline < ActiveRecord::Base
   @@names = nil
   
   scope :numbers, where(:numbers => true)
-  
+
   # Look up Discipline by name or alias. Caches Disciplines in memory
-
-
-
   def self.[](name)
     return nil unless name
     load_aliases unless @@all_aliases
@@ -30,12 +27,10 @@ class Discipline < ActiveRecord::Base
   def self.find_all_bar
     Discipline.where(:bar => true)
   end
-  
-  
-  
-    def self.find_via_alias(name)
-      Discipline[name]
-    end
+   
+  def self.find_via_alias(name)
+    Discipline[name]
+  end
 
   def self.load_aliases
     @@all_aliases = {}

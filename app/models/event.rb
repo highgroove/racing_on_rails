@@ -170,6 +170,23 @@ class Event < ActiveRecord::Base
   # Child events use their parent's values unless explicity overriden. And you cannot override
   # parent values by passing in blank or nil attributes to initialize, as there is
   # no way to differentiate missing values from nils or blanks.
+
+  def short_disc(name)
+    @short_name = {
+      "Cyclocross" => "CX",
+      "Road" => "RR",
+      "Criterium" => "CR",
+      "GBRA" => "GBRA",
+      "Mountain Bike" => "MTB",
+      "Single Speed" => "SS",
+      "Time Trial" => "TT",
+      "Track" => "TR"
+    }
+
+    return @short_name[name]
+  end
+
+
   def set_defaults
     if new_record?
       if parent
