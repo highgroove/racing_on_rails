@@ -49,11 +49,6 @@
 
       <%= render "shared/tabs" %>        
       <%= render "shared/flash_messages", :locals => { :flash => flash } %>
-      <% #@upcoming = Event.all(:where =>(sort_by(&:date).last(4))) %>
-      <% #@upcoming = Event.all.sort_by(&:date).last(1) %>
     </div>
-    
-    <%= render "layouts/google-analytics" if Rails.env == 'production' %>
-
   </body>
 </html>
