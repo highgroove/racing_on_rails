@@ -54,7 +54,7 @@ $main-width: 640px;
 }
 
 .content-item {
-    font-size: 14px;
+//    font-size: 14px;
     background: #EEE;
     border-top: 2px solid $main-bg + #111;
     border-bottom: 3px solid $main-bg;
@@ -67,6 +67,8 @@ $main-width: 640px;
     width: $main-width;
     max-width: $main-width;
     min-width: $main-width;
+
+    font-size: 14px;
 
 }
 

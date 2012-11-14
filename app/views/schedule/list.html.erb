@@ -4,64 +4,90 @@
 <div class="content-item">
   <%= render "years" %>
 </div>
+
 <div class="content-item">
   <%= render "disciplines", :locals => { :year => @year } %>
 </div>
 
 
 <p class="centered">
-  <%= link_to 'Schedule in calendar format', {:action => 'index'} %><%#, {:class => 'obvious'} %>
+  <%= link_to 'Schedule in calendar format', {:action => 'index'} %>
 </p>
 
 
 
-
-
 <% if Time.zone.today < Date.new(@year, 2) %>
-   <div>Tentative. Dates are subject to change.</div>
+   <div>
+     Tentative. Dates are subject to change.
+   </div>
    <% end %>
 
-   <%= table :caption => @year do %>
-<tr>
-  <th class="date">Date</th>
-  <th></th>
+   <%= table :class => "data-list", :caption => @year do %>
+
+<tr class="head">
+  <th>Date</th>
   <th>Event</th>
-  <th>Promoter</th> 
-  <th>Phone</th>
   <th>Discipline</th>
   <th>Location</th>
+  <th>Sponsoring Team</th>
+  <th>Tweet</th>
+  <th>Flyer</th>
+  <th>Reg.</th> 
+  <th>Results</th>
 </tr>
+
 <%- @schedule.months.each do |month| -%>
 <%- month.weeks.each do |week| -%>
 <%- week.days.each do |day| -%>
 <%- day.events.each do |event| -%>
+
 <tr class="<%= cycle("even", "odd") %>">
-  <td class="date">
+  <td>
     <%= event.date.strftime("%a %m/%d") if event.date -%>
   </td>
-  <td class="beginner_friendly"><%= image_tag("icons/star_green.png") if event.beginner_friendly? %></td>
-  <%- if event.cancelled %>
-  <td><span class="cancelled"><%= event.full_name -%></span> <i>cancelled</i></td>
-  <%- elsif event.postponed? %>
-  <td><span class="postponed"><%= event.full_name -%></span> <i>postponed</i></td>
-  <%- else -%>
-  <td class="link">
-    <%- if event.flyer.present? && event.flyer_approved? -%>
-    <a href="<%= event.flyer -%>"<%= "target='_blank'" if RacingAssociation.current.flyers_in_new_window? %>><%= event.full_name -%><%- if (!event.full_name.include?("MTB") and event.discipline == "Mountain Bike") -%>
-      MTB
-      <%- end -%></a>
+
+
+  <td>
+    <%- if event.cancelled %>
+    <span class="cancelled"><%= link_to event.full_name, event_path(event) -%></span> <i>cancelled</i>
+    <%- elsif event.postponed? %>
+    <span class="postponed"><%= link_to event.full_name, event_path(event) -%></span> <i>postponed</i>
     <%- else -%>
-    <%= event.full_name -%><%= " MTB" if !event.full_name.include?("MTB") && event.discipline == "Mountain Bike" -%>
+    <%= link_to event.full_name.html_safe, event_path(event) %>
+    <%- end -%>
+  </td>
+
+  <td><%= event.discipline -%></td>
+
+  <td><%= event.location %></td>
+
+  <td>
+    <% if event.team_id %>
+    <%= link_to event.team_name, team_path(event.team_id) %>
+    <% end %>
+  </td>
+  <td>Tweet</td>
+
+
+  <td>
+    <%- if event.flyer.present? && event.flyer_approved? -%>
+    <%= link_to image_tag("icons/pdf-icon.png"), event.flyer %>
     <%- end -%>
   </td> 
-  <%- end -%>
-  <td><%= link_to_event_email event %></td> 
-  <td class="contact_phone"><%= link_to_event_phone event %></td> 
-  <td><%= event.discipline -%></td> 
-  <td><%= event.city -%></td>
+
+  <td><%= link_to image_tag("icons/registration-icon.png"), "/" %></td>
+  
+  
+  <td>
+    <% if event.has_results? %>
+    <%= link_to image_tag("icons/results-icon.png"), event_results_path(event) %>
+    <% end %>
+  </td>
+
 </tr>
+
 <%- end -%>
 <%- end -%>
 <%- end -%>
 <%- end -%>
-<% end -%>
+<%- end -%>

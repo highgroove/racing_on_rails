@@ -23,9 +23,8 @@
       <%- day.events.each do |event| -%>
       <% if (administrator? and edit_schedule)%>
       <div class="event"><%= link_to event.full_name, edit_admin_event_path(event) %></div>
-      <% else %>
-      
 
+      <% else %>
       <div class="event">
 
         <%- if event.cancelled %>
@@ -37,12 +36,13 @@
         <%- end -%>
 
 
-
-	<ul>
+	<!-- ul>
 	  <% if event.flyer %><li><%= link_to image_tag("icons/pdf-icon.png"), event.flyer %></li><% end %>
 	  <li><%= link_to image_tag("icons/registration-icon.png"), :action => "list", :controller => "schedule" %></li>
 	  <li><%= link_to image_tag("icons/results-icon.png"), :action => "list", :controller => "schedule" %></li>
-	</ul>
+	</ul -->
+
+
       </div>
 
 

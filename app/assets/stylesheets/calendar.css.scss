@@ -1,4 +1,26 @@
 /* Calendar of events */
+
+table.data-list {
+//    background: black;
+    
+    font-size: 14px;
+    
+    th {
+	
+    }
+
+    tr.head {
+	font-size: 12px;
+    }
+
+    td {
+	font-size: 11px;
+    }
+}
+
+
+
+
 div.calendar table {
     border-collapse: separate;
     padding: 0px;
