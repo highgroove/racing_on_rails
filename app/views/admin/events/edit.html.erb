@@ -147,7 +147,7 @@
   <% unless RacingAssociation.current.short_name == "OBRA" -%></br>
   <%= f.labelled_text_field :website, nil, :editable => administrator? %></br>
   <%= f.labelled_text_field :registration_link, nil, :editable => administrator? %></br>
-  <%= f.labelled_text_field :twitter_tag, nil, :editable => administrator? %></br>
+  <%= f.labelled_text_field :twitter_tag, nil, :editable => administrator? %> (Leave off "#", comma delimited for multiple tags.)</br>
   <% end -%></br>
 
   <%= f.labelled_text_field :pre_event_fees %></br>
@@ -163,7 +163,7 @@
   <% unless @event.updated_at.nil? %></br>Last Updated: <%= @event.updated_at.to_s(:long) %></br><% end %></br>
 
 
-  <%= link_to("Delete", admin_event_path(@event), :method => :delete, :class => 'obvious', :id => 'delete') unless @event.new_record? || !administrator? %></br>
+  <%= link_to("Delete", admin_event_path(@event), :method => :delete, :confirm => "Are you sure?", :class => 'obvious', :id => 'delete') unless @event.new_record? || !administrator? %></br></br>
   <%= submit_tag "Save", :id => "save" %></br>
 
 

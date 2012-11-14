@@ -66,7 +66,14 @@
     <%= link_to event.team_name, team_path(event.team_id) %>
     <% end %>
   </td>
-  <td>Tweet</td>
+
+  <td>
+    <% if event.twitter_tag.blank? %>
+    <%= link_to image_tag("icons/tweetbutton.png"), "http://twitter.com/intent/tweet?url=http://www.gacycling.org#{event_path(event)}&hashtags=gbra&via=gacycling", :target => "blank" %>
+    <% else %>
+    <%= link_to image_tag("icons/tweetbutton.png"), "http://twitter.com/intent/tweet?url=http://www.gacycling.org#{event_path(event)}&hashtags=#{event.twitter_tag}&via=gacycling", :target => "blank" %>
+    <% end %>
+  </td>
 
 
   <td>
