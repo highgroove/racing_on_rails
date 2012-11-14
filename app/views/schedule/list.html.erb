@@ -82,12 +82,16 @@
     <%- end -%>
   </td> 
 
-  <td><%= link_to image_tag("icons/registration-icon.png"), "/" %></td>
+  <td>
+    <% if event.registration_link? %>
+    <%= link_to image_tag("icons/registration-icon.png"), event.registration_link %>
+    <% end %>
+  </td>
   
   
   <td>
     <% if event.has_results? %>
-    <%= link_to image_tag("icons/results-icon.png"), event_results_path(event) %>
+    <%= link_to image_tag("icons/results-icon_thumb.png"), event_results_path(event) %>
     <% end %>
   </td>
 

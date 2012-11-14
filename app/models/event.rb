@@ -174,6 +174,7 @@ class Event < ActiveRecord::Base
   def short_disc(name)
     @short_name = {
       "Cyclocross" => "CX",
+      "Downhill" => "DH",
       "Road" => "RR",
       "Criterium" => "CR",
       "GBRA" => "GBRA",
