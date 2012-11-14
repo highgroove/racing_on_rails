@@ -250,6 +250,8 @@ RacingOnRails::Application.routes.draw do
   match '/wsba_masters_barr' => 'competitions#show', :as => :wsba_masters_barr_root, :type => 'wsba_masters_barr'
   match '/wsba_masters_barr/:year' => 'competitions#show', :as => :wsba_masters_barr, :type => 'wsba_masters_barr', :constraints => { :year => /\d{4}/ }
 
+  match '/site' => 'home#index'
+
   match '*path', :to => 'pages#show'
 #  match "/pages/:id" => "pages#show"
 
