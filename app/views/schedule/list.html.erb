@@ -49,21 +49,13 @@
 
   
   <td>
-    <% @web_link = "list" %>
-    <% unless event.website.blank?
-       @web_link = event.website
-       end %>
-    <% if event.website.blank? and event.flyer?
-       @web_link = event.flyer
-       end %>
-
-
+ 
     <%- if event.cancelled %>
     <span class="cancelled"><%= link_to event.full_name, event.website -%></span> <i>cancelled</i>
     <%- elsif event.postponed? %>
     <span class="postponed"><%= link_to event.full_name, event.website -%></span> <i>postponed</i>
     <%- else -%>
-    <%= link_to event.full_name.html_safe, @web_link %>
+    <%= link_to event.full_name.html_safe, event.website %>
     <% end %>
 
   </td>
