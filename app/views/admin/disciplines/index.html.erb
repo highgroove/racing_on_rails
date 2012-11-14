@@ -1,0 +1,29 @@
+<% @page_title = "Admin: Disciplines" %>
+
+<h2>Disciplines</h2>
+
+
+<table class="base" id="article_categories">
+  <tr>
+    <th>Name</th>
+    <th>Short Name</th>
+    <th>ID</th>
+    <th>BAR</th>
+    <th>numbers</th>
+  </tr>
+  <p><b><%= link_to 'New discipline', new_admin_discipline_path %></b></p>
+
+  <% for discipline in @disciplines %>
+    <tr class="<%= cycle("even", "odd") %>" id="discipline_<%= discipline.id %>_row">
+      <td><%= discipline.name %></td>
+      <td><%= discipline.short_name %></td>
+      <td><%= discipline.id %></td>
+      <td><%= discipline.bar %></td>
+      <td><%= link_to 'Edit', edit_admin_discipline_path(discipline.id)  %></td>
+      <td><%= link_to 'Destroy', admin_discipline_path(discipline.id), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+

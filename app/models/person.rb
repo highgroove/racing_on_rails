@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Someone who either appears in race results or who is added as a member of a racing association
 #
 # Names are _not_ unique. In fact, there are many business rules about names. See Aliases and Names.
@@ -518,7 +519,7 @@ class Person < ActiveRecord::Base
 
     year ||= RacingAssociation.current.year
     if discipline_param.is_a?(Discipline)
-      discipline_param = discipline_param.to_param
+      discipline_param = discipline_param.to_param_name
     end
     number = race_numbers(reload).detect do |race_number|
       race_number.year == year && 

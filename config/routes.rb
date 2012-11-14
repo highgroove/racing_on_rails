@@ -1,6 +1,8 @@
 RacingOnRails::Application.routes.draw do
   namespace :admin do
+    resources :categories
     resources :articles
+    resources :disciplines
     resources :article_categories
     resources :categories do
       collection do
@@ -117,6 +119,7 @@ RacingOnRails::Application.routes.draw do
 
   resources :pages
   resources :articles
+#  resources :categories
   resources :article_categories
   resources :categories do
     resources :races

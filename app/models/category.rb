@@ -35,15 +35,16 @@ class Category < ActiveRecord::Base
   end
   
   # Sr, Mst, Jr, Cat, Beg, Exp
-  def Category.short_name(name)
-    return name if name.blank?
-    name.gsub('Senior', 'Sr').gsub('Masters', 'Mst').gsub('Junior', 'Jr').gsub('Category', 'Cat').gsub('Beginner', 'Beg').gsub('Expert', 'Exp').gsub("Clydesdale", "Clyd")
-  end
+#  def Category.short_name(name)
+ #   return name if name.blank?
+    #    name.gsub('Senior', 'Sr').gsub('Masters', 'Mst').gsub('Junior', 'Jr').gsub('Category', 'Cat').gsub('Beginner', 'Beg').gsub('Expert', 'Exp').gsub("Clydesdale", "Clyd")
+    
+#  end
   
   # Sr, Mst, Jr, Cat, Beg, Exp
-  def short_name
-    Category.short_name name
-  end
+ # def short_name
+  #  Category.short_name name
+ # end
   
   # All children and children childrens
   def descendants

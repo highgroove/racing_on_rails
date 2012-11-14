@@ -1,0 +1,14 @@
+<h1>Editing discipline</h1>
+
+
+<%= form_for([:admin, @discipline], :html => { :multipart => true }) do |f| %>
+<%= render :partial => "form", :locals => { :f => f, :action_button => "Update", :id => "hahahaha"} %>
+<% end %>
+
+
+<div class="content-item">
+<%= link_to 'Delete', :confirm => 'Are you sure you want to delete this discipline?', :method => :delete, :id => @discipline.id %>
+| 
+<%= link_to 'Back', admin_disciplines_path %>
+</div>
+

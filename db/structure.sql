@@ -119,6 +119,7 @@ CREATE TABLE `disciplines` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `numbers` tinyint(1) DEFAULT '0',
+  `short_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_disciplines_on_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1077,6 +1078,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121112005948');
 INSERT INTO schema_migrations (version) VALUES ('20121113033807');
 
 INSERT INTO schema_migrations (version) VALUES ('20121113033848');
+
+INSERT INTO schema_migrations (version) VALUES ('20121114032147');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

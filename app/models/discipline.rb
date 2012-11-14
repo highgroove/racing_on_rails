@@ -13,6 +13,9 @@ class Discipline < ActiveRecord::Base
   scope :numbers, where(:numbers => true)
   
   # Look up Discipline by name or alias. Caches Disciplines in memory
+
+
+
   def self.[](name)
     return nil unless name
     load_aliases unless @@all_aliases
@@ -23,14 +26,16 @@ class Discipline < ActiveRecord::Base
       @@all_aliases[name.underscore.gsub(' ', '_').to_sym]
     end
   end
-
+  
   def self.find_all_bar
     Discipline.where(:bar => true)
   end
-
-  def self.find_via_alias(name)
-    Discipline[name]
-  end
+  
+  
+  
+    def self.find_via_alias(name)
+      Discipline[name]
+    end
 
   def self.load_aliases
     @@all_aliases = {}
@@ -63,9 +68,10 @@ class Discipline < ActiveRecord::Base
     end
   end
 
-  def to_param
+
+  def to_param_name
     @param || @param = name.underscore.gsub(' ', '_')
-  end
+ end
 
   def <=>(other)
     name <=> other.name
@@ -74,4 +80,6 @@ class Discipline < ActiveRecord::Base
   def to_s
     "<#{self.class} #{id} #{name}>"
   end
+
+  
 end

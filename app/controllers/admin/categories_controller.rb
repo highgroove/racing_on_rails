@@ -32,6 +32,12 @@ class Admin::CategoriesController < Admin::AdminController
     redirect_to :action => :index
   end
 
+  
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+
   # Calculate MbraTeamBar only
   def recompute_team_bar
     MbraTeamBar.calculate!
