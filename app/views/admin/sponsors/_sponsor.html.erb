@@ -3,7 +3,7 @@
     <%= editable sponsor, :name %>
   </td>
   <td>
-    <%= link_to sponsor.website, sponsor.website %>
+    <%= link_to(truncate(sponsor.website, :length => 40) , sponsor.website) %>
   </td>
   <td>
     <%= sponsor.created_at.to_s %>
