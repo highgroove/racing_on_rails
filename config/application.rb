@@ -1,7 +1,5 @@
 require File.expand_path("../boot", __FILE__)
 require "rails/all"
-require "rack-google-analytics"
-
 
 if defined?(Bundler)
   Bundler.require(:default, Rails.env)
@@ -12,9 +10,9 @@ module RacingOnRails
   class Application < Rails::Application    
 
 
-
-    if Rails.env.development?
-      #      config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36359016-1'
+=begin
+  if Rails.env.development?
+     config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36359016-1'
       config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36315439-1'
     end
 
@@ -25,7 +23,7 @@ module RacingOnRails
     if Rails.env.production?
       config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36315439-1'
     end
-
+=end
 
     config.autoload_paths += %W( 
       #{config.root}/app/models/competitions 

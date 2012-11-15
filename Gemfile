@@ -36,9 +36,6 @@ gem 'axlsx'
 gem 'execjs'
 gem 'therubyracer'
 gem 'coffee-rails', "~> 3.2.0"
-gem "rack-google-analytics", "~> 0.11.0"						
-
-
 
 group :assets do
   gem 'sass-rails', "~> 3.2.0"
