@@ -19,6 +19,8 @@ before_fork do |server, worker|
   ActiveRecord::Base.connection.disconnect!
 
   old_pid = "#{server.config[:pid]}.oldbin"
+
+
   if File.exists?(old_pid) && server.pid != old_pid
     begin
       Process.kill("QUIT", File.read(old_pid).to_i)
@@ -26,6 +28,7 @@ before_fork do |server, worker|
       # someone else did our job for us
     end
   end
+
 end
 
 
