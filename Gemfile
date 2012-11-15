@@ -36,6 +36,7 @@ gem 'axlsx'
 gem 'execjs'
 gem 'therubyracer'
 gem 'coffee-rails', "~> 3.2.0"
+gem "rack-google-analytics", "~> 0.11.0"						
 
 
 
@@ -46,7 +47,6 @@ group :assets do
 end
 
 group :development do
-  gem "rack-google-analytics", "~> 0.11.0"						
   gem "capistrano"
   gem "capistrano-unicorn"
 end
@@ -74,11 +74,11 @@ end
 group :staging do
   gem "execjs"
   gem "rvm-capistrano"
+  
   gem "capistrano-unicorn"
 end
 
 group :production do
-  gem "rack-google-analytics", "~> 0.11.0"						
   gem "syslog-logger"
   gem "unicorn"
 end

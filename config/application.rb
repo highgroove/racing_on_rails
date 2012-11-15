@@ -9,8 +9,6 @@ end
 module RacingOnRails
   class Application < Rails::Application    
 
-
-
     if Rails.env == "development"
       config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36359016-1'
     end
