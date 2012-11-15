@@ -1,4 +1,4 @@
-<%= table :class => "sponsors", :id => :sponsors do %>
+<table>
   <tr>
     <th>Name</th>
     <th>Website</th>
@@ -9,8 +9,8 @@
   <% @sponsors.each do |sponsor| %>
   <%= render "sponsor", :sponsor => sponsor %>
   <% end %>
-<% end -%>
+</table>
 
-<div class="buttons container">
-  <%= link_to(image_tag('icons/add.png'), new_admin_sponsor_path, :class => "image") %>
+<div>
+  <%= link_to(image_tag('icons/add.png'), new_admin_sponsor_path) %>
 </div>
