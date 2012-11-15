@@ -8,6 +8,23 @@ end
 
 module RacingOnRails
   class Application < Rails::Application    
+
+
+
+    if Rails.env == "development"
+      config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36359016-1'
+    end
+
+    if Rails.env == "staging"
+      config.middleware.use Rack::GoogleAnalytics, :tracker => 'UA-36359016-1'
+    end
+
+    if Rails.env == "production"
+      config.middleware.use("Rack::GoogleAnalytics", :tracker => "UA-36315439-1")
+    end
+
+
+
     config.autoload_paths += %W( 
       #{config.root}/app/models/competitions 
       #{config.root}/app/models/observers 
@@ -19,9 +36,8 @@ module RacingOnRails
       #{config.root}/lib/sentient_user
     )
 
-    if Rails.env == "production"
-      config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-36315439-1")
-    end
+
+
 
 
     config.encoding = "utf-8"

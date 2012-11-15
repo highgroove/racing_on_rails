@@ -46,6 +46,7 @@ group :assets do
 end
 
 group :development do
+  gem "rack-google-analytics", "~> 0.11.0"						
   gem "capistrano"
   gem "capistrano-unicorn"
 end
@@ -77,7 +78,7 @@ group :staging do
 end
 
 group :production do
-  gem 'rack-google_analytics', :require => "rack/google_analytics"
+  gem "rack-google-analytics", "~> 0.11.0"						
   gem "syslog-logger"
   gem "unicorn"
 end
