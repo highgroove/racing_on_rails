@@ -1,6 +1,6 @@
 development:
   adapter: mysql2
-  database: gbra_development
+  database: gbra_staging
   username: gbra
   host: localhost
   encoding: utf8
