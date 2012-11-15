@@ -1,7 +1,7 @@
 development:
   adapter: mysql2
-  database: racing_on_rails_development
-  username: ror_development
+  database: gbra_staging
+  username: gbra
   host: localhost
   encoding: utf8
   reconnect: false

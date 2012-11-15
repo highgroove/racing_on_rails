@@ -90,6 +90,11 @@ namespace :deploy do
   task :stop, :roles => :app do
     top.unicorn.graceful_stop
   end
+
+  
+
+  
+
 end
 
 after "deploy:update_code", "deploy:symlinks", "deploy:copy_cache", "deploy:migrate"
