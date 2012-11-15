@@ -74,7 +74,6 @@ end
 group :staging do
   gem "execjs"
   gem "rvm-capistrano"
-  
   gem "capistrano-unicorn"
 end
 
