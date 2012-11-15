@@ -5,3 +5,5 @@ class SponsorsController < ApplicationController
       @sponsor = Sponsor.find(params[:id])
     end
   end
+
+end
