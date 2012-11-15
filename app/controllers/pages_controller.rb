@@ -7,10 +7,6 @@
 class PagesController < ApplicationController
 
 
-  def show_old
-    @page = Page.find(params[:id])
-  end
-
   def index
     @pages = Page.all
   end

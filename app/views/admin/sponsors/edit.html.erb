@@ -1,0 +1,14 @@
+<h1>Editing sponsor</h1>
+
+
+<%= form_for([:admin, @sponsor], :html => { :multipart => true }) do |f| %>
+<%= render :partial => "form", :locals => { :f => f, :action_button => "Update" } %>
+<% end %>
+<%= form_tag({:action => 'update', :id => @sponsor}) %>
+
+
+<div class="content-item">
+<%= link_to 'Delete', [:admin, @sponsor], :confirm => 'Are you sure you want to delete this sponsor?', :method => :delete %>
+| 
+<%= link_to 'Back', admin_sponsors_path %>
+</div>

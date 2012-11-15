@@ -1,0 +1,53 @@
+
+<%= f.error_messages %>
+<div class="content-item">
+
+<%= f.labelled_text_field :title %>
+<%= f.label :category %>
+<%= tree_select(ArticleCategory.all( :conditions => "parent_id = 0"), 'article', 'article_category_id', @article, false) %>
+
+
+</div>
+<div class="content-item">
+<%= f.text_area :body, :class => 'ckeditor' %>
+</div>
+<div class="content-item">
+  <%= f.label :tag_list, "Tags (comma delimited)" %></br>
+  <%= f.text_field :tag_list %>
+</div>
+
+
+
+<div class="content-item">
+  <%= f.label :new_files %>
+
+  <%= f.fields_for :assets do |asset_fields| %>
+  <% if asset_fields.object.new_record? %>
+  
+    </br><%= asset_fields.file_field :asset %>
+
+    <% end %>
+    <% end %>
+</br>
+</br>
+<%= f.label :uploaded_files %></br>
+
+<%= f.fields_for :assets do |asset_fields| %>
+
+<% unless asset_fields.object.new_record? %>
+  Delete:
+  <%= asset_fields.check_box :_destroy %>
+
+  <%= link_to(asset_fields.object.asset_file_name,
+      asset_fields.object.asset.url(:original)) %></br>
+  <% end %>
+  <% end %>
+</br>
+<%= f.labelled_text_field :position %></br>
+</br><%= f.labelled_check_box :display %></br>
+
+
+
+</br><%= f.submit action_button %>
+
+</div>

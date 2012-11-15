@@ -1,0 +1,16 @@
+<%= f.error_messages %>
+
+
+<div class="content-item">
+<%= f.labelled_text_field :name %>
+<%= f.labelled_text_field :website %>
+</div>
+
+
+<div class="content-item">
+
+  Sponsor Photo: <%= f.file_field :photo %>
+</br><%= f.labelled_check_box :display %></br>
+</br><%= f.submit action_button %>
+
+</div>

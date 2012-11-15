@@ -14,6 +14,7 @@
       tabs.add "Site", edit_racing_association_path(RacingAssociation.current)
       tabs.add("Pages", admin_pages_path) if RacingAssociation.current.administrator_tabs.include?(:pages)
       tabs.add("Disciplines", admin_disciplines_path)
+      tabs.add("Sponsors", admin_sponsors_path)
   end %>
   
   <%- elsif promoter? || official? -%>

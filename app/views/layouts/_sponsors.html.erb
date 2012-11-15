@@ -1,6 +1,7 @@
 GBRA Sponsors
-<%= link_to image_tag("sponsors/bignerdranch.jpg"), "http://www.bignerdranch.com" %>
-<%= link_to image_tag("sponsors/maxxis.jpg"), "http://www.maxxis.com/Bicycle.aspx" %>
-<%= link_to image_tag("sponsors/edgereg.jpg"), "http://www.edgereg.com/" %>
-<%= link_to image_tag("sponsors/dahlonega.jpg"), "http://thechamber.dahlonega.org/" %>
-<%= link_to image_tag("sponsors/musclemilk.jpg"), "http://www.musclemilk.com/" %>
+</br>
+<% @sponsors = Sponsor.where(:display => true) %>
+
+<% @sponsors.each do |sponsor| %>
+<%= link_to image_tag(sponsor.photo.url(:original)), sponsor.website %>
+<% end %>

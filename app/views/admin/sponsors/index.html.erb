@@ -1,0 +1,16 @@
+<%= table :class => "sponsors", :id => :sponsors do %>
+  <tr>
+    <th>Name</th>
+    <th>Website</th>
+    <th>Updated</th>
+    <th>Display</th>
+    <th></th>
+  </tr>
+  <% @sponsors.each do |sponsor| %>
+  <%= render "sponsor", :sponsor => sponsor %>
+  <% end %>
+<% end -%>
+
+<div class="buttons container">
+  <%= link_to(image_tag('icons/add.png'), new_admin_sponsor_path, :class => "image") %>
+</div>

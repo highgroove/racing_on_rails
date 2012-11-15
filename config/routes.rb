@@ -4,6 +4,7 @@ RacingOnRails::Application.routes.draw do
     resources :articles
     resources :disciplines
     resources :article_categories
+    resources :sponsors
     resources :categories do
       collection do
         post :add_child

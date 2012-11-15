@@ -1,0 +1,18 @@
+<%= content_tag :tr, :class => cycle("even", "odd") do %>
+  <td>
+    <%= editable sponsor, :name %>
+  </td>
+  <td>
+    <%= link_to sponsor.website, sponsor.website %>
+  </td>
+  <td>
+    <%= sponsor.created_at.to_s %>
+  </td>
+  <td>
+    <%= sponsor.display %>
+  </td>
+  <td>
+    <%= link_to "Edit", edit_admin_sponsor_path(sponsor) %> |
+    <%= link_to "Delete", admin_sponsor_path(sponsor), :action => :destroy, :confirm => "Are you sure?" %>
+  </td>
+<% end -%>

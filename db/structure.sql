@@ -727,6 +727,20 @@ CREATE TABLE `sessions` (
   KEY `index_sessions_on_updated_at` (`updated_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `sponsors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `display` tinyint(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `photo_file_name` varchar(255) DEFAULT NULL,
+  `photo_content_type` varchar(255) DEFAULT NULL,
+  `photo_file_size` int(11) DEFAULT NULL,
+  `photo_updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE `standings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL DEFAULT '0',
@@ -1080,6 +1094,10 @@ INSERT INTO schema_migrations (version) VALUES ('20121113033807');
 INSERT INTO schema_migrations (version) VALUES ('20121113033848');
 
 INSERT INTO schema_migrations (version) VALUES ('20121114032147');
+
+INSERT INTO schema_migrations (version) VALUES ('20121115002202');
+
+INSERT INTO schema_migrations (version) VALUES ('20121115014812');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
