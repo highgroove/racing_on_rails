@@ -11,7 +11,8 @@
 
 
 <p class="centered">
-  <%= link_to 'Schedule in calendar format', {:action => 'index'} %>
+  Schedule is also available in<%= link_to ' calendar format', {:action => 'index'} %></br>
+  <%= image_tag("icons/star_red.gif") %> Georgia Championship Series event
 </p>
 
 
@@ -26,14 +27,11 @@
 
 <tr class="head">
   <th>Date</th>
+  <th></th>
   <th>Event</th>
   <th>Discipline</th>
   <th>Location</th>
   <th>Sponsoring Team</th>
-  <!--th>Tweet</th-->
-  <th>Flyer</th>
-  <th>Reg.</th> 
-  <th>Results</th>
 </tr>
 
 <%- @schedule.months.each do |month| -%>
@@ -47,6 +45,11 @@
   </td>
 
 
+  <td>
+    <% if event.gcs %>
+    <%= image_tag("icons/star_red.gif") %>
+    <% end %>
+  </td>
   
   <td>
  
@@ -79,7 +82,7 @@
   </td-->
 
 
-  <td>
+  <!--td>
     <%- if event.flyer.present? && event.flyer_approved? -%>
     <%= link_to image_tag("icons/pdf-icon.png"), event.flyer %>
     <%- end -%>
@@ -96,7 +99,7 @@
     <% if event.has_results? %>
     <%= link_to image_tag("icons/results-icon_thumb.png"), event_results_path(event) %>
     <% end %>
-  </td>
+  </td-->
 
 </tr>
 
