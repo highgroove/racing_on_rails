@@ -1,9 +1,11 @@
-<% @upcoming_events = UpcomingEvents.find_all(:weeks => RacingAssociation.current.weeks_of_upcoming_events) %>
+<% # @upcoming_events = UpcomingEvents.find_all(:weeks => RacingAssociation.current.weeks_of_upcoming_events) %>
 
+<% @upcoming_events = Event.all(:conditions => ["date > ?", 1.day.ago.end_of_day ]).sort_by(&:date).first(4) %>
 
 <%= link_to "Schedule", :action => "list", :controller => "schedule" %>
 <ul>
-<% @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).first(4).each do |event| %>
+<% # @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).first(4).each do |event| %>
+<% @upcoming_events.each do |event| %>
   <li><span><%= public_link_to_flyer event %></span></li>
 <% end %>
 

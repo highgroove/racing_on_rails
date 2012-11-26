@@ -6,7 +6,11 @@ class HomeController < ApplicationController
   # * upcoming_events: instance of UpcomingEvents with default parameters
   # * recent_results: Events with Results within last two weeks
   def index
-    @upcoming_events = UpcomingEvents.find_all(:weeks => RacingAssociation.current.weeks_of_upcoming_events)
+#    @upcoming_events = UpcomingEvents.find_all(:weeks => RacingAssociation.current.weeks_of_upcoming_events)
+
+
+    @upcoming_events = Event.all(:conditions => ["date > ?", 1.day.ago.end_of_day ]).sort_by(&:date)
+
 
     cutoff = Time.zone.today - RacingAssociation.current.weeks_of_recent_results * 7
     

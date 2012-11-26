@@ -62,6 +62,9 @@ class ScheduleController < ApplicationController
   # * year
   # * schedule: instance of year's Schedule::Schedule
   def list
+    if is_mobile?
+      render :show
+    end
     render_page
   end
 
