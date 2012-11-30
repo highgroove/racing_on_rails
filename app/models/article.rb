@@ -1,6 +1,8 @@
 # Homepage content
 class Article < ActiveRecord::Base
-#  attr_accessible :assets_attributes, :title, :heading, :description, :display
+
+  attr_accessible :assets_attributes, :title, :heading, :description, :display, :body, :tag_list, :position, :article_category_id
+
   has_many :assets
   has_many :taggings
   has_many :tags, through: :taggings
@@ -8,6 +10,8 @@ class Article < ActiveRecord::Base
   accepts_nested_attributes_for :assets, :allow_destroy => true
   belongs_to :article_category
   acts_as_list :scope => :article_category
+
+  validates :title, :presence => true
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).articles
