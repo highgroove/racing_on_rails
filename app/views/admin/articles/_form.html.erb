@@ -7,6 +7,9 @@
 <%= tree_select(ArticleCategory.all( :conditions => "parent_id = 0"), 'article', 'article_category_id', @article, false) %>
 
 
+<% #= collection_select(:article, :article_category_id, ArticleCategory.all, :id, :name, :prompt => false) %>
+
+
 </div>
 <div class="content-item">
 <%= f.text_area :body, :class => 'ckeditor' %>

@@ -24,6 +24,7 @@ class Admin::ArticlesController < Admin::AdminController
   def new
     @article = Article.new
     @article_category = ArticleCategory.first
+    @article.article_category_id = @article_category.id
     5.times { @article.assets.build }
   end
 
