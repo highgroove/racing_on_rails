@@ -14,11 +14,11 @@
   <%- # @upcoming_events.disciplines.map(&:upcoming_events).flatten.sort_by(&:date).first(4).each do |event| -%>
 
   <% @upcoming_events.first(4).each do |event| %>
-    <li><%= public_link_to_flyer event %></li>
+  <li><%= public_link_to_flyer event %></li>
   <% end -%>
 
   <%- if @upcoming_events.empty? -%>
-  <li>No upcoming events in the next <%= pluralize(@upcoming_events.weeks, "week") %> </li>
+  <li>No upcoming events.</li>
   <% end %>
 </ul>
 
