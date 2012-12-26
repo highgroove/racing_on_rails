@@ -7,9 +7,10 @@
     <th>ID</th>
     <th>Position</th>
     <th>Display</th>
+    <th>Created</th>
     <th>Last Update</th>
   </tr>
-
+  
   <% for article in @articles %>
     <tr class="<%= cycle("even", "odd") %>" id="article_<%= article.id %>_row">
       <% if article.title? %>
@@ -21,6 +22,7 @@
       <td><%=h article.id %></td>
       <td><%=h article.position %></td>
       <td><%=h article.display %></td>
+      <td><%=h article.created_at.to_formatted_s(:long) %></td>
       <td><%=h article.updated_at.to_formatted_s(:long) %></td>
       <!--td><#%= link_to "(delete)", admin_article_path(article), :confirm => 'Are you sure?', :method => :delete %></td -->
     </tr>
