@@ -8,6 +8,7 @@
 # virtual "custom" columns.
 class Race < ActiveRecord::Base
 
+
   include Comparable
   include Export::Races
 

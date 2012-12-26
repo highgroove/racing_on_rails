@@ -4,46 +4,46 @@
 
 <h2><%= link_to_events(@race) %><%= @race.name %></h2>
 
+<div class="main-wrapper">
+  <div class="content-item">
+    <%= form_for [:admin, @race] do |f| -%>
 
-  <%= form_for [:admin, @race] do |f| -%>
+    <%= f.hidden_field :event_id %>
+    <%= f.labelled_text_field :category_name, nil, :class => @race.new_record? ? "wants_focus" : "" %>
 
-  <%= f.hidden_field :event_id %>
-  <%= f.labelled_text_field :category_name, nil, :class => @race.new_record? ? "wants_focus" : "" %>
+    <% if RacingAssociation.current.competitions.include?(:bar) -%>
+    <%= f.labelled_text :bar_category, competition_category_name(@race), "BAR Category" %>
+    <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "BAR Points"}, :editable => administrator? %>
+    <%- end %>
 
-  <% if RacingAssociation.current.competitions.include?(:bar) -%>
-  <%= f.labelled_text :bar_category, competition_category_name(@race), "BAR Category" %><br/><br/>
-  <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "BAR Points"}, :editable => administrator? %>
-  <%- end %>
+    <% if RacingAssociation.current.competitions.include?(:rider_rankings) -%>
+    <%= f.labelled_text :bar_category, competition_category_name(@race), "Rankings Cat" %>
+    <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "Raking Pts"}, :editable => administrator? %>
+    <%- end %>
 
-  <% if RacingAssociation.current.competitions.include?(:rider_rankings) -%>
-  <%= f.labelled_text :bar_category, competition_category_name(@race), "Rankings Cat" %><br/><br/>
-  <%= f.labelled_select :bar_points, bar_points_and_labels, :label => { :text => "Raking Pts"}, :editable => administrator? %>
-  <%- end %>
-
-  <% if RacingAssociation.current.sanctioning_organizations.many? -%>
-  <%= f.labelled_select :sanctioned_by, RacingAssociation.current.sanctioning_organizations %>
-  <%- end %>
-
-
-
-  <%= f.labelled_text_field :notes, nil, :editable => administrator? %>
-  <%= f.labelled_text_field :field_size, "Field Size (#{@race.results.size})", :editable => administrator? %>
-  <%= f.labelled_text_field :distance, nil, :editable => administrator? %>
-  <%= f.labelled_text_field :laps, nil, :editable => administrator? %>
+    <% if RacingAssociation.current.sanctioning_organizations.many? -%>
+    <%= f.labelled_select :sanctioned_by, RacingAssociation.current.sanctioning_organizations %>
+    <%- end %>
 
 
 
+    <%= f.labelled_text_field :notes, nil, :editable => administrator? %>
+    <%= f.labelled_text_field :field_size, "Field Size (#{@race.results.size})", :editable => administrator? %>
+    <%= f.labelled_text_field :distance, nil, :editable => administrator? %>
+    <%= f.labelled_text_field :laps, nil, :editable => administrator? %>
 
-  <%= "Updated: #{time_ago_in_words(@race.updated_at, true)} ago" if @race.updated_at.present? %>
+    <%= "Updated: #{time_ago_in_words(@race.updated_at, true)} ago" if @race.updated_at.present? %>
+    <%= submit_tag "Save", :id => "save" %>  
+    <% end -%>    
+  </div>
+</div>
 
-  <%= submit_tag "Save", :id => "save" %>
-  
-  
-  <% end -%>    
 
-
+</br>
 <% if administrator? %>
 <div class="content-item">
   <%= render :partial => "results", :locals => { :race => @race } %>
 </div>
 <% end -%>
+
+
