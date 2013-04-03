@@ -68,6 +68,13 @@ class ScheduleController < ApplicationController
     render_page
   end
 
+  def list_full
+    if is_mobile?
+      render :show
+    end
+    render_page
+  end
+
   def calendar
     respond_to do |format|
       format.html { render_page }
@@ -94,9 +101,12 @@ class ScheduleController < ApplicationController
     if !start_date.blank? and !end_date.blank?
       @events = SingleDayEvent.find_all_by_unix_dates(start_date, end_date, @discipline, @gcs)
 
-      logger.info("!!!!!!!!!\n\n\n\n #{@gcs}\n\n\n\n!!!!!!!!!!!")
     else
       @events = SingleDayEvent.find_all_by_year(@year, @discipline, @gcs)
+
+      if params["discipline"] == "gcs"
+        @events = @events.select {|e| e.gcs == true}
+      end
     end
 
         

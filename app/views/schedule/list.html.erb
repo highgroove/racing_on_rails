@@ -11,7 +11,9 @@
 
 
 <p class="centered">
-  Schedule is also available in<%= link_to ' calendar format', {:action => 'index'} %></br>
+  <%= link_to "GCS Only Events", "/schedule/list/gcs" %></br>
+  <%= link_to 'Full list of events', "/schedule/list" %></br>
+  Schedule is also available in<%= link_to ' calendar format', "/schedule/gcs" %></br>
   <%= image_tag("icons/star_red.gif") %> Georgia Championship Series event
 </p>
 
@@ -39,6 +41,8 @@
 <%- week.days.each do |day| -%>
 <%- day.events.each do |event| -%>
 
+
+<% #if event.gcs %>
 <tr class="<%= cycle("even", "odd") %>">
   <td>
     <%= event.date.strftime("%a %m/%d") if event.date -%>
@@ -102,6 +106,8 @@
   </td-->
 
 </tr>
+
+
 
 <%- end -%>
 <%- end -%>

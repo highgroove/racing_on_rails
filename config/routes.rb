@@ -217,7 +217,9 @@ RacingOnRails::Application.routes.draw do
   resources :results
   match '/schedule/:year/calendar' => 'schedule#calendar', :constraints => { :year => /\d\d\d\d/ }
   match '/schedule/calendar' => 'schedule#calendar'
+
   match '/schedule/list/:discipline' => 'schedule#list'
+
   match '/schedule/:year/list/:discipline' => 'schedule#list', :constraints => { :year => /\d\d\d\d/ }
   match '/schedule/:year/list' => 'schedule#list', :constraints => { :year => /\d\d\d\d/ }
   match '/schedule/:year/:discipline' => 'schedule#index', :constraints => { :year => /\d\d\d\d/ }
