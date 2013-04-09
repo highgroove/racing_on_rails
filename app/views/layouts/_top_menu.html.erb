@@ -1,6 +1,6 @@
 <ul>
   <li><%= link_to("Home", "/")%></li>
-  <li><%= link_to "Results", results_path %></li>
+  <li><%= link_to "Results", {:controller => "articles", :action => "index", :results => "true"} %></li>
   <li><%= link_to "Schedule", "/schedule/list/gcs"%></li>
   <li><%= link_to "Mailing List", "/mailinglist" %></li>
   <li><%= link_to "Mobile", url_for(:mobile => 1), "data-role" => "button" %></li>

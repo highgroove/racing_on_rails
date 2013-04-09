@@ -15,7 +15,7 @@ class Article < ActiveRecord::Base
 
 
   def self.recent_results
-    @recent_results = Article.where("display = ? AND results = ?", true, true)
+    @recent_results = Article.where("display = ? AND results = ?", true, true).order("created_at desc").first(4)
   end
 
 

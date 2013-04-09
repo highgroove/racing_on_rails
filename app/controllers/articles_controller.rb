@@ -17,6 +17,8 @@ class ArticlesController < ApplicationController
 
     if params[:tag]
       @articles = Article.tagged_with(params[:tag]).where(:display => true).order("created_at desc")
+    elsif params[:results]
+      @articles = Article.where("display = ? AND results = ?", true, true).order("created_at desc")
     else
       @articles = Article.where(:display => true).order("created_at desc")
     end

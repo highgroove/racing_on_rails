@@ -5,7 +5,8 @@
 
 <% @recent_results = Article.recent_results %>
 
-<%= link_to "Recent Results", results_path, :id => "results_link" %>
+
+<%= link_to "Recent Results", {:controller => "articles", :action => "index", :results => "true"} %>
 <ul>
   <%- @recent_results.each do |article| -%>
   <li><span><%= link_to article.title, article %></span></li>
