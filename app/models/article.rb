@@ -1,7 +1,7 @@
 # Homepage content
 class Article < ActiveRecord::Base
 
-  attr_accessible :assets_attributes, :title, :heading, :description, :display, :body, :tag_list, :position, :article_category_id
+  attr_accessible :assets_attributes, :title, :heading, :description, :display, :body, :tag_list, :position, :article_category_id, :results
 
   has_many :assets
   has_many :taggings
@@ -12,6 +12,12 @@ class Article < ActiveRecord::Base
   acts_as_list :scope => :article_category
 
   validates :title, :presence => true
+
+
+  def self.recent_results
+    @recent_results = Article.where("display = ? AND results = ?", true, true)
+  end
+
 
   def self.tagged_with(name)
     Tag.find_by_name!(name).articles

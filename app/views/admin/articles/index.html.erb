@@ -6,6 +6,7 @@
     <th>Category</th>
     <th>ID</th>
     <th>Position</th>
+    <th>Results</th>
     <th>Display</th>
     <th>Created</th>
     <th>Last Update</th>
@@ -21,6 +22,7 @@
       <td><%= link_to article.article_category.name, { :action => 'index', :article_category_id => article.article_category } %></td> 
       <td><%=h article.id %></td>
       <td><%=h article.position %></td>
+      <td><%=h article.results %></td>
       <td><%=h article.display %></td>
       <td><%=h article.created_at.to_formatted_s(:long) %></td>
       <td><%=h article.updated_at.to_formatted_s(:long) %></td>

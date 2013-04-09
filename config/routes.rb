@@ -1,7 +1,7 @@
 RacingOnRails::Application.routes.draw do
   namespace :admin do
     resources :categories
-    resources :articles
+    resources :articles 
     resources :disciplines
     resources :article_categories
     resources :sponsors

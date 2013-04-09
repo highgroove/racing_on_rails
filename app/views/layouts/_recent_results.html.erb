@@ -1,13 +1,14 @@
 <% cutoff = Time.zone.today - RacingAssociation.current.weeks_of_recent_results * 7 %>
 
-<% @recent_results = Event.all(:select => "DISTINCT(events.id), events.name, events.parent_id, events.date, events.sanctioned_by",:joins => [:races => :results], :conditions => ['events.date > ? and events.sanctioned_by = ?', cutoff, RacingAssociation.current.default_sanctioned_by],:order => 'events.date desc').first(4) %>
+<% #@recent_results = Event.all(:select => "DISTINCT(events.id), events.name, events.parent_id, events.date, events.sanctioned_by",:joins => [:races => :results], :conditions => ['events.date > ? and events.sanctioned_by = ?', cutoff, RacingAssociation.current.default_sanctioned_by],:order => 'events.date desc').first(4) %>
 
 
+<% @recent_results = Article.recent_results %>
 
 <%= link_to "Recent Results", results_path, :id => "results_link" %>
 <ul>
-  <%- @recent_results.each do |event| -%>
-  <li><span><%= link_to event.full_name, event_results_path(event, :host => RacingAssociation.current.rails_host) %></span></li>
+  <%- @recent_results.each do |article| -%>
+  <li><span><%= link_to article.title, article %></span></li>
   <%- end -%>
 </ul>
 

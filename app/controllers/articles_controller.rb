@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
 
   def feed
     @articles = Article.all(:select => "title, body, created_at", :display => true, :order => "posted_at DESC", :limit => 20)
-
+    
     respond_to do |format|
       format.html
       format.rss { render :layout => false }

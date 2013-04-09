@@ -36,6 +36,7 @@ CREATE TABLE `articles` (
   `article_category_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `results` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -50,7 +51,7 @@ CREATE TABLE `assets` (
   `updated_at` datetime NOT NULL,
   `page_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `bids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -739,7 +740,7 @@ CREATE TABLE `sponsors` (
   `photo_file_size` int(11) DEFAULT NULL,
   `photo_updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `standings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -770,7 +771,7 @@ CREATE TABLE `taggings` (
   PRIMARY KEY (`id`),
   KEY `index_taggings_on_tag_id` (`tag_id`),
   KEY `index_taggings_on_article_id` (`article_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -778,7 +779,7 @@ CREATE TABLE `tags` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `teams` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -1077,10 +1078,6 @@ INSERT INTO schema_migrations (version) VALUES ('20120813183838');
 
 INSERT INTO schema_migrations (version) VALUES ('20120816165547');
 
-INSERT INTO schema_migrations (version) VALUES ('20121016192731');
-
-INSERT INTO schema_migrations (version) VALUES ('20121016205454');
-
 INSERT INTO schema_migrations (version) VALUES ('20121017183409');
 
 INSERT INTO schema_migrations (version) VALUES ('20121111192914');
@@ -1098,6 +1095,8 @@ INSERT INTO schema_migrations (version) VALUES ('20121114032147');
 INSERT INTO schema_migrations (version) VALUES ('20121115002202');
 
 INSERT INTO schema_migrations (version) VALUES ('20121115014812');
+
+INSERT INTO schema_migrations (version) VALUES ('20130409124935');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 
