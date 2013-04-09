@@ -54,12 +54,12 @@ $main-width: 640px;
 }
 
 .content-item {
-//    font-size: 14px;
     background: #EEE;
     border-top: 2px solid $main-bg + #111;
     border-bottom: 3px solid $main-bg;
     padding: 10px 3px 10px 3px;
     border-radius: $border-rad * 3;
+    word-wrap: break-word;
 }
 
 
